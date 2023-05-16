@@ -22,7 +22,8 @@ public class  Singleton {
         return single_instance;
     }
 
-    public static void main(String[] args) {
+    public static void main(String args[]) {
+
         Singleton x = Singleton.getInstance();
         Singleton y = Singleton.getInstance();
         Singleton z = Singleton.getInstance();

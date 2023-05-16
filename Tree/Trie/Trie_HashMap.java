@@ -8,12 +8,12 @@ public class Trie_HashMap {
     TrieNode root;
 
     static class TrieNode {
-        Map<Character, TrieNode> children;
         boolean isEnd;
+        Map<Character, TrieNode> children;
 
         public TrieNode() {
-            children = new HashMap<>();
             isEnd = false;
+            children = new HashMap<>();
         }
 
     }

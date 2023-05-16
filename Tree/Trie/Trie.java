@@ -2,50 +2,57 @@ package Tree.Trie;
 
 public class Trie {
 
-    // Trie supports search, insert and delete operations in O(L) time, where L is the length of the string.
+    // Trie supports search, insert and delete operations in O(L) time, where L is the length of the key.
 
-    static Node root = new Node();
+    // In hashing, we convert the key to a small value and the value is used to index data.
+    // Hashing supports search, insert and delete operations in O(L) time on average.
+
+    static Node root;
 
     static class Node {
-        Node[] children;
-        boolean endOfWord;
+        Node[] children = new Node[26];
+        boolean isEndOfWord;
 
         Node() {
-            children = new Node[26];
+            isEndOfWord = false;
             for (int i = 0; i < 26; i++) {
                 children[i] = null;
             }
-            endOfWord = false;
         }
     }
 
 
-    // TC - O(L), L = length of string
-    static void insert(String str) {
+    static void insert(String key) {
         Node node = root;
-        for (int i = 0; i < str.length(); i++) {
-            int index = str.charAt(i) - 'a';
+
+        for (int i = 0; i < key.length(); i++) {
+            int index = key.charAt(i) - 'a';
             if (node.children[index] == null) {
                 node.children[index] = new Node();
             }
+
             node = node.children[index];
         }
-        node.endOfWord = true;
+
+        // mark last node as leaf
+        node.isEndOfWord = true;
     }
 
 
     // Returns true if key presents in trie, else false
-    // TC - O(L), L = length of string
     static boolean search(String key) {
         Node node = root;
+
         for (int i = 0; i < key.length(); i++) {
             int index = key.charAt(i) - 'a';
-            if (node.children[index] == null){
+
+            if (node.children[index] == null)
                 return false;
-            }
+
             node = node.children[index];
         }
-        return node.endOfWord;
+
+        return node.isEndOfWord;
     }
 
 
@@ -68,8 +75,8 @@ public class Trie {
 
             // This node is no more end of word after
             // removal of given key
-            if (root.endOfWord)
-                root.endOfWord = false;
+            if (root.isEndOfWord)
+                root.isEndOfWord = false;
 
             // If given is not prefix of any other word
             if (isEmpty(root)) {
@@ -86,7 +93,7 @@ public class Trie {
 
         // If root does not have any child (its only child got
         // deleted), and it is not end of another word.
-        if (isEmpty(root) && !root.endOfWord) {
+        if (isEmpty(root) && !root.isEndOfWord) {
             root = null;
         }
 
@@ -95,10 +102,12 @@ public class Trie {
 
 
     public static void main(String[] args) {
-        String[] words = {"the", "a", "there", "answer", "any", "by", "bye", "their"};
+        String[] keys = {"the", "a", "there", "answer", "any", "by", "bye", "their"};
+
+        root = new Node();
 
         // Construct trie
-        for (String i : words) {
+        for (String i : keys) {
             insert(i);
         }
 
