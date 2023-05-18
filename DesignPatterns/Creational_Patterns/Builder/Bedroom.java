@@ -1,10 +1,10 @@
-package DesignPattern.CreationalPatterns.Builder;
+package DesignPatterns.Creational_Patterns.Builder;
 
 import java.awt.Color;
 import java.awt.Dimension;
 
 public class Bedroom {
-
+    
     private Dimension dimensions;
     private int ceilingHeight;
     private int floorNumber;
@@ -13,16 +13,16 @@ public class Bedroom {
     private int numberOfDoors;
     private boolean isDouble;
     private boolean hasEnsuite;
-
+    
     public Bedroom(Dimension dimensions, int ceilingHeight, int floorNumber, Color wallColor, int numberOfWindows, int numberOfDoors, boolean isDouble, boolean hasEnsuite){
         this.dimensions = dimensions;
         this.ceilingHeight = ceilingHeight;
         this.floorNumber = floorNumber;
         this.wallColor = wallColor;
         this.numberOfWindows = numberOfWindows;
-        this.numberOfDoors = numberOfDoors;
+        this.numberOfDoors = numberOfDoors;        
         this.isDouble = isDouble;
-        this.hasEnsuite = hasEnsuite;
+        this.hasEnsuite = hasEnsuite;        
     }
-
+    
 }
