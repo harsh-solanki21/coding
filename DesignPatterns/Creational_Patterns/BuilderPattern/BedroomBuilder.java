@@ -1,4 +1,4 @@
-package DesignPatterns.Creational_Patterns.Builder;
+package DesignPatterns.Creational_Patterns.BuilderPattern;
 
 import java.awt.Color;
 import java.awt.Dimension;
