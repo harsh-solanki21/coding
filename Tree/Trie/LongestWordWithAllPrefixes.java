@@ -13,7 +13,7 @@ public class LongestWordWithAllPrefixes {
             return;
         }
         for (int i = 0; i < 26; i++) {
-            if (root.children[i] != null && root.children[i].endOfWord) {
+            if (root.children[i] != null && root.children[i].isEndOfWord) {
                 temp.append((char) (i + 'a'));
                 if (temp.length() > ans.length()) {
                     ans = temp.toString();
