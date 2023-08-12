@@ -21,8 +21,8 @@ public class Main {
 
     static int[] productExceptSelf3(int[] nums) {
         int n = nums.length;
-        int pre[] = new int[n];
-        int suff[] = new int[n];
+        int[] pre = new int[n];
+        int[] suff = new int[n];
         pre[0] = 1;
         suff[n - 1] = 1;
 
@@ -33,7 +33,7 @@ public class Main {
             suff[i] = suff[i + 1] * nums[i + 1];
         }
 
-        int ans[] = new int[n];
+        int[] ans = new int[n];
         for (int i = 0; i < n; i++) {
             ans[i] = pre[i] * suff[i];
         }
@@ -56,9 +56,76 @@ public class Main {
         return ans;
     }
 
+//    public static void main(String[] args) {
+//        int[] nums = {1, 2, 3, 4, 5};
+//        System.out.println(Arrays.toString(productExceptSelf3(nums)));
+//    }
+
+    // search target in rotated sorted array with duplicates
+    static boolean search(int[] nums, int target) {
+        int start = 0;
+        int end = nums.length - 1;
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (nums[mid] == target) {
+                return true;
+            }
+
+            if (nums[mid] == nums[start]) {
+                start++;
+                continue;
+            }
+
+            if (nums[start] <= nums[mid]) {
+                if (nums[start] <= target && target < nums[mid]) {
+                    end = mid - 1;
+                } else {
+                    start = mid + 1;
+                }
+            } else {
+                if (nums[mid] < target && target <= nums[end]) {
+                    start = mid + 1;
+                } else {
+                    end = mid - 1;
+                }
+            }
+        }
+
+        return false;
+    }
+
+//    public static void main(String[] args) {
+//        int[] nums = {1, 0, 1, 1, 1};
+//        int target = 0; // 3
+//        System.out.println(search(nums, target));
+//    }
+
+    static int[] searchInMatrix(int[][] nums, int target) {
+        int row = 0, col = nums.length - 1;
+        while (row < nums.length && col >= 0) {
+            if (nums[row][col] == target) {
+                return new int[]{row, col};
+            }
+            if (nums[row][col] < target) {
+                row++;
+            } else {
+                col--;
+            }
+        }
+        return new int[]{-1, -1};
+    }
+
     public static void main(String[] args) {
-        int[] nums = {1, 2, 3, 4, 5};
-        System.out.println(Arrays.toString(productExceptSelf3(nums)));
+        int[][] nums = {
+                {10, 20, 30, 40},
+                {15, 25, 35, 45},
+                {28, 29, 37, 49},
+                {33, 34, 38, 50}
+        };
+        int target = 34;
+        System.out.println(Arrays.toString(searchInMatrix(nums, target)));
     }
 
 }

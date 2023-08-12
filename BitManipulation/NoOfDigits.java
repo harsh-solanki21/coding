@@ -2,18 +2,12 @@ package BitManipulation;
 
 public class NoOfDigits {
 
-    // Brute force approach for this program is
-    //    while(n > 0) {
-    //        count++;
-    //    }
-
+    // Time complexity = log(n)
     public static void main(String[] args) {
         int n = 34567;
-        int base = 2;
-        int ans = (int)(Math.log(n) / Math.log(base)) + 1;
-        // If you want to convert anything to base then you just divide by the same log of that with base.
+        int base = 2; // Enter base here to get answer for that base (e.g. 10 => ans: 5)
+        int ans = (int) (Math.log(n) / Math.log(base)) + 1;
         System.out.println(ans);
-        // Time complexity = logn
     }
 
 }
