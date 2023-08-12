@@ -102,30 +102,4 @@ public class Main {
 //        System.out.println(search(nums, target));
 //    }
 
-    static int[] searchInMatrix(int[][] nums, int target) {
-        int row = 0, col = nums.length - 1;
-        while (row < nums.length && col >= 0) {
-            if (nums[row][col] == target) {
-                return new int[]{row, col};
-            }
-            if (nums[row][col] < target) {
-                row++;
-            } else {
-                col--;
-            }
-        }
-        return new int[]{-1, -1};
-    }
-
-    public static void main(String[] args) {
-        int[][] nums = {
-                {10, 20, 30, 40},
-                {15, 25, 35, 45},
-                {28, 29, 37, 49},
-                {33, 34, 38, 50}
-        };
-        int target = 34;
-        System.out.println(Arrays.toString(searchInMatrix(nums, target)));
-    }
-
 }
