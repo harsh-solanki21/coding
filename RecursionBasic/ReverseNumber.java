@@ -2,15 +2,7 @@ package RecursionBasic;
 
 public class ReverseNumber {
 
-    public static void main(String[] args) {
-//        reverse1(1234);
-//        System.out.println(sum);
-
-//        System.out.println(reverse2(1234));
-
-        System.out.println(palindrome(12321));
-    }
-
+    // Approach 1
     static int sum = 0;
 
     static void reverse1(int n) {
@@ -22,7 +14,7 @@ public class ReverseNumber {
         reverse1(n / 10);
     }
 
-    // without static sum
+    // Approach 2 (without static sum)
     static int reverse2(int n) {
         // sometimes you might need some additional variables in the argument
         // in that case make another function
@@ -41,6 +33,15 @@ public class ReverseNumber {
     // Palindrome number
     static boolean palindrome(int n) {
         return n == reverse2(n);
+    }
+
+    public static void main(String[] args) {
+//        reverse1(1234);
+//        System.out.println(sum);
+
+//        System.out.println(reverse2(1234));
+
+        System.out.println(palindrome(12321));
     }
 
 }

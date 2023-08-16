@@ -1,11 +1,12 @@
 package RecursionBasic;
 
-public class fibonacci {
+public class Fibonacci {
 
     // TC - O(2^n)
     static int fibonacciRecursion(int n) {
-        if (n == 0 || n == 1)
+        if (n == 0 || n == 1) {
             return n;
+        }
         return fibonacciRecursion(n - 1) + fibonacciRecursion(n - 2);
     }
 
@@ -14,9 +15,11 @@ public class fibonacci {
         int[] fibo = new int[n + 1];
         fibo[0] = 0;
         fibo[1] = 1;
+
         for (int i = 2; i <= n; i++) {
             fibo[i] = fibo[i - 1] + fibo[i - 2];
         }
+
         return fibo[n];
     }
 
@@ -35,15 +38,17 @@ public class fibonacci {
     static int[] f = new int[100];
 
     static int fibonacciLogn(int n) {
-        if (n == 0)
+        if (n == 0) {
             return 0;
-
-        if (n == 1 || n == 2)
+        }
+        if (n == 1 || n == 2) {
             return (f[n] = 1);
+        }
 
         // If fib(n) is already computed
-        if (f[n] != 0)
+        if (f[n] != 0) {
             return f[n];
+        }
 
         int k = (n & 1) == 1 ? (n + 1) / 2 : n / 2;
 
@@ -57,6 +62,9 @@ public class fibonacci {
 
     public static void main(String[] args) {
         int n = 12;
+        System.out.println(fibonacciRecursion(n));
+        System.out.println(fibonacciNN(n));
+        System.out.println(fibonacciN(n));
         System.out.println(fibonacciLogn(n));
     }
 

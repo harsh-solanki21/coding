@@ -5,8 +5,9 @@ public class Power {
     // TC - O(log n)
     // Recursive
     static int power1(int x, int n) {
-        if (n == 0)
+        if (n == 0) {
             return 1;
+        }
         int res = power1(x, n / 2);
         int ans = res * res;
         if (n % 2 == 1) {
@@ -22,8 +23,7 @@ public class Power {
             if (n % 2 == 0) {
                 x = x * x;
                 n /= 2;
-            }
-            else {
+            } else {
                 ans *= x;
                 n--;
             }

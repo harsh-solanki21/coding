@@ -4,65 +4,69 @@ import java.util.Arrays;
 
 public class MergeSort {
 
-//    1. Divide the array into two halves until it has only one element in array
-//    2. Sort the arrays
-//    3. Merge the arrays
+    //    Time Complexity:
+    //    Total number of levels are (log n)
+    //    At each level, there are total (n) comparisons being made
+    //    So, the time complexity is: (total level * work at every level)
+    //    O(n log(n))
 
-    public static void main(String[] args) {
-        int[] nums = {5, 4, 3, 2, 1};
-        nums = mergeSort(nums);
-        System.out.println(Arrays.toString(nums));
-    }
+    //    Space Complexity:
+    //    SC is the maximum height of the tree
+    //    O(n)
 
-    static int[] mergeSort(int[] nums) {
-        if (nums.length == 1) {
-            return nums;
+    static void merge(int[] nums, int start, int mid, int end) {
+        int n1 = mid - start + 1;
+        int n2 = end - mid;
+
+        int[] first = new int[n1];
+        int[] second = new int[n2];
+
+        for (int i = 0; i < n1; i++) {
+            first[i] = nums[start + i];
         }
-        int mid = nums.length / 2;
-        int[] left = mergeSort(Arrays.copyOfRange(nums, 0, mid));
-        int[] right = mergeSort(Arrays.copyOfRange(nums, mid, nums.length));
+        for (int j = 0; j < n2; j++) {
+            second[j] = nums[mid + 1 + j];
+        }
 
-        return merge(left, right);
-    }
-
-    // At every level, N elements are being merged
-    static int[] merge(int[] first, int[] second) {
-        int[] mix = new int[first.length + second.length];
-        int i = 0, j = 0, k = 0;
-
-        while (i < first.length && j < second.length) {
-            if (first[i] < second[j]) {
-                mix[k] = first[i];
+        int i = 0, j = 0;
+        int k = start;
+        while (i < n1 && j < n2) {
+            if (first[i] <= second[j]) {
+                nums[k] = first[i];
                 i++;
             } else {
-                mix[k] = second[j];
+                nums[k] = second[j];
                 j++;
             }
             k++;
         }
 
-        // when one of the array is finished and other is not
-        while (i < first.length) {
-            mix[k] = first[i];
+        while (i < n1) {
+            nums[k] = first[i];
             i++;
             k++;
         }
-        while (j < second.length) {
-            mix[k] = second[i];
+
+        while (j < n2) {
+            nums[k] = second[j];
             j++;
             k++;
         }
-
-        return mix;
     }
 
-//    Time Complexity
-//    Total number of levels are (log n)
-//    At each level, there are total (n) comparisons being made
-//    So, the time complexity is: (total level * work at every level)
-//    O(n log(n))
+    static void sort(int[] nums, int start, int end) {
+        if (start < end) {
+            int m = start + (end - start) / 2;
+            sort(nums, start, m);
+            sort(nums, m + 1, end);
+            merge(nums, start, m, end);
+        }
+    }
 
-//    Space Complexity
-//    SC is the maximum height of the tree
-//    O(n)
+    public static void main(String[] args) {
+        int[] nums = {5, 4, 3, 2, 1};
+        sort(nums, 0, nums.length - 1);
+        System.out.println(Arrays.toString(nums));
+    }
+
 }

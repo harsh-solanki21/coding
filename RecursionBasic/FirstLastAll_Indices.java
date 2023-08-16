@@ -28,8 +28,7 @@ public class FirstLastAll_Indices {
             int[] ans = allIndices(nums, target, i + 1, count + 1);
             ans[count] = i;
             return ans;
-        }
-        else {
+        } else {
             int[] ans = allIndices(nums, target, i + 1, count);
             return ans;
         }

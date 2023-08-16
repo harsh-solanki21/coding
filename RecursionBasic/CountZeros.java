@@ -32,15 +32,18 @@ public class CountZeros {
         }
     }
 
-//    static int count(int n) {
-//        if (n == 0)
-//            return 0;
-//        return n % 10 == 0 ? 1 + count(n / 10) : count(n / 10);
-//    }
+    // Simplified Approach 2
+    static int count3(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        return n % 10 == 0 ? 1 + count(n / 10) : count(n / 10);
+    }
 
     public static void main(String[] args) {
         System.out.println(count(300210));
         System.out.println(count2(300210));
+        System.out.println(count3(300210));
     }
 
 }
