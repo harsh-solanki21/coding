@@ -1,11 +1,11 @@
-package binarySearch;
+package BinarySearch;
 
 public class FindPositionInInfiniteArray {
 
     static int searchInfinite(int[] nums, int target) {
         int start = 0;
         int end = 1;
-        while(target > nums[end]) {
+        while (target > nums[end]) {
             int temp = end + 1;
             end = end + (end - start + 1) * 2;
             start = temp;
@@ -16,12 +16,13 @@ public class FindPositionInInfiniteArray {
     static int binarySearch(int[] nums, int target, int start, int end) {
         while (start <= end) {
             int mid = start + (end - start) / 2;
-            if(target == nums[mid])
+            if (target == nums[mid]) {
                 return mid;
-            else if(target < nums[mid])
+            } else if (target < nums[mid]) {
                 end = mid - 1;
-            else
+            } else {
                 start = mid + 1;
+            }
         }
         return -1;
     }

@@ -9,6 +9,40 @@ public class SortedMatrix {
 
     // This approach will only applicable on strictly sorted matrix like below one
     // Time complexity = O(log n + log m)
+
+    static int[] search(int[][] nums, int target) {
+        int rowStart = 0;
+        int rowEnd = nums.length - 1;
+        int column = nums[0].length - 1;
+
+        while (rowStart < rowEnd) {
+            int mid = rowStart + (rowEnd - rowStart) / 2;
+            if (nums[mid][column] == target) {
+                return new int[]{mid, column};
+            } else if (nums[mid][column] < target) {
+                rowStart = mid + 1;
+            } else {
+                rowEnd = mid;
+            }
+        }
+
+        return binarySearch(nums, rowStart, 0, column, target);
+    }
+
+    static int[] binarySearch(int[][] nums, int row, int colStart, int colEnd, int target) {
+        while (colStart <= colEnd) {
+            int mid = colStart + (colEnd - colStart) / 2;
+            if (nums[row][mid] == target) {
+                return new int[]{row, mid};
+            } else if (nums[row][mid] < target) {
+                colStart = mid + 1;
+            } else {
+                colEnd = mid - 1;
+            }
+        }
+        return new int[]{-1, -1};
+    }
+
     public static void main(String[] args) {
         int[][] nums = {{1, 2, 3, 4},
                 {5, 6, 7, 8},
@@ -16,35 +50,6 @@ public class SortedMatrix {
                 {13, 14, 15, 16}};
         int target = 7;
         System.out.println(Arrays.toString(search(nums, target)));
-    }
-
-    static int[] search(int[][] nums, int target) {
-        int rowStart = 0;
-        int rowEnd = nums.length - 1;
-        int column = nums[0].length - 1;
-        while (rowStart < rowEnd) {   // while(rowStart != rowEnd) also works
-            int mid = rowStart + (rowEnd - rowStart) / 2;
-            if (nums[mid][column] == target)
-                return new int[]{mid, column};
-            else if (nums[mid][column] < target)
-                rowStart = mid + 1;
-            else
-                rowEnd = mid;
-        }
-        return binarySearch(nums, rowStart, 0, column, target);
-    }
-
-    static int[] binarySearch(int[][] nums, int row, int colStart, int colEnd, int target) {
-        while (colStart <= colEnd) {
-            int mid = colStart + (colEnd - colStart) / 2;
-            if (nums[row][mid] == target)
-                return new int[]{row, mid};
-            else if (nums[row][mid] < target)
-                colStart = mid + 1;
-            else
-                colEnd = mid - 1;
-        }
-        return new int[]{-1, -1};
     }
 
 //    public static void main(String[] args) {
