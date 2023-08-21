@@ -3,8 +3,9 @@ package Arrays;
 public class LargestNumberTwiceOfOthers {
 
     static int dominantIndex(int[] nums) {
-        if (nums.length == 1)
+        if (nums.length == 1){
             return 0;
+        }
 
         int maxNum = nums[0], index = 0;
         for (int i = 1; i < nums.length; i++) {
@@ -15,8 +16,9 @@ public class LargestNumberTwiceOfOthers {
         }
 
         for (int i = 0; i < nums.length; i++) {
-            if (i != index && nums[i] * 2 > maxNum)
+            if (i != index && nums[i] * 2 > maxNum){
                 return -1;
+            }
         }
 
         return index;

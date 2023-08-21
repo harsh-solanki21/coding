@@ -8,8 +8,9 @@ public class FindOriginalArray {
 
     static int[] findOriginalArray(int[] changed) {
         // if odd number of elements then can't make original array
-        if (changed.length % 2 != 0)
+        if (changed.length % 2 != 0) {
             return new int[0];
+        }
 
         int max = 0;
         for (int i : changed) {

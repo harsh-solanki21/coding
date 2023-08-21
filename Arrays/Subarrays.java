@@ -1,6 +1,6 @@
 package Arrays;
 
-public class subarrays {
+public class Subarrays {
 
     // Iterative Approach   O(n^3)
     static void subArrays(int[] nums) {
@@ -33,8 +33,8 @@ public class subarrays {
 
     public static void main(String[] args) {
         int[] nums = {1, 2, 3, 4};
-//        subArrays(nums);
-        subArraysRecursive(nums, 0, 0);
+        subArrays(nums);
+//        subArraysRecursive(nums, 0, 0);
     }
 
 }

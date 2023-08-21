@@ -2,7 +2,7 @@ package Arrays;
 
 import java.util.Arrays;
 
-public class rotateArray {
+public class RotateArray {
 
     // Solution 1
     static void rotate(int[] nums, int k) {

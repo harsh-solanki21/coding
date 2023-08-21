@@ -12,10 +12,11 @@ public class LongestIncreasingSubsequence {
 
         for (int i = 1; i < nums.length; i++) {
             int num = nums[i];
-            if (num > list.get(list.size() - 1))
+            if (num > list.get(list.size() - 1)) {
                 list.add(num);
-            else
+            } else {
                 list.set(binarySearch(num), num);
+            }
         }
         return list.size();
     }
@@ -24,12 +25,13 @@ public class LongestIncreasingSubsequence {
         int start = 0, end = list.size() - 1;
         while (start <= end) {
             int mid = (start + end) / 2;
-            if (list.get(mid) == num)
+            if (list.get(mid) == num) {
                 return mid;
-            else if (list.get(mid) < num)
+            } else if (list.get(mid) < num) {
                 start = mid + 1;
-            else
+            } else {
                 end = mid - 1;
+            }
         }
 
         return start;

@@ -1,6 +1,6 @@
 package Arrays;
 
-public class replaceElementsWithGreatestElementOnRight {
+public class ReplaceElementsWithGreatestElementOnRight {
 
     static int[] replaceElements(int[] nums) {
         int i = nums.length - 1;

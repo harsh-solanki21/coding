@@ -1,6 +1,6 @@
 package Arrays;
 
-public class zerosAtEnd {
+public class ZerosAtEnd {
 
     static int[] solve(int[] nums) {
         int index = 0;

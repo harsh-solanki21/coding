@@ -14,11 +14,13 @@ public class MaxScore {
 
     private static int helper(int[] nums, int[] multipliers, int left, int index, Integer[][] dp) {
         int right = N - 1 - (index - left);
-        if (index == M)
+        if (index == M) {
             return 0;
+        }
 
-        if (dp[left][index] != null)
+        if (dp[left][index] != null) {
             return dp[left][index];
+        }
 
         int res = Math.max(nums[left] * multipliers[index] + helper(nums, multipliers, left + 1, index + 1, dp),
                 nums[right] * multipliers[index] + helper(nums, multipliers, left, index + 1, dp));

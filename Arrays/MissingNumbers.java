@@ -3,7 +3,7 @@ package Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
-public class missingNumbers {
+public class MissingNumbers {
 
     static List<Integer> findDisappearedNumbers(int[] nums) {
         List<Integer> ans = new ArrayList<>();
@@ -14,8 +14,9 @@ public class missingNumbers {
                 int temp = nums[i];
                 nums[i] = nums[correct];
                 nums[correct] = temp;
-            } else
+            } else {
                 i++;
+            }
         }
         for (int j = 0; j < nums.length; j++) {
             if (nums[j] != j + 1) {

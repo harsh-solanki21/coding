@@ -1,14 +1,15 @@
 package Arrays;
 
-public class powerSet {
+public class PowerSet {
 
     // O(n * 2^n)
     static void printPowerSet(char[] set, int setSize) {
         long powSetSize = (long) Math.pow(2, setSize);
         for (int i = 0; i < powSetSize; i++) {
             for (int j = 0; j < setSize; j++) {
-                if ((i & (1 << j)) > 0)
+                if ((i & (1 << j)) > 0) {
                     System.out.print(set[j]);
+                }
             }
             System.out.println();
         }

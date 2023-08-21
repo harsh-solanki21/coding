@@ -8,10 +8,9 @@ public class LongestConsecutiveSequence {
     // TC - O(n * log n), SC - O(1)
     static int longestConsecutive1(int[] nums) {
         Arrays.sort(nums);
-        int count = 1;
-        int ans = 1;
-        int n = nums.length;
-        for (int i = 0; i < n - 1; i++) {
+        int count = 1, ans = 1;
+
+        for (int i = 0; i < nums.length - 1; i++) {
             if (nums[i] + 1 == nums[i + 1]) {
                 count++;
                 ans = Math.max(ans, count);
@@ -20,27 +19,27 @@ public class LongestConsecutiveSequence {
             }
 
         }
-        return n == 0 ? 0 : (Math.max(ans, count));
+
+        return nums.length == 0 ? 0 : (Math.max(ans, count));
     }
 
 
     // TC - O(n), SC - O(n)
     static int longestConsecutive2(int[] nums) {
         HashMap<Integer, Boolean> map = new HashMap<>();
-        int n = nums.length;
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < nums.length; i++) {
             map.put(nums[i], true);
         }
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < nums.length; i++) {
             if (map.containsKey(nums[i] - 1)) {
                 map.put(nums[i], false);
             }
         }
 
         int maxlen = 0;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < nums.length; i++) {
             if (map.get(nums[i])) {
                 int curr = nums[i];
                 int len = 1;

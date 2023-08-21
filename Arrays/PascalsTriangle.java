@@ -3,7 +3,7 @@ package Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
-public class pascalsTriangle {
+public class PascalsTriangle {
 
     // to get array of the specific row only
     static List<Integer> getRow(int rowIndex) {
@@ -22,10 +22,11 @@ public class pascalsTriangle {
         for (int i = 0; i < numRows; i++) {
             List<Integer> curr = new ArrayList<>();
             for (int j = 0; j <= i; j++) {
-                if (j == 0 || j == i)
+                if (j == 0 || j == i) {
                     curr.add(1);
-                else
+                } else {
                     curr.add(ans.get(i - 1).get(j - 1) + ans.get(i - 1).get(j));
+                }
             }
             ans.add(curr);
         }

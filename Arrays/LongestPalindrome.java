@@ -22,7 +22,6 @@ public class LongestPalindrome {
         }
 
         return hasOdd ? newStrLen + 1 : newStrLen;
-
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,6 @@
 package Arrays;
 
-public class subsets {
+public class Subsets {
 
     // Time Complexity = n * 2^n
     static void printSubsets(char[] set) {

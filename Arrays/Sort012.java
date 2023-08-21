@@ -1,6 +1,6 @@
 package Arrays;
 
-public class sort012 {
+public class Sort012 {
 
     // for 0s and 1s
     static int[] sort01(int[] nums) {

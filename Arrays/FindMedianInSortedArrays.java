@@ -1,6 +1,6 @@
 package Arrays;
 
-public class findMedianInSortedArrays {
+public class FindMedianInSortedArrays {
 
     static double findMedian(int[] nums1, int[] nums2) {
         int[] ans = new int[nums1.length + nums2.length];
@@ -8,18 +8,20 @@ public class findMedianInSortedArrays {
         int len = nums1.length + nums2.length - 1;
 
         while (i >= 0 || j >= 0) {
-            if (i >= 0 && j >= 0)
+            if (i >= 0 && j >= 0) {
                 ans[len--] = (nums1[i] <= nums2[j]) ? nums2[j--] : nums1[i--];
-            else if (i >= 0)
+            } else if (i >= 0) {
                 ans[len--] = nums1[i--];
-            else
+            } else {
                 ans[len--] = nums2[j--];
+            }
         }
 
-        if (ans.length % 2 == 0)
+        if (ans.length % 2 == 0) {
             return (double) (ans[ans.length / 2 - 1] + ans[ans.length / 2]) / 2;
-        else
+        } else {
             return ans[ans.length / 2];
+        }
     }
 
     public static void main(String[] args) {

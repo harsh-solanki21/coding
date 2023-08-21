@@ -3,7 +3,7 @@ package Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
-public class findDuplicates {
+public class FindDuplicates {
 
     // XOR
     static int findDuplicateXOR(int[] nums) {

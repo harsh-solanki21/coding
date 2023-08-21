@@ -1,6 +1,6 @@
 package Arrays;
 
-public class removeDuplicates {
+public class RemoveDuplicates {
 
 //    static int removeDuplicates(int[] nums) {
 //        if (nums.length == 1)

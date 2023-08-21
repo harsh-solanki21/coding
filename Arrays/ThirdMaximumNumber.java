@@ -1,8 +1,6 @@
 package Arrays;
 
-import java.util.Arrays;
-
-public class thirdMaximumNumber {
+public class ThirdMaximumNumber {
 
     static int thirdMax(int[] nums) {
         int largest = 0, secondLargest = -1, thirdLargest = -1;

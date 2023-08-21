@@ -1,6 +1,6 @@
 package Arrays;
 
-public class validMountainArray {
+public class ValidMountainArray {
 
     static boolean mountainArray(int[] nums) {
         if (nums.length < 3)

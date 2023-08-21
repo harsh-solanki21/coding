@@ -14,10 +14,11 @@ public class IntersectionOfTwoArrays {
                 ans.add(nums1[i]);
                 i++;
                 j++;
-            } else if (nums1[i] < nums2[j])
+            } else if (nums1[i] < nums2[j]) {
                 i++;
-            else
+            } else {
                 j++;
+            }
         }
         return ans;
     }

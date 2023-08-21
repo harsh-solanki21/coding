@@ -1,6 +1,6 @@
 package Arrays;
 
-public class duplicateZeros {
+public class DuplicateZeros {
 
     static int[] zeros(int[] nums) {
         int count = 0;

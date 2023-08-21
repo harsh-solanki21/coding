@@ -2,7 +2,7 @@ package Arrays;
 
 import java.util.Arrays;
 
-public class arraySum {
+public class ArraySum {
 
     static int[] addArrays(int[] a1, int[] a2) {
         int n1 = a1.length;

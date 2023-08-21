@@ -1,6 +1,6 @@
 package Arrays;
 
-public class pivotIndex {
+public class PivotIndex {
 
     static int pivotIndex(int[] nums) {
         int left = 0, sum = 0;
