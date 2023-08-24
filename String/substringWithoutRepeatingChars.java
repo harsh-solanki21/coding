@@ -8,7 +8,7 @@ public class substringWithoutRepeatingChars {
     // Approach 1
     // Longest Substring Without Repeating Characters
     static int lengthOfLongestSubstring(String s) {
-        if (s == null || s.length() == 0)
+        if (s == null || s.isEmpty())
             return 0;
 
         HashMap<Character, Integer> map = new HashMap<>();

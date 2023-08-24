@@ -6,8 +6,9 @@ import java.util.List;
 public class Permutations {
 
     // No. of permutations = str.length()!
+    // TC - O(n * n!), SC - O(n)
 
-    // Return void
+    // Print Permutations
     static void permutations(String s, String ans) {
         if (s.isEmpty()) {
             System.out.println(ans);
@@ -21,42 +22,24 @@ public class Permutations {
         }
     }
 
-    // Return ArrayList
-//    static ArrayList<String> permutationsList(String s, String ans) {
-//        if (s.isEmpty()) {
-//            ArrayList<String> list = new ArrayList<>();
-//            list.add(ans);
-//            return list;
-//        }
-//        char ch = s.charAt(0);
-//        ArrayList<String> result = new ArrayList<>();
-//        for (int i = 0; i <= ans.length(); i++) {
-//            String first = ans.substring(0, i);
-//            String second = ans.substring(i);
-//            result.addAll(permutationsList(s.substring(1), first + ch + second));
-//        }
-//        return result;
-//    }
-
-    // fix this
+    // Return ArrayList of Permutations
     static ArrayList<String> permutationsList(String s, String ans) {
         if (s.isEmpty()) {
             ArrayList<String> list = new ArrayList<>();
-            list.add("");
+            list.add(ans);
             return list;
         }
+        char ch = s.charAt(0);
         ArrayList<String> result = new ArrayList<>();
-        for (int i = 0; i < s.length(); i++) {
-            char ch = s.charAt(i);
-            String first = s.substring(0, i);
-            String second = s.substring(i + 1);
-            ArrayList<String> res = permutationsList(first + second, ans + ch);
-            result.addAll(res);
+        for (int i = 0; i <= ans.length(); i++) {
+            String first = ans.substring(0, i);
+            String second = ans.substring(i);
+            result.addAll(permutationsList(s.substring(1), first + ch + second));
         }
         return result;
     }
 
-    // Return int
+    // Find total Permutation count
     static int permutationsCount(String s, String ans) {
         if (s.isEmpty()) {
             System.out.println(ans);
@@ -76,7 +59,7 @@ public class Permutations {
     // Permutation Sequence
 //    The set [1, 2, 3, ..., n] contains a total of n! unique permutations.
 //
-//    By listing and labeling all of the permutations in order, we get the following sequence for n = 3:
+//    By listing and labeling all the permutations in order, we get the following sequence for n = 3:
 //            "123"
 //            "132"
 //            "213"
@@ -103,7 +86,7 @@ public class Permutations {
         while (true) {
             ans.append(nums.get(k / fact));
             nums.remove(k / fact);
-            if (nums.size() == 0)
+            if (nums.isEmpty())
                 break;
             k %= fact;
             fact /= nums.size();
@@ -117,10 +100,9 @@ public class Permutations {
         permutations("abc", "");
 
 //        System.out.println(permutationsList("abc", ""));
-
-//        System.out.println(permutationsCount("abcde", ""));
-
-//        System.out.println(getPermutation(3, 3));
+//
+//        System.out.println(permutationsCount("abc", ""));
+//
 //        System.out.println(getPermutation(4, 9));
     }
 

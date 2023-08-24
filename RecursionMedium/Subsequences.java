@@ -15,6 +15,8 @@ public class Subsequences {
     // A subsequence of a string is a new string that is formed from the original string by deleting some(can be none)
     // of the characters without disturbing the relative position of the remaining characters.
 
+    // TC - O(2^n), SC - O(n)
+
     // Approach 1
     // for ArrayList return type
     static ArrayList<String> subSeqList(String ans, String str) {
@@ -33,7 +35,7 @@ public class Subsequences {
 
     // Approach 2
     static ArrayList<String> getSubsequence(String s) {
-        if (s.length() == 0) {
+        if (s.isEmpty()) {
             ArrayList<String> ans = new ArrayList<>();
             ans.add("");
             return ans;

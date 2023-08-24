@@ -5,18 +5,22 @@ import java.util.Arrays;
 public class FirstLastAll_Indices {
 
     static int firstIndex(int[] nums, int target, int i) {
-        if (i == nums.length - 1)
+        if (i == nums.length) {
             return -1;
-        if (nums[i] == target)
+        }
+        if (nums[i] == target) {
             return i;
+        }
         return firstIndex(nums, target, i + 1);
     }
 
     static int lastIndex(int[] nums, int target, int i) {
-        if (i == 0)
+        if (i == 0) {
             return nums[0];
-        if (nums[i] == target)
+        }
+        if (nums[i] == target) {
             return i;
+        }
         return lastIndex(nums, target, i - 1);
     }
 

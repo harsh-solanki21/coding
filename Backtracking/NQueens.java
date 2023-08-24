@@ -49,7 +49,7 @@ public class NQueens {
 
     // displays the chess board placed with queens
     // also displays no. of ways possible to place queens on the board
-    // TC - O(n!)
+    // TC - O(n^3 * n!)
     static int queens(boolean[][] board, int row) {
         if (row == board.length) {
             display(board);

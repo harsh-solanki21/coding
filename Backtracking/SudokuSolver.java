@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class SudokuSolver {
 
+    // TC - O(9^n^2)
     static void solveSudoku(int[][] board, int i, int j) {
         if (i == board.length) {
             for (int[] nums : board) {
