@@ -13,7 +13,7 @@ public class RotateArray {
         reverse(nums, 0, nums.length - 1);
     }
 
-    static void reverse(int[] nums, int start, int end) {
+    private static void reverse(int[] nums, int start, int end) {
         while (start < end) {
             int temp = nums[start];
             nums[start] = nums[end];
@@ -21,6 +21,23 @@ public class RotateArray {
             start++;
             end--;
         }
+    }
+
+    // Addition in Solution 1
+    // when input of k = -2 => 3, 4, 5, 6, 7, 1, 2
+    // when input of k = 0  => 1, 2, 3, 4, 5, 6, 7
+    // when input of k = 2  => 6, 7, 1, 2, 3, 4, 5
+    static int[] rotateArray(int[] nums, int k) {
+        k %= nums.length;
+        if (k < 0) {
+            k += nums.length;
+        }
+
+        reverse(nums, 0, nums.length - k - 1);
+        reverse(nums, nums.length - k, nums.length - 1);
+        reverse(nums, 0, nums.length - 1);
+
+        return nums;
     }
 
     // Solution 2
@@ -34,8 +51,8 @@ public class RotateArray {
 
     public static void main(String[] args) {
         int[] nums = {1, 2, 3, 4, 5, 6, 7};
-        int k = 3;
-        System.out.println(Arrays.toString(rotate2(nums, k)));
+        int k = -2;
+        System.out.println(Arrays.toString(rotateArray(nums, k)));
     }
 
 }
