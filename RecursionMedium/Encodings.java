@@ -4,28 +4,24 @@ public class Encodings {
 
     // 1 = a, 2 = b, c = 3, .., z = 26
     static void printEncodings(String s, String ans) {
-        if (s.length() == 0) {
+        if (s.isEmpty()) {
             System.out.println(ans);
-        }
-        else if (s.length() == 1) {
+        } else if (s.length() == 1) {
             char ch = s.charAt(0);
             if (ch == '0') {
                 return;
-            }
-            else {
+            } else {
                 int chVal = ch - '0';
                 char code = (char) ('a' + chVal - 1);
                 ans += code;
                 System.out.println(ans);
             }
-        }
-        else {
+        } else {
             char ch = s.charAt(0);
             String str1 = s.substring(1);
             if (ch == '0') {
                 return;
-            }
-            else {
+            } else {
                 int chVal = ch - '0';
                 char code = (char) ('a' + chVal - 1);
                 printEncodings(str1, ans + code);
