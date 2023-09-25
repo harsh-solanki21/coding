@@ -17,27 +17,28 @@ public class CyclicSortAlgorithm {
     // Given an integer array nums of length n where all the integers of nums are in the range [1, n]
     // You must write an algorithm that runs in O(n) time and uses only constant extra space.
 
-    public static void main(String[] args) {
-        int[] nums = {3,5,2,1,4};
-        sort(nums);
-        System.out.println(Arrays.toString((nums)));
-    }
-
     static void sort(int[] nums) {
         int i = 0;
-        while(i < nums.length) {
+        while (i < nums.length) {
             int correct = nums[i] - 1;
-            if(nums[i] != nums[correct])
+            if (nums[i] != nums[correct]) {
                 swap(nums, i, correct);
-            else
+            } else {
                 i++;
+            }
         }
     }
 
-    static void swap(int[] nums, int first, int second) {
+    private static void swap(int[] nums, int first, int second) {
         int temp = nums[first];
         nums[first] = nums[second];
         nums[second] = temp;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {3, 5, 2, 1, 4};
+        sort(nums);
+        System.out.println(Arrays.toString((nums)));
     }
 
 }
