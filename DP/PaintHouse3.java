@@ -27,9 +27,7 @@ public class PaintHouse3 {
             dp[0][j][target - 1] = 0;
         }
 
-
         int lr = target - 1;
-
         for (int i = 1; i < m; i++) {
             int hr = m - i;
             if (hr >= target) {

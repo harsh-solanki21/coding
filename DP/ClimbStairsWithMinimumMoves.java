@@ -7,7 +7,7 @@ public class ClimbStairsWithMinimumMoves {
     // Tabulation
     static int minimumMoves(int[] nums, Integer[] dp) {
         dp[nums.length] = 0;  // but moves to go 6 to 6 is 0 (because we don't need to move to go 6 from 6)
-                              // steps to go 6 to 6 is 1 (that step is don't move)
+        // steps to go 6 to 6 is 1 (that step is don't move)
         for (int i = nums.length - 1; i >= 0; i--) {
             if (nums[i] > 0) {
                 int min = Integer.MAX_VALUE;

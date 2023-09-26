@@ -75,9 +75,9 @@ public class CountDerangements {
 
     public static void main(String[] args) {
         int n = 4;
-//        System.out.println(countDerangements(n));  // 7 -> 0,1,2,..,6
-//        System.out.println(countDerangementsMemoize(n, new int[n + 1]));
-//        System.out.println(countDerangementsTabulation(n));
+        System.out.println(countDerangements(n));  // 7 -> 0,1,2,..,6
+        System.out.println(countDerangementsMemoize(n, new int[n + 1]));
+        System.out.println(countDerangementsTabulation(n));
         System.out.println(countDerangementsSpaceOptimize(n));
     }
 

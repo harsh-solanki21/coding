@@ -26,7 +26,6 @@ public class PaintFence {
 //    }
 
 
-
     public static void main(String[] args) {
         int n = 2, k = 4;  // 16
 //        System.out.println(noOfWaysToPaintFence(n, k));

@@ -19,8 +19,8 @@ public class CutRodIntoSegments {
         int a = cutSegments(n - x, x, y, z) + 1;
         int b = cutSegments(n - y, x, y, z) + 1;
         int c = cutSegments(n - z, x, y, z) + 1;
-
         int ans = Math.max(a, Math.max(b, c));
+
         return ans == Integer.MIN_VALUE ? 0 : ans;
     }
 
@@ -41,10 +41,9 @@ public class CutRodIntoSegments {
         int a = cutSegmentsMemoize(n - x, x, y, z, dp) + 1;
         int b = cutSegmentsMemoize(n - y, x, y, z, dp) + 1;
         int c = cutSegmentsMemoize(n - z, x, y, z, dp) + 1;
-
         int ans = Math.max(a, Math.max(b, c));
-        dp[n] = ans;
 
+        dp[n] = ans;
         return ans == Integer.MIN_VALUE ? 0 : ans;
     }
 
@@ -56,12 +55,15 @@ public class CutRodIntoSegments {
         dp[0] = 0;
 
         for (int i = 1; i <= n; i++) {
-            if (i - x >= 0 && dp[i - x] != -1)
+            if (i - x >= 0 && dp[i - x] != -1) {
                 dp[i] = Math.max(dp[i], dp[i - x] + 1);
-            if (i - y >= 0 && dp[i - y] != -1)
+            }
+            if (i - y >= 0 && dp[i - y] != -1) {
                 dp[i] = Math.max(dp[i], dp[i - y] + 1);
-            if (i - z >= 0 && dp[i - z] != -1)
+            }
+            if (i - z >= 0 && dp[i - z] != -1) {
                 dp[i] = Math.max(dp[i], dp[i - z] + 1);
+            }
         }
 
         return dp[n] == -1 ? 0 : dp[n];
@@ -70,8 +72,8 @@ public class CutRodIntoSegments {
 
     public static void main(String[] args) {
         int n = 7, x = 5, y = 2, z = 2;
-//        System.out.println(cutSegments(n, x, y, z));
-//        System.out.println(cutSegmentsMemoize(n, x, y, z, new int[n + 1]));
+        System.out.println(cutSegments(n, x, y, z));
+        System.out.println(cutSegmentsMemoize(n, x, y, z, new int[n + 1]));
         System.out.println(cutSegmentsTabulation(n, x, y, z));
     }
 

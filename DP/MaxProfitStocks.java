@@ -37,11 +37,11 @@ public class MaxProfitStocks {
 
         for (int i = 1; i <= currentValue.length; i++) {
             for (int j = 1; j <= saving; j++) {
-                if (j < currentValue[i - 1])
+                if (j < currentValue[i - 1]) {
                     dp[i][j] = dp[i - 1][j];
-                else
+                } else {
                     dp[i][j] = Math.max(dp[i - 1][j], (dp[i - 1][j - currentValue[i - 1]] + (futureValue[i - 1] - currentValue[i - 1])));
-
+                }
                 profit = Math.max(profit, dp[i][j]);
             }
         }

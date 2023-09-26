@@ -4,7 +4,6 @@ public class HouseRobber2 {
 
     // https://leetcode.com/problems/house-robber-ii/
 
-
     // TC - O(n), SC - O(n) + O(n)
     private static int houseRobber(int[] nums) {
         if (nums.length == 1) {
@@ -13,12 +12,13 @@ public class HouseRobber2 {
 
         int[] first = new int[nums.length - 1];
         int[] second = new int[nums.length - 1];
-
         for (int i = 0; i < nums.length; i++) {
-            if (i != nums.length - 1)
+            if (i != nums.length - 1) {
                 first[i] = nums[i];
-            if (i != 0)
+            }
+            if (i != 0) {
                 second[i - 1] = nums[i];
+            }
         }
 
         return Math.max(solve(first), solve(second));
@@ -31,7 +31,6 @@ public class HouseRobber2 {
 
         int prev2 = nums[0];
         int prev1 = Math.max(nums[0], nums[1]);
-
         for (int i = 2; i < nums.length; i++) {
             int incl = prev2 + nums[i];
             int excl = prev1;

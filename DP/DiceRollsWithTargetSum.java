@@ -10,14 +10,15 @@ public class DiceRollsWithTargetSum {
     }
 
     private static int getCount(int dice, int faces, int target, Integer[][] dp) {
-        if (target < 0 || dice < 0)
+        if (target < 0 || dice < 0) {
             return 0;
-
-        if (dice == 0 && target == 0)
+        }
+        if (dice == 0 && target == 0) {
             return 1;
-
-        if (dp[dice][target] != null)
+        }
+        if (dp[dice][target] != null) {
             return dp[dice][target];
+        }
 
         int ans = 0;
         for (int i = 1; i <= faces; i++) {

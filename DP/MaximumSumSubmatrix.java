@@ -25,22 +25,26 @@ public class MaximumSumSubmatrix {
 
         for (int i = 0; i < sum.length; i++) {
             maxEndsHere += sum[i];
-            if (maxSoFar < maxEndsHere)
+            if (maxSoFar < maxEndsHere) {
                 maxSoFar = maxEndsHere;
-            if (maxEndsHere < 0)
+            }
+            if (maxEndsHere < 0) {
                 maxEndsHere = 0;
+            }
         }
+
         return maxSoFar;
     }
 
 
     public static void main(String[] args) {
-        int[][] nums = {{1, 2, -1, -4, -20},
+        int[][] nums = {
+                {1, 2, -1, -4, -20},
                 {-8, -3, 4, -2, 1},
                 {3, 8, 9, 1, 3},
                 {-4, -1, 1, 7, -6},
-                {-2, -3, 8, 1, -1}};
-
+                {-2, -3, 8, 1, -1}
+        };
         System.out.println(maxSumSubmatrix(nums, nums.length, nums[0].length));
     }
 

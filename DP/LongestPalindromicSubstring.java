@@ -9,7 +9,6 @@ public class LongestPalindromicSubstring {
     static int longestPalindromeBF(String s) {
         int maxLength = 1, start = 0;
 
-        // Nested loop to mark start and end index
         for (int i = 0; i < s.length(); i++) {
             for (int j = i; j < s.length(); j++) {
                 int flag = 1;
@@ -41,10 +40,8 @@ public class LongestPalindromicSubstring {
         }
 
         int len = s.length(), longestPalindromeStart = 0, longestPalindromeLength = 1;
-        // state[i][j] true if s[i, j] is palindrome.
         boolean[][] state = new boolean[len][len];
 
-        // Base cases
         for (int i = 0; i < len; i++) {
             state[i][i] = true; // dist = 0.
         }
@@ -67,7 +64,7 @@ public class LongestPalindromicSubstring {
     // Expand Around Center Approach
     // TC - O(n^2), SC - O(1)
     static int longestPalindrome(String s) {
-        if (s == null || s.length() < 1) {
+        if (s == null || s.isEmpty()) {
             return s.length();
         }
 
@@ -92,7 +89,6 @@ public class LongestPalindromicSubstring {
         }
         return R - L - 1;
     }
-
 
 
     // Manacher's Algorithm does this in linear time. See the solution in String section.

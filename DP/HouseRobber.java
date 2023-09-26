@@ -49,7 +49,6 @@ public class HouseRobber {
         int excl = helper(nums, i - 1);
 
         dp[i] = Math.max(incl, excl);
-
         return dp[i];
     }
 
