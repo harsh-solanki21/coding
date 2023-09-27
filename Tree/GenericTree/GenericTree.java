@@ -15,7 +15,6 @@ public class GenericTree {
         ArrayList<Node> children = new ArrayList<>();
 
         Node() {
-
         }
 
         Node(int data) {
