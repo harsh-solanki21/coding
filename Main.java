@@ -1,5 +1,3 @@
-import Tree.BinaryTree.BFS_MAANG;
-
 import java.util.*;
 
 public class Main {
@@ -11,14 +9,15 @@ public class Main {
         Node left;
         Node right;
 
-        Node(int val) {
-            this.data = val;
+        Node(int data) {
+            this.data = data;
             this.left = null;
             this.right = null;
         }
+
     }
 
-    // Level order traversal 2 (print from bottom)
+    
 
     public static void main(String[] args) {
         root = new Node(3);
@@ -32,7 +31,6 @@ public class Main {
         root.left.right.right = new Node(9);
         root.right.right.left = new Node(2);
         root.right.right.left.right = new Node(44);
-
 
     }
 
