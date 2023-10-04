@@ -22,8 +22,9 @@ public class LevelOrderTraversal {
     }
 
     private static void solve(Node root, int level, List<List<Integer>> res) {
-        if (root == null)
+        if (root == null) {
             return;
+        }
 
         // When found a new level, add a new list
         if (level >= res.size()) {

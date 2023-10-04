@@ -22,12 +22,12 @@ public class GenericTree {
         }
     }
 
-    public static void display(Node node) {
-        String s = node.data + " -> ";
+    static void display(Node node) {
+        StringBuilder s = new StringBuilder(node.data + " -> ");
         for (Node child : node.children) {
-            s += child.data + ", ";
+            s.append(child.data).append(", ");
         }
-        s += ".";
+        s.append(".");
         System.out.println(s);
 
         for (Node child : node.children) {
@@ -38,7 +38,7 @@ public class GenericTree {
 
     // find size of generic tree
     // size means count the total nodes
-    public static int size(Node node) {
+    static int size(Node node) {
         int size = 0;
         for (Node child : node.children) {
             int childSize = size(child);
@@ -90,7 +90,7 @@ public class GenericTree {
         Queue<Node> q = new ArrayDeque<>();
         q.add(node);
 
-        while (q.size() > 0) {
+        while (!q.isEmpty()) {
             node = q.remove();
             System.out.print(node.data + " ");
 
@@ -107,7 +107,7 @@ public class GenericTree {
         q.add(node);
 
         Queue<Node> childQ = new ArrayDeque<>();
-        while (q.size() > 0) {
+        while (!q.isEmpty()) {
             node = q.remove();
             System.out.print(node.data + " ");
 
@@ -115,7 +115,7 @@ public class GenericTree {
                 childQ.add(child);
             }
 
-            if (q.size() == 0) {
+            if (q.isEmpty()) {
                 q = childQ;
                 childQ = new ArrayDeque<>();
                 System.out.println();
@@ -132,7 +132,7 @@ public class GenericTree {
         Stack<Node> childSt = new Stack<>();
         int level = 1;
 
-        while (st.size() > 0) {
+        while (!st.isEmpty()) {
             node = st.pop();
             System.out.print(node.data + " ");
 
@@ -148,7 +148,7 @@ public class GenericTree {
                 }
             }
 
-            if (st.size() == 0) {
+            if (st.isEmpty()) {
                 st = childSt;
                 childSt = new Stack<>();
                 level++;
@@ -165,7 +165,7 @@ public class GenericTree {
         q.add(node);
         q.add(new Node(-1));
 
-        while (q.size() > 0) {
+        while (!q.isEmpty()) {
             node = q.remove();
             if (node.data != -1) {
                 System.out.print(node.data + " ");
@@ -173,7 +173,7 @@ public class GenericTree {
                     q.add(child);
                 }
             } else {
-                if (q.size() > 0) {
+                if (!q.isEmpty()) {
                     q.add(new Node(-1));
                     System.out.println();
                 }
@@ -187,7 +187,7 @@ public class GenericTree {
         Queue<Node> q = new ArrayDeque<>();
         q.add(node);
 
-        while (q.size() > 0) {
+        while (!q.isEmpty()) {
             int cicl = q.size();  // children in current level
             for (int i = 0; i < cicl; i++) {
                 node = q.remove();
@@ -218,7 +218,7 @@ public class GenericTree {
         q.add(new Pair(node, 1));
 
         int level = 1;
-        while (q.size() > 0) {
+        while (!q.isEmpty()) {
             Pair p = q.remove();
             if (p.level > level) {
                 level = p.level;
@@ -248,7 +248,7 @@ public class GenericTree {
     static void removeLeaves(Node node) {
         for (int i = node.children.size() - 1; i >= 0; i--) {
             Node child = node.children.get(i);
-            if (child.children.size() == 0) {
+            if (child.children.isEmpty()) {
                 node.children.remove(child);
             }
         }
@@ -292,7 +292,7 @@ public class GenericTree {
 
     // Linearize a generic tree | Efficient approach
     static Node linearize2(Node node) {
-        if (node.children.size() == 0) {
+        if (node.children.isEmpty()) {
             return node;
         }
 
@@ -333,7 +333,7 @@ public class GenericTree {
 
         for (Node child : node.children) {
             ArrayList<Integer> pathTillChild = nodeToRootPath(child, data);
-            if (pathTillChild.size() > 0) {
+            if (!pathTillChild.isEmpty()) {
                 pathTillChild.add(node.data);
                 return pathTillChild;
             }
@@ -601,7 +601,7 @@ public class GenericTree {
                 Node node = new Node();
                 node.data = nums[i];
 
-                if (st.size() > 0) {
+                if (!st.isEmpty()) {
                     st.peek().children.add(node);
                 } else {
                     root = node;
