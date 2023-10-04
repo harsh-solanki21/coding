@@ -1,0 +1,91 @@
+package Tree.BinaryTree.MAANG_Ques;
+
+public class Diameter {
+
+    static Node root;
+
+    static class Node {
+        int data;
+        Node left;
+        Node right;
+
+        Node(int data) {
+            this.data = data;
+            this.left = null;
+            this.right = null;
+        }
+    }
+
+    static int height(Node root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    // The diameter of a binary tree is the length of the longest path between any two nodes in a tree.
+    // Approach - 1 with TC - O(n^2)
+    static int diameter1(Node root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftDiameter = diameter1(root.left);
+        int rightDiameter = diameter1(root.right);
+        int diameter = height(root.left) + height(root.right) + 1;  // +1 for root node (if you consider edges then +2)
+        return Math.max(diameter, Math.max(leftDiameter, rightDiameter));
+    }
+
+    
+    // Approach - 2 with TC - O(n)
+    static class TreeInfo {
+        int height;
+        int diameter;
+
+        TreeInfo(int height, int diameter) {
+            this.height = height;
+            this.diameter = diameter;
+        }
+    }
+
+    static TreeInfo diameter2(Node root) {
+        if (root == null) {
+            return new TreeInfo(0, 0);
+        }
+        TreeInfo left = diameter2(root.left);
+        TreeInfo right = diameter2(root.right);
+
+        int myHeight = Math.max(left.height, right.height) + 1;
+
+        int diameter1 = left.diameter;
+        int diameter2 = right.diameter;
+        int diameter3 = left.height + right.height + 1;
+
+        int myDiameter = Math.max(Math.max(diameter1, diameter2), diameter3);
+        
+        return new TreeInfo(myHeight, myDiameter);
+    }
+    
+
+    public static void main(String[] args) {
+        root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        root.right.left = new Node(6);
+        root.left.left.left = new Node(7);
+        root.left.left.right = new Node(8);
+        root.left.right.right = new Node(9);
+        root.left.left.right.right = new Node(10);
+        root.left.right.right.left = new Node(11);
+        root.left.left.right.right.left = new Node(12);
+        root.left.right.right.left.right = new Node(13);
+        root.left.left.right.right.left.left = new Node(14);
+
+        System.out.println(diameter1(root));
+        System.out.println(diameter2(root).diameter);
+    }
+    
+}

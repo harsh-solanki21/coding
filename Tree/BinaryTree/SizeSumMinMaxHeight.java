@@ -1,6 +1,6 @@
 package Tree.BinaryTree;
 
-public class SizeSumMaxHeightDiameter {
+public class SizeSumMinMaxHeight {
 
     Node root;
 
@@ -73,51 +73,9 @@ public class SizeSumMaxHeightDiameter {
         return Math.max(leftHeight, rightHeight) + 1;
     }
 
-    // The diameter of a binary tree is the length of the longest path between any two nodes in a tree.
-    // Approach - 1 with TC - O(n^2)
-    static int diameter1(Node root) {
-        if (root == null) {
-            return 0;
-        }
-        int leftDiameter = diameter1(root.left);
-        int rightDiameter = diameter1(root.right);
-        int diameter = height(root.left) + height(root.right) + 1;  // +1 for root node (if you consider edges then +2)
-        return Math.max(diameter, Math.max(leftDiameter, rightDiameter));
-    }
-
-    // Approach - 2 with TC - O(n)
-    static class TreeInfo {
-        int height;
-        int diameter;
-
-        TreeInfo(int height, int diameter) {
-            this.height = height;
-            this.diameter = diameter;
-        }
-    }
-
-    static TreeInfo diameter2(Node root) {
-        if (root == null) {
-            return new TreeInfo(0, 0);
-        }
-        TreeInfo left = diameter2(root.left);
-        TreeInfo right = diameter2(root.right);
-
-        int myHeight = Math.max(left.height, right.height) + 1;
-
-        int diameter1 = left.diameter;
-        int diameter2 = right.diameter;
-        int diameter3 = left.height + right.height + 1;
-
-        int myDiameter = Math.max(Math.max(diameter1, diameter2), diameter3);
-
-        TreeInfo myInfo = new TreeInfo(myHeight, myDiameter);
-        return myInfo;
-    }
-
 
     public static void main(String[] args) {
-        SizeSumMaxHeightDiameter tree = new SizeSumMaxHeightDiameter();
+        SizeSumMinMaxHeight tree = new SizeSumMinMaxHeight();
         tree.root = new Node(50);
         tree.root.left = new Node(25);
         tree.root.right = new Node(75);
@@ -130,10 +88,9 @@ public class SizeSumMaxHeightDiameter {
 
         System.out.println(size(tree.root));
         System.out.println(sum(tree.root));
+        System.out.println(min(tree.root));
         System.out.println(max(tree.root));
         System.out.println(height(tree.root));
-        System.out.println(diameter1(tree.root));
-        System.out.println(diameter2(tree.root).diameter);
     }
 
 }
