@@ -1,4 +1,4 @@
-package Tree.AVLTree;
+package Tree.SelfBalancingBST.AVLTree;
 
 public class InsertionDeletion {
 
