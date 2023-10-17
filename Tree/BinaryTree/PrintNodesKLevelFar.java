@@ -42,7 +42,6 @@ public class PrintNodesKLevelFar {
         if (node == null || k < 0 || node == blocker) {
             return;
         }
-
         if (k == 0) {
             System.out.print(node.data + " ");
         }

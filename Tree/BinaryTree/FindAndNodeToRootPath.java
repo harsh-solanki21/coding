@@ -48,17 +48,19 @@ public class FindAndNodeToRootPath {
 
     // Approach 2
     static String ans = "";
+
     static void nodeToRoot(Node root, int val, String path) {
-        if(root == null)
+        if (root == null) {
             return;
-        if(root.data == val){
+        }
+        if (root.data == val) {
             ans = path + root.data;
             return;
         }
-        if(root.left != null){
+        if (root.left != null) {
             nodeToRoot(root.left, val, path + root.data + "->");
         }
-        if(root.right != null){
+        if (root.right != null) {
             nodeToRoot(root.right, val, path + root.data + "->");
         }
     }

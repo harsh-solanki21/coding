@@ -43,15 +43,13 @@ public class LargestBSTSubtree {
         pair.min = Math.min(node.data, Math.min(leftPair.min, rightPair.min));
         pair.max = Math.max(node.data, Math.max(leftPair.max, rightPair.max));
 
-        if(pair.isBST) {
+        if (pair.isBST) {
             pair.root = node;
             pair.size = leftPair.size + rightPair.size + 1;
-        }
-        else if(leftPair.size > rightPair.size) {
+        } else if (leftPair.size > rightPair.size) {
             pair.root = leftPair.root;
             pair.size = leftPair.size;
-        }
-        else {
+        } else {
             pair.root = rightPair.root;
             pair.size = rightPair.size;
         }

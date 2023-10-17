@@ -23,8 +23,9 @@ public class PseudoPalindromicPaths {
     }
 
     private static void dfs(Node root, int count) {
-        if (root == null)
+        if (root == null) {
             return;
+        }
 
         count ^= 1 << (root.val - 1);
         dfs(root.left, count);

@@ -29,8 +29,7 @@ public class TiltOfBinaryTree {
         int localTilt = Math.abs(leftSum - rightSum);
         tilt += localTilt;
 
-        int sum = leftSum + rightSum + node.data;
-        return sum;
+        return leftSum + rightSum + node.data;
     }
 
 

@@ -35,7 +35,6 @@ public class PathToLeafFromRootInRange {
     }
 
     public static void main(String[] args) {
-        PathToLeafFromRootInRange tree = new PathToLeafFromRootInRange();
         root = new Node(50);
         root.left = new Node(25);
         root.right = new Node(75);

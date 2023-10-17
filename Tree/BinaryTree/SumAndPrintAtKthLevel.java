@@ -34,11 +34,11 @@ public class SumAndPrintAtKthLevel {
 
 
     static int sum;
+
     static void sumOfNodesAtKthLevel(Node node, int k) {
         if (node == null || k < 0) {
             return;
         }
-
         if (k == 0) {  // because we are considering root node at level 0
             sum += node.data;
         }
@@ -49,20 +49,18 @@ public class SumAndPrintAtKthLevel {
 
 
     static int sumOfNodesAtKthLevelIterative(Node root, int k) {
-        if (root == null)
+        if (root == null) {
             return 0;
+        }
 
         Queue<Node> que = new LinkedList<>();
-
         que.add(root);
-
         int level = 1;
         int sum = 0;
         int flag = 0;
 
         while (!que.isEmpty()) {
             int size = que.size();
-
             while (size-- > 0) {
                 Node ptr = que.peek();
                 que.remove();
@@ -71,19 +69,21 @@ public class SumAndPrintAtKthLevel {
                     flag = 1;
                     sum += ptr.data;
                 } else {
-
-                    if (ptr.left != null)
+                    if (ptr.left != null) {
                         que.add(ptr.left);
-
-                    if (ptr.right != null)
+                    }
+                    if (ptr.right != null) {
                         que.add(ptr.right);
+                    }
                 }
             }
             level++;
 
-            if (flag == 1)
+            if (flag == 1) {
                 break;
+            }
         }
+
         return sum;
     }
 

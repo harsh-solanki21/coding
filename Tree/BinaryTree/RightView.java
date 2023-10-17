@@ -26,10 +26,12 @@ public class RightView {
     }
 
     private static void rightView(Node root, List<Integer> list, int level) {
-        if (root == null)
+        if (root == null) {
             return;
-        if (level == list.size())
+        }
+        if (level == list.size()) {
             list.add(root.data);
+        }
 
         rightView(root.right, list, level + 1);
         rightView(root.left, list, level + 1);

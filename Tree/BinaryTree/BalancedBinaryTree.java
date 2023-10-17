@@ -32,8 +32,7 @@ public class BalancedBinaryTree {
             isBalanced = false;
         }
 
-        int height = Math.max(leftHeight, rightHeight) + 1;
-        return height;
+        return Math.max(leftHeight, rightHeight) + 1;
     }
 
 
@@ -56,7 +55,7 @@ public class BalancedBinaryTree {
 
         Pair pair = new Pair();
         pair.isBalanced = Math.abs(leftPair.height - rightPair.height) <= 1 && leftPair.isBalanced && rightPair.isBalanced;
-                            // to check node is balanced                    // to check whole left and right tree is balanced
+        // to check node is balanced                    // to check whole left and right tree is balanced
         pair.height = Math.max(leftPair.height, rightPair.height) + 1;
         return pair;
     }
@@ -73,7 +72,7 @@ public class BalancedBinaryTree {
         root.right.left.left = new Node(8);
         root.right.left.right = new Node(18);
         root.right.left.right.right = new Node(20);
-    
+
         isBalanced1(root);
         System.out.println(isBalanced);
 

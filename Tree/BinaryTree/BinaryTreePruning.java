@@ -18,7 +18,7 @@ public class BinaryTreePruning {
 
     static TreeNode pruneTree(TreeNode root) {
         if (root == null) {
-            return root;
+            return null;
         }
 
         root.left = pruneTree(root.left); // depth first search

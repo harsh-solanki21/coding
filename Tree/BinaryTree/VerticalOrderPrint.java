@@ -17,24 +17,27 @@ public class VerticalOrderPrint {
 
 
     private static void findMinMax(Node node, int hd) {
-        if (node == null)
+        if (node == null) {
             return;
+        }
 
-        if (hd < min)
+        if (hd < min) {
             min = hd;
-        else if (hd > max)
+        } else if (hd > max) {
             max = hd;
+        }
 
         findMinMax(node.left, hd - 1);
         findMinMax(node.right, hd + 1);
     }
 
     private static void printVerticalLine(Node node, int i, int hd) {
-        if (node == null)
+        if (node == null) {
             return;
-
-        if (hd == i)
+        }
+        if (hd == i) {
             System.out.print(node.data + " ");
+        }
 
         printVerticalLine(node.left, i, hd - 1);
         printVerticalLine(node.right, i, hd + 1);

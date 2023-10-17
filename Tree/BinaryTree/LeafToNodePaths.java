@@ -25,12 +25,15 @@ public class LeafToNodePaths {
     }
 
     private static void searchBT(Node root, String path, List<String> ans) {
-        if (root.left == null && root.right == null)
+        if (root.left == null && root.right == null) {
             ans.add(path + root.val);
-        if (root.left != null)
+        }
+        if (root.left != null) {
             searchBT(root.left, path + root.val + "->", ans);
-        if (root.right != null)
+        }
+        if (root.right != null) {
             searchBT(root.right, path + root.val + "->", ans);
+        }
     }
 
 
