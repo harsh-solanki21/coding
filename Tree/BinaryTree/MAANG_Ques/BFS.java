@@ -4,6 +4,15 @@ import java.util.*;
 
 public class BFS {
 
+    // Queue<Node> queue = new LinkedList<>()/ArrayDeque<>();
+    // which one is better?
+
+    // If you need add/remove of the both ends, ArrayDeque is significantly better than a linked list.
+    // Random access each element is also O(1) for a cyclic queue.
+    // The only better operation of a linked list is removing the current element during iteration.
+
+    // LinkedList supports null elements, whereas ArrayDeque does not.
+
     static Node root;
 
     static class Node {
@@ -170,9 +179,10 @@ public class BFS {
                     queue.add(currentNode.right);
                 }
             }
-            result.add(currentLevel);
+            result.add(currentLevel); // result.add(0, currentLevel);
         }
 
+        // Doesn't need this reversal if we use result.add(0, currentLevel);
         List<List<Integer>> ans = new ArrayList<>();
         for (int i = result.size() - 1; i >= 0; i--) {
             ans.add(result.get(i));
