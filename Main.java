@@ -25,35 +25,11 @@ public class Main {
         }
     }
 
-    static void preInPost(Node root) {
-        StringBuilder pre = new StringBuilder();
-        StringBuilder in = new StringBuilder();
-        StringBuilder post = new StringBuilder();
-
-        Stack<Pair> st = new Stack<>();
-        st.push(new Pair(root, 1));
-
-        while (!st.isEmpty()) {
-            if (st.peek().count == 1) {
-                pre.append(st.peek().node.data).append(" ");
-                st.peek().count = 2;
-                if (st.peek().node.left != null) {
-                    st.push(new Pair(st.peek().node.left, 1));
-                }
-            } else if (st.peek().count == 2) {
-                in.append(st.peek().node.data).append(" ");
-                st.peek().count = 3;
-                if (st.peek().node.right != null) {
-                    st.push(new Pair(st.peek().node.right, 1));
-                }
-            } else {
-                post.append(st.pop().node.data).append(" ");
-            }
-        }
-
-        System.out.println(pre);
-        System.out.println(in);
-        System.out.println(post);
+    // https://www.youtube.com/watch?v=9D-vP-jcc-Y
+    // https://www.youtube.com/watch?v=1Kyc-zQS7eQ&list=PL-Jc9J83PIiHYxUk8dSu2_G7MR1PaGXN4&index=19
+    static List<Integer> nodeToRootPath(Node root, int target) {
+        List<Integer> ans = new ArrayList<>();
+        return ans;
     }
 
 
@@ -73,7 +49,7 @@ public class Main {
         root.left.right.right.left.right = new Node(13);
         root.left.left.right.right.left.left = new Node(14);
 
-        preInPost(root);
+        System.out.println(nodeToRootPath(root, 12));
     }
 
 }
