@@ -15,6 +15,47 @@ public class Main {
         }
     }
 
+    static class Pair {
+        Node node;
+        int count;
+
+        Pair(Node node, int count) {
+            this.node = node;
+            this.count = count;
+        }
+    }
+
+    static void preInPost(Node root) {
+        StringBuilder pre = new StringBuilder();
+        StringBuilder in = new StringBuilder();
+        StringBuilder post = new StringBuilder();
+
+        Stack<Pair> st = new Stack<>();
+        st.push(new Pair(root, 1));
+
+        while (!st.isEmpty()) {
+            if (st.peek().count == 1) {
+                pre.append(st.peek().node.data).append(" ");
+                st.peek().count = 2;
+                if (st.peek().node.left != null) {
+                    st.push(new Pair(st.peek().node.left, 1));
+                }
+            } else if (st.peek().count == 2) {
+                in.append(st.peek().node.data).append(" ");
+                st.peek().count = 3;
+                if (st.peek().node.right != null) {
+                    st.push(new Pair(st.peek().node.right, 1));
+                }
+            } else {
+                post.append(st.pop().node.data).append(" ");
+            }
+        }
+
+        System.out.println(pre);
+        System.out.println(in);
+        System.out.println(post);
+    }
+
 
     public static void main(String[] args) {
         root = new Node(1);
@@ -32,7 +73,7 @@ public class Main {
         root.left.right.right.left.right = new Node(13);
         root.left.left.right.right.left.left = new Node(14);
 
-//        System.out.println(isSymmetric(root));
+        preInPost(root);
     }
 
 }

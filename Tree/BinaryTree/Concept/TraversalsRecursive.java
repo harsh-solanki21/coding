@@ -1,4 +1,4 @@
-package Tree.BinaryTree;
+package Tree.BinaryTree.Concept;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
@@ -30,58 +30,63 @@ public class TraversalsRecursive {
         }
     }
 
+
+    // DFS Traversals
     // PreOrder traversal = Root, Left Subtree, Right Subtree
-    // PreOrder TC - O(n)
+    // TC - O(n), SC - O(n)
     static void preOrder(Node root) {
-        if (root == null)
+        if (root == null) {
             return;
+        }
         System.out.print(root.data + " ");
         preOrder(root.left);
         preOrder(root.right);
     }
 
+
     // InOrder traversal = Left Subtree, Root, Right Subtree
-    // InOrder TC - O(n)
+    // TC - O(n), SC - O(n)
     static void inOrder(Node root) {
-        if (root == null)
+        if (root == null) {
             return;
+        }
         inOrder(root.left);
         System.out.print(root.data + " ");
         inOrder(root.right);
     }
 
+
     // PostOrder traversal = Left Subtree, Right Subtree, Root
-    // PostOrder TC - O(n)
+    // TC - O(n), SC - O(n)
     static void postOrder(Node root) {
-        if (root == null)
+        if (root == null) {
             return;
+        }
         postOrder(root.left);
         postOrder(root.right);
         System.out.print(root.data + " ");
     }
 
+
+    // BFS Traversal
     // LevelOrder traversal = Level-wise traversal
-    // LevelOrder TC - O(n)
-    // BFS is LevelOrder Traversal
+    // TC - O(n), SC - O(n)
     static void levelOrder(Node root) {
         Queue<Node> q = new ArrayDeque<>();
         q.add(root);
 
-        while (q.size() > 0) {
+        while (!q.isEmpty()) {
             int count = q.size();
             for (int i = 0; i < count; i++) {
                 root = q.remove();
                 System.out.print(root.data + " ");
-
                 if (root.left != null) {
                     q.add(root.left);
                 }
-
                 if (root.right != null) {
                     q.add(root.right);
                 }
             }
-
             System.out.println();
         }
     }
@@ -89,9 +94,9 @@ public class TraversalsRecursive {
     public static void main(String[] args) {
         int[] nodes = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
         Node root = BinaryTree.buildTree(nodes);
-//        preOrder(root);
-//        inOrder(root);
-//        postOrder(root);
+        preOrder(root);
+        inOrder(root);
+        postOrder(root);
         levelOrder(root);
     }
 

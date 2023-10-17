@@ -1,4 +1,4 @@
-package Tree.BinaryTree;
+package Tree.BinaryTree.Concept;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -46,13 +46,14 @@ public class TraversalsIterative {
     // Inorder
     // TC - O(n), SC - O(n)
     void inorder() {
-        if (root == null)
+        if (root == null) {
             return;
+        }
 
         Stack<Node> st = new Stack<>();
         Node curr = root;
 
-        while (curr != null || st.size() > 0) {
+        while (curr != null || !st.isEmpty()) {
             while (curr != null) {
                 st.push(curr);
                 curr = curr.left;
@@ -70,18 +71,20 @@ public class TraversalsIterative {
         Stack<Node> s1 = new Stack<>();
         Stack<Node> s2 = new Stack<>();
 
-        if (root == null)
+        if (root == null) {
             return;
-
+        }
         s1.push(root);
 
         while (!s1.isEmpty()) {
             Node temp = s1.pop();
             s2.push(temp);
-            if (temp.left != null)
+            if (temp.left != null) {
                 s1.push(temp.left);
-            if (temp.right != null)
+            }
+            if (temp.right != null) {
                 s1.push(temp.right);
+            }
         }
 
         while (!s2.isEmpty()) {
@@ -101,8 +104,9 @@ public class TraversalsIterative {
                 root = root.left;
             }
 
-            if (stack.empty())
+            if (stack.empty()) {
                 return;
+            }
             root = stack.pop();
 
             if (!stack.empty() && stack.peek() == root) {
@@ -127,7 +131,6 @@ public class TraversalsIterative {
             if (tempNode.left != null) {
                 queue.add(tempNode.left);
             }
-
             if (tempNode.right != null) {
                 queue.add(tempNode.right);
             }
@@ -152,14 +155,14 @@ public class TraversalsIterative {
         Pair rootPair = new Pair(node, 1);
         st.push(rootPair);
 
-        String pre = "";
-        String in = "";
-        String post = "";
+        StringBuilder pre = new StringBuilder();
+        StringBuilder in = new StringBuilder();
+        StringBuilder post = new StringBuilder();
 
-        while (st.size() > 0) {
+        while (!st.isEmpty()) {
             Pair top = st.peek();
             if (top.state == 1) {  // pre, state++, go left
-                pre += top.node.data + " ";
+                pre.append(top.node.data).append(" ");
                 top.state++;
 
                 if (top.node.left != null) {
@@ -167,7 +170,7 @@ public class TraversalsIterative {
                     st.push(leftPair);
                 }
             } else if (top.state == 2) {  // in, state++, go right
-                in += top.node.data + " ";
+                in.append(top.node.data).append(" ");
                 top.state++;
 
                 if (top.node.right != null) {
@@ -175,7 +178,7 @@ public class TraversalsIterative {
                     st.push(rightPair);
                 }
             } else {  // post, pop
-                post += top.node.data + " ";
+                post.append(top.node.data).append(" ");
                 st.pop();
             }
         }
