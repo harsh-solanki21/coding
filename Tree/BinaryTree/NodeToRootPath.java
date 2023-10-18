@@ -2,7 +2,7 @@ package Tree.BinaryTree;
 
 import java.util.ArrayList;
 
-public class FindAndNodeToRootPath {
+public class NodeToRootPath {
 
     static Node root;
 

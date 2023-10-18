@@ -15,22 +15,7 @@ public class Main {
         }
     }
 
-    static class Pair {
-        Node node;
-        int count;
 
-        Pair(Node node, int count) {
-            this.node = node;
-            this.count = count;
-        }
-    }
-
-    // https://www.youtube.com/watch?v=9D-vP-jcc-Y
-    // https://www.youtube.com/watch?v=1Kyc-zQS7eQ&list=PL-Jc9J83PIiHYxUk8dSu2_G7MR1PaGXN4&index=19
-    static List<Integer> nodeToRootPath(Node root, int target) {
-        List<Integer> ans = new ArrayList<>();
-        return ans;
-    }
 
 
     public static void main(String[] args) {
@@ -49,7 +34,6 @@ public class Main {
         root.left.right.right.left.right = new Node(13);
         root.left.left.right.right.left.left = new Node(14);
 
-        System.out.println(nodeToRootPath(root, 12));
     }
 
 }

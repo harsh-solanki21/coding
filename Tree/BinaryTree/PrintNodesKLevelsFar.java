@@ -2,7 +2,7 @@ package Tree.BinaryTree;
 
 import java.util.ArrayList;
 
-public class PrintNodesKLevelFar {
+public class PrintNodesKLevelsFar {
 
     static Node root;
 
@@ -17,16 +17,6 @@ public class PrintNodesKLevelFar {
         }
     }
 
-    static class Pair {
-        Node node;
-        int state;
-
-        Pair(Node node, int state) {
-            this.node = node;
-            this.state = state;
-        }
-    }
-
 
     static void printKNodesFar(Node node, int data, int k) {
         path = new ArrayList<>();
@@ -38,7 +28,7 @@ public class PrintNodesKLevelFar {
 
 
     // Print nodes at Kth level
-    static void printNodesOfKthLevel(Node node, int k, Node blocker) {
+    private static void printNodesOfKthLevel(Node node, int k, Node blocker) {
         if (node == null || k < 0 || node == blocker) {
             return;
         }
@@ -54,7 +44,7 @@ public class PrintNodesKLevelFar {
     // Find and Node to root path
     static ArrayList<Node> path;
 
-    static boolean findAndNodeToPath(Node node, int data) {
+    private static boolean findAndNodeToPath(Node node, int data) {
         if (node == null) {
             return false;
         }
