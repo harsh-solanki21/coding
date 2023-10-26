@@ -15,9 +15,10 @@ public class Main {
         }
     }
 
+    // https://www.youtube.com/watch?v=A6Z5YvsrDtg&list=PL-Jc9J83PIiHYxUk8dSu2_G7MR1PaGXN4&index=31
+    // Bottom View of Binary Tree, Top View of Binary Tree
 
-
-
+    
     public static void main(String[] args) {
         root = new Node(1);
         root.left = new Node(2);
