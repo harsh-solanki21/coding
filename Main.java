@@ -13,12 +13,15 @@ public class Main {
             this.left = null;
             this.right = null;
         }
+
+        Node(int data, Node left, Node right) {
+            this.data = data;
+            this.left = left;
+            this.right = right;
+        }
     }
 
-    // https://www.youtube.com/watch?v=A6Z5YvsrDtg&list=PL-Jc9J83PIiHYxUk8dSu2_G7MR1PaGXN4&index=31
-    // Bottom View of Binary Tree, Top View of Binary Tree
 
-    
     public static void main(String[] args) {
         root = new Node(1);
         root.left = new Node(2);
@@ -34,7 +37,6 @@ public class Main {
         root.left.left.right.right.left = new Node(12);
         root.left.right.right.left.right = new Node(13);
         root.left.left.right.right.left.left = new Node(14);
-
     }
 
 }
