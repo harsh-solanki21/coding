@@ -1,21 +1,11 @@
-package Graphs;
+package Graphs.GraphRepresentations.AdjacencyList;
 
 import java.util.ArrayList;
 
-public class AdjacencyList {
-
-    // All graph problems will somehow use a grid or network in the problem, but sometimes these will be well disguised.
-    // Secondly, if you are required to find a path of any sort, it is usually a graph problem as well.
-    // Some common keywords associated with graph problems are:
-    // vertices, nodes, edges, connections, connectivity, paths, cycles and direction.
+public class ArrayListOfArrayList {
 
     // SC - O(2n)
     // In case of weighted graph, use Pair in ArrayList.
-
-    static void addEdge(ArrayList<ArrayList<Integer>> adj, int source, int destination) {
-        adj.get(source).add(destination);
-        adj.get(destination).add(source);
-    }
 
     static void printGraph(ArrayList<ArrayList<Integer>> graph) {
         for (int i = 0; i < graph.size(); i++) {
@@ -30,11 +20,15 @@ public class AdjacencyList {
         }
     }
 
+    private static void addEdge(ArrayList<ArrayList<Integer>> adj, int source, int destination) {
+        adj.get(source).add(destination);
+        adj.get(destination).add(source);
+    }
+
     public static void main(String[] args) {
         int vertex = 5;
         ArrayList<ArrayList<Integer>> graph = new ArrayList<>(vertex);
 
-        //creating array lists for storing lists
         for (int i = 0; i < vertex; i++) {
             graph.add(new ArrayList<>());
         }

@@ -1,11 +1,8 @@
-package Graphs;
+package Graphs.GraphRepresentations;
 
 public class AdjacencyMatrix {
 
-    // Representations of Graph:
-    // 1. Adjacency Matrix (use only when vertices < 10000)
-    // 2. Adjacency List
-
+    // Use Adjacency Matrix only when vertices < 10000
     // SC - O(n^2)
     // In case of weighted graph, put wight in the matrix instead of 1.
 
@@ -15,7 +12,6 @@ public class AdjacencyMatrix {
     }
 
     static void printGraph(int[][] graph) {
-        System.out.println("Graph: (Adjacency Matrix)");
         for (int i = 0; i < graph.length; i++) {
             for (int j = 0; j < graph[i].length; j++) {
                 System.out.print(graph[i][j] + " ");
