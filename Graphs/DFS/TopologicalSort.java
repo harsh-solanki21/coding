@@ -5,37 +5,68 @@ import java.util.Stack;
 
 public class TopologicalSort {
 
+    // Topological Sort - Topological sort is a linear order of vertices such that every directed edge u -> v, the vertex u comes before v in the order.
+    // Topological sorting is used only for DAGs(Directed Acyclic Graphs), (not for non-DAGs)
+
     static class Edge {
-        int source;
-        int neighbour;
+        int source, destination;
 
         Edge(int source, int neighbour) {
             this.source = source;
-            this.neighbour = neighbour;
+            this.destination = neighbour;
         }
     }
 
+    static void topologicalSort(ArrayList<ArrayList<Edge>> graph, int vertices) {
+        boolean[] visited = new boolean[vertices];
+        Stack<Integer> st = new Stack<>();
 
-    // Topological Sort - A permutation for vertices for a directed cyclic graph is called topological sort if for all directed edges
-    //                    uv, u appears before v in the graph
+        for (int i = 0; i < vertices; i++) {
+            if (!visited[i]) {
+                topologicalSortUtil(graph, i, visited, st);
+            }
+        }
 
-    // When to use Topological Sort:
-    // 1. Finding cycle in a graph
-    // 2. Operating System deadlock detection
-    // 3. Dependency resolution (when work 1 is dependent on work 2, then work 2 has to be done first)
-    // 4. Sentence Ordering
-    // 5. Critical Path Analysis
-    // 6. Course Schedule problem
-    // 7. Other applications like manufacturing workflows, data serialization and context-free grammar
+        while (!st.isEmpty()) {
+            System.out.print(st.pop() + " ");
+        }
+    }
 
-    static void topologicalSort(ArrayList<ArrayList<Edge>> graph, int source, boolean[] visited, Stack<Integer> st) {
+    private static void topologicalSortUtil(ArrayList<ArrayList<Edge>> graph, int source, boolean[] visited, Stack<Integer> st) {
         visited[source] = true;
         for (Edge e : graph.get(source)) {
-            if (!visited[e.neighbour]) {
-                topologicalSort(graph, e.neighbour, visited, st);
+            if (!visited[e.destination]) {
+                topologicalSortUtil(graph, e.destination, visited, st);
             }
         }
         st.push(source);
+    }
+
+
+    // without Edge
+    static void topologicalSort2(ArrayList<ArrayList<Integer>> graph, int vertices) {
+        Stack<Integer> stack = new Stack<>();
+        boolean[] visited = new boolean[vertices];
+
+        for (int i = 0; i < vertices; i++) {
+            if (!visited[i]) {
+                topologicalSortUtil2(graph, i, visited, stack);
+            }
+        }
+
+        while (!stack.empty()) {
+            System.out.print(stack.pop() + " ");
+        }
+    }
+
+    private static void topologicalSortUtil2(ArrayList<ArrayList<Integer>> graph, int vertex, boolean[] visited, Stack<Integer> stack) {
+        visited[vertex] = true;
+        for (Integer i : graph.get(vertex)) {
+            if (!visited[i]) {
+                topologicalSortUtil2(graph, i, visited, stack);
+            }
+        }
+        stack.push(vertex);
     }
 
 
@@ -43,36 +74,47 @@ public class TopologicalSort {
         int vertices = 7;
         ArrayList<ArrayList<Edge>> graph = new ArrayList<>();
 
-        // vertices
         for (int i = 0; i < vertices; i++) {
             graph.add(new ArrayList<>());
         }
 
-        // Edges
-        // Directed
         graph.get(0).add(new Edge(0, 1));
-        graph.get(1).add(new Edge(1, 2));
-        graph.get(2).add(new Edge(2, 3));
         graph.get(0).add(new Edge(0, 3));
+
+        graph.get(1).add(new Edge(1, 2));
+
+        graph.get(2).add(new Edge(2, 3));
+
         graph.get(4).add(new Edge(4, 3));
         graph.get(4).add(new Edge(4, 5));
-        graph.get(5).add(new Edge(5, 6));
         graph.get(4).add(new Edge(4, 6));
 
+        graph.get(5).add(new Edge(5, 6));
 
-        // Topological Sort
-        boolean[] visited = new boolean[vertices];
-        Stack<Integer> st = new Stack<>();
+        topologicalSort(graph, vertices);
 
-        for (int i = 0; i < vertices; i++) {
-            if (!visited[i]) {
-                topologicalSort(graph, i, visited, st);
-            }
-        }
 
-        while (!st.isEmpty()) {
-            System.out.print(st.pop() + " ");
-        }
+        // without Edge
+//        int vertices = 7;
+//        ArrayList<ArrayList<Integer>> graph = new ArrayList<>(vertices);
+//        for (int i = 0; i < vertices; i++) {
+//            graph.add(new ArrayList<>());
+//        }
+//
+//        graph.get(0).add(1);
+//        graph.get(0).add(3);
+//
+//        graph.get(1).add(2);
+//
+//        graph.get(2).add(3);
+//
+//        graph.get(4).add(3);
+//        graph.get(4).add(5);
+//        graph.get(4).add(6);
+//
+//        graph.get(5).add(6);
+//
+//        topologicalSort2(graph, vertices);
 
     }
 
