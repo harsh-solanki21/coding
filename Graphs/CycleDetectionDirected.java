@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public class CycleDetectionDirected {
 
+    // Ways to detect cycle in Directed Graph
+    // DFS, BFS, Topological Sorting (Kahn's Algorithm), Graph Coloring
+
+
     // DFS
     static boolean isCyclic(ArrayList<ArrayList<Integer>> graph, int vertices) {
         boolean[] visited = new boolean[vertices + 1];
