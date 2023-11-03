@@ -1,4 +1,4 @@
-package PriorityQueue;
+package Heap.PriorityQueue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +31,7 @@ public class MergeKSortedLists {
             pq.add(p);
         }
 
-        while (pq.size() > 0) {
+        while (!pq.isEmpty()) {
             Pair p = pq.remove();
             ans.add(p.val);
             p.dataIndex++;

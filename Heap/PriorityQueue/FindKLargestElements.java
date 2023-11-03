@@ -1,4 +1,4 @@
-package PriorityQueue;
+package Heap.PriorityQueue;
 
 import java.util.PriorityQueue;
 
@@ -6,7 +6,6 @@ public class FindKLargestElements {
 
     // Find K(here 3)th largest elements and print them in increasing order
     // TC - O(n log(k)), SC - O(k)
-    // Priority Queue
     static void findKLargestElements(int[] nums, int k) {
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         for (int i = 0; i < nums.length; i++) {
@@ -21,7 +20,7 @@ public class FindKLargestElements {
             }
         }
 
-        while (pq.size() > 0) {
+        while (!pq.isEmpty()) {
             System.out.println(pq.remove());
         }
     }

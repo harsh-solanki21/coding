@@ -1,4 +1,4 @@
-package PriorityQueue;
+package Heap.PriorityQueue;
 
 import java.util.PriorityQueue;
 
@@ -15,7 +15,7 @@ public class SortNearlySortedArray {
             pq.add(nums[i]);
         }
 
-        while (pq.size() > 0) {
+        while (!pq.isEmpty()) {
             System.out.println(pq.remove());
         }
     }

@@ -1,4 +1,4 @@
-package PriorityQueue;
+package Heap.PriorityQueue;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ public class PriorityQueueImplementation {
 
     // https://www.youtube.com/watch?v=RIjxT24gUv4&list=PL-Jc9J83PIiHq5rMZasunIR19QG3E-PAA&index=20
 
-    // Priority Queue Implementation using Heap
+    // Priority Queue Implementation using Heap.
     // Heap Order Property and Complete Binary Tree will help to perform add and remove operations in O(log n)
 
     // Heap Order Property
@@ -72,8 +72,9 @@ public class PriorityQueueImplementation {
         // 4. perform above operation till element gets place on correct position
         // O(log n)
         public int remove() {
-            if (this.size() == 0)
+            if (this.size() == 0) {
                 return -1;
+            }
 
             swap(0, data.size() - 1);
             int val = data.remove(data.size() - 1);
@@ -82,7 +83,6 @@ public class PriorityQueueImplementation {
         }
 
         private void downHeapify(int parentIndex) {
-
             int minIndex = parentIndex;
             int leftIndex = 2 * parentIndex + 1;
             if (leftIndex < data.size() && data.get(leftIndex) < data.get(minIndex)) {
@@ -103,8 +103,9 @@ public class PriorityQueueImplementation {
 
         // O(1)
         public int peek() {
-            if (this.size() == 0)
+            if (this.size() == 0) {
                 return -1;
+            }
             return data.get(0);
         }
 

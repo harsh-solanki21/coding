@@ -1,6 +1,5 @@
-package PriorityQueue;
+package Heap.PriorityQueue;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -9,7 +8,7 @@ public class PriorityQueueIntro {
     // Priority queue is Heap
 
     static void priorityQueue(int[] nums) {
-//        PriorityQueue<Integer> pq = new PriorityQueue<>();
+//        Heap.PriorityQueue<Integer> pq = new Heap.PriorityQueue<>();
 
         // to give high priority to large values
         PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.reverseOrder());
@@ -22,7 +21,7 @@ public class PriorityQueueIntro {
 
         // This loop will run in O(n log(n))
         // Because this loop will run n times and remove() will take log(n)
-        while (pq.size() > 0) {
+        while (!pq.isEmpty()) {
             System.out.println(pq.peek());
             pq.remove();
         }

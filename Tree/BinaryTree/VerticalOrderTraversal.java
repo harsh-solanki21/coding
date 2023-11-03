@@ -136,7 +136,7 @@ public class VerticalOrderTraversal {
 //    static int mostCol;
 //
 //    static List<List<Integer>> ans;
-//    static PriorityQueue<Pair> pq;
+//    static Heap.PriorityQueue<Pair> pq;
 //
 //    static List<List<Integer>> verticalTraversal(TreeNode root) {
 //        ans = new ArrayList<>();
@@ -157,7 +157,7 @@ public class VerticalOrderTraversal {
 //
 //    private static void bfs(TreeNode root) {
 //        Queue<Pair> q = new LinkedList<Pair>();
-//        pq = new PriorityQueue<>();
+//        pq = new Heap.PriorityQueue<>();
 //        int row = 0;
 //        int col = 0;
 //        q.add(new Pair(row, col, root));

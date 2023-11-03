@@ -1,4 +1,4 @@
-package PriorityQueue;
+package Heap.PriorityQueue;
 
 import java.util.PriorityQueue;
 
@@ -13,8 +13,9 @@ public class MinNumberOfRefuelingStops {
 
         for (int[] station : stations) {
             while (fuel < station[0]) {
-                if (fuelInStation.isEmpty())
+                if (fuelInStation.isEmpty()) {
                     return -1;
+                }
                 fuel += fuelInStation.poll();
                 ans++;
             }
@@ -22,8 +23,9 @@ public class MinNumberOfRefuelingStops {
         }
 
         while (fuel < target) {
-            if (fuelInStation.isEmpty())
+            if (fuelInStation.isEmpty()) {
                 return -1;
+            }
             fuel += fuelInStation.poll();
             ans++;
         }
