@@ -9,7 +9,7 @@ public class HashMapImplement {
     // All these operations achieved in O(1)
 
     // Methods of HashMap:
-    //                  exists                          doesn't exists
+    //                  exists                          doesn't exist
     // put              update                          Insert
     // get              return value                    null
     // containsKey      true                            false
@@ -33,11 +33,11 @@ public class HashMapImplement {
         private LinkedList<Node>[] buckets;  // N = buckets.length
 
         public HashMap() {
-            initbuckets(4);
+            initBuckets(4);
             size = 0;
         }
 
-        private void initbuckets(int N) {
+        private void initBuckets(int N) {
             buckets = new LinkedList[N];
             for (int i = 0; i < buckets.length; i++) {
                 buckets[i] = new LinkedList<>();
@@ -84,11 +84,11 @@ public class HashMapImplement {
         private void reHash() throws Exception {
             LinkedList<Node>[] oldBucketArray = buckets;
 
-            initbuckets(oldBucketArray.length * 2);
+            initBuckets(oldBucketArray.length * 2);
             size = 0;
 
-            for (int i = 0; i < oldBucketArray.length; i++) {
-                for (Node node : oldBucketArray[i]) {
+            for (LinkedList<Node> nodes : oldBucketArray) {
+                for (Node node : nodes) {
                     put(node.key, node.value);
                 }
             }
@@ -114,10 +114,7 @@ public class HashMapImplement {
             int bucketIndex = hashFunction(key);
             int dataIndex = getIndexWithinBucket(key, bucketIndex);
 
-            if (dataIndex != -1)
-                return true;
-            else
-                return false;
+            return dataIndex != -1;
         }
 
 
@@ -139,8 +136,8 @@ public class HashMapImplement {
         // keySet
         public ArrayList<K> keySet() throws Exception {
             ArrayList<K> keys = new ArrayList<>();
-            for (int i = 0; i < buckets.length; i++) {
-                for (Node node : buckets[i]) {
+            for (LinkedList<Node> bucket : buckets) {
+                for (Node node : bucket) {
                     keys.add(node.key);
                 }
             }
@@ -163,17 +160,17 @@ public class HashMapImplement {
                 System.out.println(".");
             }
         }
-
-
-        public static void main(String[] args) throws Exception {
-            HashMap map = new HashMap();
-            map.put("India", 200);
-            map.put("Canada", 100);
-            map.put("US", 50);
-//            System.out.println(map.keySet());
-            map.display();
-        }
-
     }
+
+
+    public static void main(String[] args) throws Exception {
+        HashMap map = new HashMap();
+        map.put("India", 200);
+        map.put("Canada", 100);
+        map.put("US", 50);
+//      System.out.println(map.keySet());
+        map.display();
+    }
+
 
 }
