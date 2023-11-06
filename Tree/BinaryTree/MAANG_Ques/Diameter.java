@@ -16,29 +16,30 @@ public class Diameter {
         }
     }
 
-    static int height(Node root) {
-        if (root == null) {
-            return 0;
-        }
-        int leftHeight = height(root.left);
-        int rightHeight = height(root.right);
-        return Math.max(leftHeight, rightHeight) + 1;
-    }
 
     // The diameter of a binary tree is the length of the longest path between any two nodes in a tree.
-    // Approach - 1 with TC - O(n^2)
+    // Approach 1 => TC - O(n^2)
     static int diameter1(Node root) {
         if (root == null) {
             return 0;
         }
         int leftDiameter = diameter1(root.left);
         int rightDiameter = diameter1(root.right);
-        int diameter = height(root.left) + height(root.right) + 1;  // +1 for root node (if you consider edges then +2)
+        int diameter = height(root.left) + height(root.right) + 2;  // +1 for root node (if you consider edges then +2)
         return Math.max(diameter, Math.max(leftDiameter, rightDiameter));
     }
 
-    
-    // Approach - 2 with TC - O(n)
+    private static int height(Node root) {
+        if (root == null) {
+            return -1;   // 0 for nodes, -1 for edges
+        }
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+
+    // Approach 2 => TC - O(n)
     static class TreeInfo {
         int height;
         int diameter;
@@ -49,24 +50,29 @@ public class Diameter {
         }
     }
 
-    static TreeInfo diameter2(Node root) {
+    static int diameter2(Node root) {
+        TreeInfo ans = diameterHelper(root);
+        return ans.diameter;
+    }
+
+    private static TreeInfo diameterHelper(Node root) {
         if (root == null) {
-            return new TreeInfo(0, 0);
+            return new TreeInfo(-1, 0);  // height 0 for nodes, -1 for edges
         }
-        TreeInfo left = diameter2(root.left);
-        TreeInfo right = diameter2(root.right);
+        TreeInfo left = diameterHelper(root.left);
+        TreeInfo right = diameterHelper(root.right);
 
         int myHeight = Math.max(left.height, right.height) + 1;
 
         int diameter1 = left.diameter;
         int diameter2 = right.diameter;
-        int diameter3 = left.height + right.height + 1;
+        int diameter3 = left.height + right.height + 2;  // +1 for root node (if you consider edges then +2)
 
         int myDiameter = Math.max(Math.max(diameter1, diameter2), diameter3);
-        
+
         return new TreeInfo(myHeight, myDiameter);
     }
-    
+
 
     public static void main(String[] args) {
         root = new Node(1);
@@ -85,7 +91,7 @@ public class Diameter {
         root.left.left.right.right.left.left = new Node(14);
 
         System.out.println(diameter1(root));
-        System.out.println(diameter2(root).diameter);
+        System.out.println(diameter2(root));
     }
-    
+
 }
