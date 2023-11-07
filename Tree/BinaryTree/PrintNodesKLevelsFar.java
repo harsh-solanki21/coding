@@ -19,24 +19,29 @@ public class PrintNodesKLevelsFar {
 
 
     // Solution 1
+    // TC - O(n), SC - O(n)
     static List<Integer> distanceK(Node root, Node target, int k) {
-        Map<Node, Node> parent = new HashMap<>();
-        getParents(parent, root);
+        HashMap<Node, Node> parent = new HashMap<>();
+        getParentsByBFS(parent, root);
 
         Queue<Node> queue = new LinkedList<>();
-        Map<Node, Boolean> visited = new HashMap<>();
+        HashMap<Node, Boolean> visited = new HashMap<>();
         visited.put(target, true);
         queue.offer(target);
         int level = 0;
 
         while (!queue.isEmpty()) {
-            int n = queue.size();
+            int currSize = queue.size();
             if (level == k) {
                 break;
             }
             level++;
-            for (int i = n - 1; i >= 0; i--) {
+            for (int i = 0; i < currSize; i++) {
                 Node curr = queue.poll();
+                if (parent.containsKey(curr) && !visited.containsKey(parent.get(curr))) {
+                    visited.put(parent.get(curr), true);
+                    queue.offer(parent.get(curr));
+                }
                 if (curr.left != null && !visited.containsKey(curr.left)) {
                     visited.put(curr.left, true);
                     queue.offer(curr.left);
@@ -44,10 +49,6 @@ public class PrintNodesKLevelsFar {
                 if (curr.right != null && !visited.containsKey(curr.right)) {
                     visited.put(curr.right, true);
                     queue.offer(curr.right);
-                }
-                if (parent.containsKey(curr) && !visited.containsKey(parent.get(curr))) {
-                    visited.put(parent.get(curr), true);
-                    queue.offer(parent.get(curr));
                 }
             }
         }
@@ -60,21 +61,7 @@ public class PrintNodesKLevelsFar {
         return ans;
     }
 
-    private static void getParents(Map<Node, Node> parent, Node root) {
-        if (root == null) {
-            return;
-        }
-        if (root.left != null) {
-            parent.put(root.left, root);
-        }
-        if (root.right != null) {
-            parent.put(root.right, root);
-        }
-        getParents(parent, root.left);
-        getParents(parent, root.right);
-    }
-
-    private static void getParentsByBFS(Map<Node, Node> parent, Node root) {
+    private static void getParentsByBFS(HashMap<Node, Node> parent, Node root) {
         Queue<Node> queue = new LinkedList<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
@@ -93,18 +80,33 @@ public class PrintNodesKLevelsFar {
         }
     }
 
+    private static void getParents(HashMap<Node, Node> parent, Node root) {
+        if (root == null) {
+            return;
+        }
+        if (root.left != null) {
+            parent.put(root.left, root);
+        }
+        if (root.right != null) {
+            parent.put(root.right, root);
+        }
+        getParents(parent, root.left);
+        getParents(parent, root.right);
+    }
+
 
     // Solution 2
+    static ArrayList<Node> path;
+
     static void printKNodesFar(Node node, int data, int k) {
         path = new ArrayList<>();
         findAndNodeToPath(node, data);
+
         for (int i = 0; i < path.size(); i++) {
             printNodesOfKthLevel(path.get(i), k - i, i == 0 ? null : path.get(i - 1));
         }
     }
 
-
-    // Print nodes at Kth level
     private static void printNodesOfKthLevel(Node node, int k, Node blocker) {
         if (node == null || k < 0 || node == blocker) {
             return;
@@ -116,10 +118,6 @@ public class PrintNodesKLevelsFar {
         printNodesOfKthLevel(node.left, k - 1, blocker);
         printNodesOfKthLevel(node.right, k - 1, blocker);
     }
-
-
-    // Find Node to root path
-    static ArrayList<Node> path;
 
     private static boolean findAndNodeToPath(Node node, int data) {
         if (node == null) {

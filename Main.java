@@ -1,10 +1,12 @@
 import java.util.*;
 
 public class Main {
+    // Graph
     // BFS and DFS of Graph
-    // Diameter in Tree
 
-    static Node root = null;
+
+    // Tree
+    static Node root;
 
     static class Node {
         int data;
@@ -16,7 +18,21 @@ public class Main {
         }
     }
 
+
+    // Diameter of Binary Tree
+//    static int diameter1(Node root) {
+//
+//    }
+
+
+    // print nodes k level far
+//    static List<Integer> distanceK(Node root, Node target, int k) {
+//
+//    }
+
+
     public static void main(String[] args) {
+        // Tree
         root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
@@ -32,12 +48,18 @@ public class Main {
         root.left.right.right.left.right = new Node(13);
         root.left.left.right.right.left.left = new Node(14);
 
-//        System.out.println(diameter1(root));
-//        TreeInfo ans = diameter(root);
-//        System.out.println(ans.diameter + "  " + ans.height);
-    }
+        Node targetNode = root.left.left.right.right;
+        int k = 3;
 
-//    public static void main(String[] args) {
+//        System.out.println(distanceK(root, targetNode, k));
+
+//        System.out.println(diameter1(root));
+//        System.out.println(diameter2(root));
+
+
+
+
+        // Graph
 //        int vertices = 7;
 //        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
 //        for (int i = 0; i < vertices; i++) {
@@ -70,7 +92,7 @@ public class Main {
 ////        System.out.println(bfs(graph, vertices));
 //
 ////        System.out.println(dfs(graph, vertices));
-//
-//    }
+
+    }
 
 }
