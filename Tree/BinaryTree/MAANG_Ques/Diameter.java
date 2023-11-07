@@ -74,6 +74,28 @@ public class Diameter {
     }
 
 
+    // Approach 3
+    static int diameter = 0;
+
+    static int diameter3(Node root) {
+        diaHeight(root);
+        return diameter - 1;
+    }
+
+    private static int diaHeight(Node node) {
+        if (node == null) {
+            return 0;
+        }
+
+        int leftHeight = diaHeight(node.left);
+        int rightHeight = diaHeight(node.right);
+        int dia = leftHeight + rightHeight + 1;
+
+        diameter = Math.max(diameter, dia);
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+
     public static void main(String[] args) {
         root = new Node(1);
         root.left = new Node(2);
@@ -92,6 +114,7 @@ public class Diameter {
 
         System.out.println(diameter1(root));
         System.out.println(diameter2(root));
+        System.out.println(diameter3(root));
     }
 
 }

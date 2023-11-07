@@ -32,6 +32,7 @@ public class DFS {
 
 
     // Invert Binary Tree
+    // TC - O(n), SC - O(log n) / O(h), where h = height of Binary Tree
     static Node invertTree(Node root) {
         if (root == null) {
             return null;
@@ -65,7 +66,7 @@ public class DFS {
             return null;
         }
 
-        int mid = (right + left) / 2;
+        int mid = (left + right) / 2;
         Node root = new Node(nums[mid]);
         root.left = helper(nums, left, mid - 1);
         root.right = helper(nums, mid + 1, right);
@@ -74,7 +75,7 @@ public class DFS {
     }
 
 
-    // Flatten Binary Tree to Linked List
+    // Flatten Binary Tree to Linked List or Skewed Binary Tree
     static void flatten(Node root) {
 
     }
@@ -101,7 +102,7 @@ public class DFS {
 
 //        System.out.println(maxDepth(root));
 
-//        int[] nums = {-10, -3, 0, 5, 9};
+//        int[] nums = {-10, -3, 0, 5, 9, 11, 13, 17};
 //        Node root = sortedArrayToBST(nums);
 //        display(root);
 

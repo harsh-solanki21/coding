@@ -31,6 +31,12 @@ public class Main {
 //    }
 
 
+//    static Node invertTree(Node root) {
+//
+//    }
+
+
+
     public static void main(String[] args) {
         // Tree
         root = new Node(1);
@@ -48,15 +54,16 @@ public class Main {
         root.left.right.right.left.right = new Node(13);
         root.left.left.right.right.left.left = new Node(14);
 
-        Node targetNode = root.left.left.right.right;
-        int k = 3;
+
+//        Node targetNode = root.left.left.right.right;
+//        int k = 3;
+
 
 //        System.out.println(distanceK(root, targetNode, k));
 
 //        System.out.println(diameter1(root));
 //        System.out.println(diameter2(root));
-
-
+//        System.out.println(diameter3(root));
 
 
         // Graph
