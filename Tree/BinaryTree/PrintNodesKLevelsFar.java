@@ -31,11 +31,11 @@ public class PrintNodesKLevelsFar {
         int level = 0;
 
         while (!queue.isEmpty()) {
-            int currSize = queue.size();
             if (level == k) {
                 break;
             }
             level++;
+            int currSize = queue.size();
             for (int i = 0; i < currSize; i++) {
                 Node curr = queue.poll();
                 if (parent.containsKey(curr) && !visited.containsKey(parent.get(curr))) {
@@ -65,17 +65,14 @@ public class PrintNodesKLevelsFar {
         Queue<Node> queue = new LinkedList<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
-            int n = queue.size();
-            for (int i = n - 1; i >= 0; i--) {
-                Node curr = queue.poll();
-                if (curr.left != null) {
-                    parent.put(curr.left, curr);
-                    queue.offer(curr.left);
-                }
-                if (curr.right != null) {
-                    parent.put(curr.right, curr);
-                    queue.offer(curr.right);
-                }
+            Node curr = queue.poll();
+            if (curr.left != null) {
+                parent.put(curr.left, curr);
+                queue.offer(curr.left);
+            }
+            if (curr.right != null) {
+                parent.put(curr.right, curr);
+                queue.offer(curr.right);
             }
         }
     }

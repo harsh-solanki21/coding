@@ -20,21 +20,50 @@ public class Main {
 
 
     // Diameter of Binary Tree
-//    static int diameter1(Node root) {
-//
+//    static int diameter(Node root) {
 //    }
 
-
-    // print nodes k level far
-//    static List<Integer> distanceK(Node root, Node target, int k) {
-//
+//    static void flatten(Node root) {
+//        while (root != null) {
+//            if (root.left != null) {
+//                Node prev = root.left;
+//                // Find the rightmost node in left subtree
+//                while (prev.right != null) {
+//                    prev = prev.right;
+//                }
+//                prev.right = root.right;
+//                root.right = root.left;
+//                root.left = null;
+//            }
+//            root = root.right;
+//        }
 //    }
 
+    static void flatten(Node root) {
 
-//    static Node invertTree(Node root) {
-//
-//    }
+    }
 
+    static void preOrder(Node root) {
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.data + " ");
+        preOrder(root.left);
+        preOrder(root.right);
+    }
+
+
+    static Node lowestCommonAncestor(Node root, Node p, Node q) {
+        if (root == null || root == p || root == q) {
+            return root;
+        }
+        Node left = lowestCommonAncestor(root.left, p, q);
+        Node right = lowestCommonAncestor(root.right, p, q);
+        if (left != null && right != null) {
+            return root;
+        }
+        return left != null ? left : right;
+    }
 
 
     public static void main(String[] args) {
@@ -54,16 +83,14 @@ public class Main {
         root.left.right.right.left.right = new Node(13);
         root.left.left.right.right.left.left = new Node(14);
 
+//        flatten(root);
+//        preOrder(root);
 
-//        Node targetNode = root.left.left.right.right;
-//        int k = 3;
+//        Node ans = lowestCommonAncestor(root, root.left.left.right.right, root.left.right.right.left);
+//        System.out.println(ans.data);
 
 
-//        System.out.println(distanceK(root, targetNode, k));
-
-//        System.out.println(diameter1(root));
-//        System.out.println(diameter2(root));
-//        System.out.println(diameter3(root));
+//        System.out.println(diameter(root));
 
 
         // Graph

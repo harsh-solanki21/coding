@@ -75,8 +75,25 @@ public class DFS {
     }
 
 
-    // Flatten Binary Tree to Linked List or Skewed Binary Tree
-    static void flatten(Node root) {
+    // Validate BST
+    static boolean isValidBST(Node root) {
+        return isBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    private static boolean isBST(Node root, long min, long max) {
+        if (root == null) {
+            return true;
+        }
+        if (root.data >= max || root.data <= min) {
+            return false;
+        }
+
+        return isBST(root.left, min, root.data) && isBST(root.right, root.data, max);
+    }
+
+
+    // Lowest Common Ancestor
+    static Node lowestCommonAncestor(Node root, Node p, .Node q) {
 
     }
 
@@ -106,7 +123,10 @@ public class DFS {
 //        Node root = sortedArrayToBST(nums);
 //        display(root);
 
-        flatten(root);
+//        System.out.println(isValidBST(root));
+
+        Node ansNode = lowestCommonAncestor(root, root.left.left.right.right, root.left.right.right.left);  // root, 10, 11
+        System.out.println(ansNode.data);
     }
 
 }
