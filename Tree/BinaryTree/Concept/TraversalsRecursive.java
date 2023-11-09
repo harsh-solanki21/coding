@@ -45,6 +45,7 @@ public class TraversalsRecursive {
 
 
     // InOrder traversal = Left Subtree, Root, Right Subtree
+    // It gives sorted order elements in BST
     // TC - O(n), SC - O(n)
     static void inOrder(Node root) {
         if (root == null) {
