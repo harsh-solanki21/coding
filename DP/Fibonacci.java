@@ -3,20 +3,16 @@ package DP;
 public class Fibonacci {
 
     // DP - Memoization
-    static int fiboRecursive(int n, int[] dp) {
-        if (n == 0 || n == 1) {
+    static int fiboRecursive(int n, int[] cache) {
+        if (n <= 1) {
             return n;
         }
-        if (dp[n] != 0) {
-            return dp[n];
+        if (cache[n] != 0) {
+            return cache[n];
         }
 
-        int fibo1 = fiboRecursive(n - 1, dp);
-        int fibo2 = fiboRecursive(n - 2, dp);
-        int fibo = fibo1 + fibo2;
-
-        dp[n] = fibo;
-        return fibo;
+        cache[n] = fiboRecursive(n - 1, cache) + fiboRecursive(n - 2, cache);
+        return cache[n];
     }
 
 
