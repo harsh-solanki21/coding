@@ -25,13 +25,13 @@ public class Diameter {
         }
         int leftDiameter = diameter1(root.left);
         int rightDiameter = diameter1(root.right);
-        int diameter = height(root.left) + height(root.right) + 2;  // +1 for root node (if you consider edges then +2)
+        int diameter = height(root.left) + height(root.right) + 1;  // +1 for root node, +2 for edges
         return Math.max(diameter, Math.max(leftDiameter, rightDiameter));
     }
 
     private static int height(Node root) {
         if (root == null) {
-            return -1;   // 0 for nodes, -1 for edges
+            return 0;   // 0 for nodes, -1 for edges
         }
         int leftHeight = height(root.left);
         int rightHeight = height(root.right);
@@ -57,7 +57,7 @@ public class Diameter {
 
     private static TreeInfo diameterHelper(Node root) {
         if (root == null) {
-            return new TreeInfo(-1, 0);  // height 0 for nodes, -1 for edges
+            return new TreeInfo(0, 0);  // height 0 for nodes, -1 for edges
         }
         TreeInfo left = diameterHelper(root.left);
         TreeInfo right = diameterHelper(root.right);
@@ -66,7 +66,7 @@ public class Diameter {
 
         int diameter1 = left.diameter;
         int diameter2 = right.diameter;
-        int diameter3 = left.height + right.height + 2;  // +1 for root node (if you consider edges then +2)
+        int diameter3 = left.height + right.height + 1;  // +1 for root node (if you consider edges then +2)
 
         int myDiameter = Math.max(Math.max(diameter1, diameter2), diameter3);
 

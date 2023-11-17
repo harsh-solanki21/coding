@@ -1,12 +1,18 @@
 import java.util.*;
 
 public class Main {
-    // Diameter of Binary Tree
-    // Lowest Common Ancestor
-    // Kth Smallest element in BST
 
 
-    public static void main(String[] args) {
+
+}
+
+
+// Tree
+
+// Diameter of Binary Tree
+// Lowest Common Ancestor
+// Kth Smallest element in BST
+
 //        root = new Node(1);
 //        root.left = new Node(2);
 //        root.right = new Node(3);
@@ -37,7 +43,3 @@ public class Main {
 //        System.out.println(ans.data);
 
 //        System.out.println(diameter(root));
-
-    }
-
-}
