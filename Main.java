@@ -29,6 +29,7 @@ public class Main {
         rearrange(arr, n);
         System.out.println(Arrays.toString(arr));
     }
+    
 
 }
 
