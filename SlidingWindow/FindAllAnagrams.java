@@ -26,14 +26,12 @@ public class FindAllAnagrams {
             // able to compose of anagram
             if (temp[c - 'a'] < target[c - 'a']) {
                 temp[c - 'a']++;
-            } 
-            else if (target[c - 'a'] == 0) { // current letter doesn't exist in p, reset window
+            } else if (target[c - 'a'] == 0) { // current letter doesn't exist in p, reset window
                 start = end + 1;
                 end = start;
                 Arrays.fill(temp, 0);
                 continue;
-            } 
-            else { // current letter exists in p, but is extra, shrink window
+            } else { // current letter exists in p, but is extra, shrink window
                 temp[s.charAt(start) - 'a']--;
                 start++;
                 continue;

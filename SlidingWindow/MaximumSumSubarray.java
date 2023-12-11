@@ -10,20 +10,19 @@ public class MaximumSumSubarray {
 
     // Maximum Sum Subarray of size K
 
-    public static int maxSum(int[] arr, int n, int k) {
-        if(n < k) {
-            System.out.println("Invalid");
+    public static int maxSum(int[] nums, int k) {
+        if (nums.length < k) {
             return -1;
         }
 
         int res = 0;
-        for(int i=0; i<k; i++) {
-            res += arr[i];
+        for (int i = 0; i < k; i++) {
+            res += nums[i];
         }
 
         int currentSum = res;
-        for (int i=k; i<n; i++) {
-            currentSum += arr[i] - arr[i-k];
+        for (int i = k; i < nums.length; i++) {
+            currentSum += nums[i] - nums[i - k];
             res = Math.max(res, currentSum);
         }
 
@@ -31,10 +30,9 @@ public class MaximumSumSubarray {
     }
 
     public static void main(String[] args) {
-        int[] arr = {1, 4, 2, 10, 2, 3, 1, 0, 20};
+        int[] nums = {1, 4, 2, 10, 2, 3, 1, 0, 20};
         int k = 4;
-        int n = arr.length;
-        System.out.println(maxSum(arr, n, k));
+        System.out.println(maxSum(nums, k));
     }
 
 }
