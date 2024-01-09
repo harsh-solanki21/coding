@@ -2,95 +2,84 @@ import java.util.*;
 
 public class Main {
 
-    static Node root;
+    static class Pair {
+        int i, j;
 
-    static class Node {
-        int data;
-        Node left, right;
-
-        Node(int data) {
-            this.data = data;
-            left = right = null;
+        Pair(int i, int j) {
+            this.i = i;
+            this.j = j;
         }
     }
 
-    static int diameter(Node root) {
-        if (root == null) {
-            return 0;
+    static int orangesRotting(int[][] grid) {
+        Queue<Pair> q = new LinkedList<>();
+        int minutes = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; i++) {
+                if (grid[i][j] == 2) {
+                    q.add(new Pair(i, j));
+                }
+            }
         }
 
-        int left = diameter(root.left);
-        int right = diameter(root.right);
-        int dia = height(root.left) + height(root.right) + 1;
-        return Math.max(dia, Math.max(left, right));
-    }
-
-    private static int height(Node node) {
-        if (node == null) {
-            return 0;
+        int[] x = {-1, 0, 1, 0};
+        int[] y = {0, 1, 0, -1};
+        while (!q.isEmpty()) {
+            int currentSize = q.size();
+            for (int i = 0; i < currentSize; i++) {
+                Pair remQ = q.remove();
+                minutes++;
+                for(int j = 0; j<4; j++) {
+                    int first = remQ.i + x[i];
+                    int second = remQ.j + y[i];
+                    if(first >= 0 && second >= 0 && first < grid.length && second < grid[0].length && grid[first][second] == 1) {
+                        grid[first][second] = 2;
+                        q.add(new Pair());
+                    }
+                }
+            }
         }
 
-        int left = height(node.left);
-        int right = height(node.right);
-        return Math.max(left, right) + 1;
+        return minutes;
     }
 
 
     public static void main(String[] args) {
-        root = new Node(1);
-        root.left = new Node(2);
-        root.right = new Node(3);
-        root.left.left = new Node(4);
-        root.left.right = new Node(5);
-        root.right.left = new Node(6);
-        root.left.left.left = new Node(7);
-        root.left.left.right = new Node(8);
-        root.left.right.right = new Node(9);
-        root.left.left.right.right = new Node(10);
-        root.left.right.right.left = new Node(11);
-        root.left.left.right.right.left = new Node(12);
-        root.left.right.right.left.right = new Node(13);
-        root.left.left.right.right.left.left = new Node(14);
-
-        System.out.println(diameter(root));
+        int[][] grid = {{2, 1, 1}, {1, 1, 0}, {0, 1, 1}};
+        System.out.println(orangesRotting(grid));
     }
 
+//    public static void main(String[] args) {
+//        int vertices = 7;
+//        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+//
+//        for (int i = 0; i < vertices; i++) {
+//            graph.add(new ArrayList<>());
+//        }
+//
+//        graph.get(0).add(1);
+//        graph.get(0).add(2);
+//
+//        graph.get(1).add(0);
+//        graph.get(1).add(3);
+//        graph.get(1).add(4);
+//
+//        graph.get(2).add(0);
+//        graph.get(2).add(3);
+//
+//        graph.get(3).add(1);
+//        graph.get(3).add(2);
+//
+//        graph.get(4).add(1);
+//        graph.get(4).add(5);
+//        graph.get(4).add(6);
+//
+//        graph.get(5).add(4);
+//        graph.get(5).add(6);
+//
+//        graph.get(6).add(4);
+//        graph.get(6).add(5);
+//
+//    }
+
 }
-
-
-// Tree
-
-// Diameter of Binary Tree
-// Lowest Common Ancestor
-// Kth Smallest element in BST
-
-//        root = new Node(1);
-//        root.left = new Node(2);
-//        root.right = new Node(3);
-//        root.left.left = new Node(4);
-//        root.left.right = new Node(5);
-//        root.right.left = new Node(6);
-//        root.left.left.left = new Node(7);
-//        root.left.left.right = new Node(8);
-//        root.left.right.right = new Node(9);
-//        root.left.left.right.right = new Node(10);
-//        root.left.right.right.left = new Node(11);
-//        root.left.left.right.right.left = new Node(12);
-//        root.left.right.right.left.right = new Node(13);
-//        root.left.left.right.right.left.left = new Node(14);
-
-//        root = new Node(1);
-//        root.left = new Node(2);
-//        root.right = new Node(5);
-//        root.left.left = new Node(3);
-//        root.left.right = new Node(4);
-//        root.right.right = new Node(6);
-//        root.left.left.left = new Node(7);
-//        root.left.left.right = new Node(8);
-//        root.left.right.left = new Node(10);
-//        root.left.left.right.right = new Node(9);
-
-//        Node ans = lowestCommonAncestor(root, root.left.left.left, root.left.left.right.right);
-//        System.out.println(ans.data);
-
-//        System.out.println(diameter(root));
