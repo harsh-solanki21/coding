@@ -2,6 +2,7 @@ package Graphs;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class FloodFill {
@@ -10,7 +11,7 @@ public class FloodFill {
     // https://leetcode.com/problems/flood-fill/
 
     // DFS
-    static int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+    static int[][] floodFillDFS(int[][] image, int sr, int sc, int newColor) {
         dfs(image, sr, sc, image[sr][sc], newColor);
         return image;
     }
@@ -29,44 +30,38 @@ public class FloodFill {
 
     // BFS
     static class Pair {
-        int first, second;
+        int x, y;
 
-        Pair(int first, int second) {
-            this.first = first;
-            this.second = second;
+        Pair(int x, int y) {
+            this.x = x;
+            this.y = y;
         }
     }
 
-    static int[][] floodFillAlgorithm(int[][] image, int sr, int sc, int newColor) {
+    static int[][] floodFillBFS(int[][] image, int sr, int sc, int newColor) {
         int[] nums1 = {-1, 0, 1, 0};
-        int[] nums2 = {0, -1, 0, 1};
-        int color = image[sr][sc];
-        Queue<Pair> q = new ArrayDeque<>();
-        q.add(new Pair(sr, sc));
-        image[sr][sc] = newColor;
+        int[] nums2 = {0, 1, 0, -1};
+        int oldColor = image[sr][sc];
+        Queue<Pair> q = new LinkedList<>();
+        if (image[sr][sc] == newColor) {
+            return image;
+        } else {
+            q.add(new Pair(sr, sc));
+        }
 
         while (!q.isEmpty()) {
-            int first = q.peek().first;
-            int second = q.peek().second;
-            q.remove();
-
+            Pair remNode = q.remove();
+            image[remNode.x][remNode.y] = newColor;
             for (int i = 0; i < 4; i++) {
-                int val1 = first + nums1[i];
-                int val2 = second + nums2[i];
-                if (check(image, val1, val2, newColor, color)) {
-                    q.add(new Pair(val1, val2));
-                    image[val1][val2] = newColor;
+                int first = remNode.x + nums1[i];
+                int second = remNode.y + nums2[i];
+                if (first >= 0 && second >= 0 && first < image.length && second < image[0].length && image[first][second] == oldColor) {
+                    q.add(new Pair(first, second));
                 }
             }
         }
 
         return image;
-    }
-
-    private static boolean check(int[][] image, int i, int j, int newColor, int color) {
-        if (i < 0 || j < 0 || i == image.length || j == image[0].length || image[i][j] != color || image[i][j] == newColor)
-            return false;
-        return true;
     }
 
 
@@ -81,12 +76,12 @@ public class FloodFill {
                 {1, 1, 1, 1, 1, 2, 2, 1}};
         int sr = 4, sc = 4, newColor = 3;
 
-//        int[][] ans = floodFill(image, sr, sc, newColor);
+//        int[][] ans = floodFillDFS(image, sr, sc, newColor);
 //        for (int[] i : ans) {
 //            System.out.println(Arrays.toString(i));
 //        }
 
-        int[][] ans = floodFillAlgorithm(image, sr, sc, newColor);
+        int[][] ans = floodFillBFS(image, sr, sc, newColor);
         for (int[] i : ans) {
             System.out.println(Arrays.toString(i));
         }
