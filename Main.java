@@ -4,7 +4,13 @@ public class Main {
 
 
 
+
 //    public static void main(String[] args) {
+//
+////        0 -- 1 --- 4
+////        |    |    |  \
+////        2 -- 3    5 - 6
+//
 //        int vertices = 7;
 //        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
 //

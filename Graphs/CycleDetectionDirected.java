@@ -49,14 +49,20 @@ public class CycleDetectionDirected {
         }
 
         graph.get(1).add(2);
+
         graph.get(2).add(3);
         graph.get(2).add(4);
+
         graph.get(3).add(7);
         graph.get(3).add(8);
-        graph.get(8).add(7);
+
         graph.get(4).add(5);
+
         graph.get(5).add(6);
+
         graph.get(6).add(4);
+
+        graph.get(8).add(7);
 
         System.out.println(isCyclic(graph, vertices));
 
