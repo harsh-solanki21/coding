@@ -3,72 +3,39 @@ import java.util.*;
 public class Main {
 
     static class Node {
-        int x, y, distance;
+        int x, y, time;
 
-        Node(int x, int y, int distance) {
+        Node(int x, int y, int time) {
             this.x = x;
             this.y = y;
-            this.distance = distance;
+            this.time = time;
         }
     }
 
-    static int[][] nearest(int[][] grid) {
-        int[][] ans = new int[grid.length][grid[0].length];
-
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
-                if (grid[i][j] == 1) {
-                    ans[i][j] = 0;
-                } else {
-                    bfs(grid, ans, i, j);
-                }
-            }
-        }
-
-        return ans;
-    }
-
-    private static void bfs(int[][] grid, int[][] ans, int i, int j) {
+    static int orangesRotting(int[][] grid) {
+        int totalOranges = 0, rottenOranges = 0, time = 0;
         int[] a = {-1, 0, 1, 0};
         int[] b = {0, 1, 0, -1};
         Queue<Node> q = new LinkedList<>();
-        q.offer(new Node(i, j, 0));
-
-        while (!q.isEmpty()) {
-            int qSize = q.size();
-            for (int z = 0; z < qSize; z++) {
-                Node rem = q.poll();
-                int x = rem.x;
-                int y = rem.y;
-                int distance = rem.distance;
-                for (int p = 0; p < 4; p++) {
-                    int first = x + a[p];
-                    int second = y + b[p];
-                    if (first >= 0 && first < grid.length && second >= 0 && second < grid[0].length) {
-                        if (grid[first][second] == 1) {
-                            ans[x][y] = distance + 1;
-                            return;
-                        } else {
-                            q.offer(new Node(first, second, distance + 1));
-                        }
-                    }
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] == 2) {
+                    q.offer(new Node(i, j, 0));
+                    rottenOranges++;
+                } else if (grid[i][j] != 0) {
+                    totalOranges++;
                 }
             }
         }
+
+
+        return totalOranges == rottenOranges ? time : -1;
     }
 
 
     public static void main(String[] args) {
-        int[][] grid = {
-                {1, 0, 1},
-                {1, 1, 0},
-                {1, 0, 0}
-        };
-
-        int[][] ans = nearest(grid);
-        for (int[] i : ans) {
-            System.out.println(Arrays.toString(i));
-        }
+        int[][] isConnected = {{2, 1, 1}, {1, 1, 0}, {0, 1, 1}};
+        System.out.println(orangesRotting(isConnected));
     }
 
 
