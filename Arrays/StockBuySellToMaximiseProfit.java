@@ -8,7 +8,7 @@ public class StockBuySellToMaximiseProfit {
 //    Again, buy on day 4 and sell on day 6.
 //    If the given array of prices is sorted in decreasing order, then profit cannot be earned at all.
 
-    static int maxProfit(int[] prices) {
+    static int maxProfitMultipleBuyAndSell(int[] prices) {
         int maxProfit = 0;
         for (int i = 1; i < prices.length; i++) {
             if (prices[i] > prices[i - 1]) {
@@ -19,9 +19,24 @@ public class StockBuySellToMaximiseProfit {
     }
 
 
+    static int maxProfitSingleBuyAndSell(int[] prices) {
+        int maxPrice = 0;
+        int minPrice = prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            if (minPrice > prices[i]) {
+                minPrice = prices[i];
+            } else {
+                maxPrice = Math.max(maxPrice, prices[i] - minPrice);
+            }
+        }
+        return maxPrice;
+    }
+
+
     public static void main(String[] args) {
-        int[] price = {100, 180, 260, 310, 40, 535, 695};
-        System.out.println(maxProfit(price));
+        int[] price = {7, 1, 5, 3, 6, 14};
+        System.out.println(maxProfitMultipleBuyAndSell(price));
+        System.out.println(maxProfitSingleBuyAndSell(price));
     }
 
 }
