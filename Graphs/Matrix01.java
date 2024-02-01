@@ -26,21 +26,21 @@ public class Matrix01 {
             }
         }
 
-        int[] row = {-1,0,1,0};
-        int[] col = {0,1,0,-1};
-        while(!q.isEmpty()) {
+        int[] row = {-1, 0, 1, 0};
+        int[] col = {0, 1, 0, -1};
+        while (!q.isEmpty()) {
             int first = q.peek().first;
             int second = q.peek().second;
             int steps = q.peek().steps;
             q.remove();
 
-            for(int i=0; i<4; i++) {
+            for (int i = 0; i < 4; i++) {
                 int x = first + row[i];
                 int y = second + col[i];
-                if(x >= 0 && y >= 0 && x < mat.length && y < mat[0].length) {
-                    if(mat[x][y] == 0)
+                if (x >= 0 && y >= 0 && x < mat.length && y < mat[0].length) {
+                    if (mat[x][y] == 0) {
                         mat[x][y] = steps;
-
+                    }
                 }
             }
         }
