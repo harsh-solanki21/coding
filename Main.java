@@ -2,56 +2,49 @@ import java.util.*;
 
 public class Main {
 
-    static class Node {
-        int x, y, distance;
+    static int countDistinctIslands(int[][] grid) {
+        boolean[][] visited = new boolean[grid.length][grid[0].length];
+        HashSet<ArrayList<String>> st = new HashSet<>();
 
-        Node(int x, int y, int distance) {
-            this.x = x;
-            this.y = y;
-            this.distance = distance;
-        }
-    }
-
-    static int[][] updateMatrix(int[][] mat) {
-        Queue<Node> q = new LinkedList<>();
-
-        for (int i = 0; i < mat.length; i++) {
-            for (int j = 0; j < mat[i].length; j++) {
-                if (mat[i][j] != 0) {
-                    q.offer(new Node(i, j, 0));
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (!visited[i][j] && grid[i][j] == 1) {
+                    ArrayList<String> res = new ArrayList<>();
+                    dfs(i, j, grid, visited, res, i, j);
+                    st.add(res);
                 }
             }
         }
+
+        return st.size();
+    }
+
+    private static void dfs(int i, int j, int[][] grid, boolean[][] visited, ArrayList<String> res, int row0, int col0) {
+        visited[i][j] = true;
+        res.add("(" + (i - row0) + ", " + (j - col0) + ")");
 
         int[] row = {-1, 0, 1, 0};
         int[] col = {0, 1, 0, -1};
-        while (!q.isEmpty()) {
-            Node node = q.poll();
-            for (int i = 0; i < 4; i++) {
-                int first = node.x + row[i];
-                int second = node.y + col[i];
-                if (first >= 0 && second >= 0 && first < mat.length && second < mat[0].length) {
-                    if (mat[first][second] == 0) {
-                        mat[node.x][node.y] = node.distance + 1;
-                        break;
-                    } else {
-                        q.add(new Node(first, second, node.distance + 1));
-                    }
-                }
+        for (int a = 0; a < 4; a++) {
+            int first = i + row[a];
+            int second = j + col[a];
+            if (first >= 0 && second >= 0 && first < grid.length && second < grid[0].length && !visited[first][second] && grid[first][second] == 1) {
+                dfs(first, second, grid, visited, res, row0, col0);
             }
         }
-
-        return mat;
     }
-
 
     public static void main(String[] args) {
-        int[][] mat = {{0, 0, 0}, {0, 1, 0}, {1, 1, 1}};
-        int[][] ans = updateMatrix(mat);
-        for (int[] i : ans) {
-            System.out.println(Arrays.toString(i));
-        }
+        int[][] grid = {
+                {1, 1, 0, 1, 1},
+                {1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 1},
+                {1, 1, 0, 1, 1}
+        };
+
+        System.out.println(countDistinctIslands(grid));
     }
+
 
 //    static void nextPermutation(int[] nums) {
 //        int index1 = -1;
@@ -65,7 +58,7 @@ public class Main {
 //            }
 //        }
 //
-//        // if there is no breaking  point
+//        // if there is no breaking point
 //        if (index1 == -1) {
 //            reverse(nums, 0);
 //            return;
