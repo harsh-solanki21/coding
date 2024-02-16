@@ -27,6 +27,7 @@ public class CycleDetectionDirected {
     private static boolean dfs(ArrayList<ArrayList<Integer>> graph, boolean[] visited, boolean[] path, int node) {
         visited[node] = true;
         path[node] = true;
+
         for (int i : graph.get(node)) {
             if (!visited[i]) {
                 if (dfs(graph, visited, path, i)) {
@@ -36,6 +37,7 @@ public class CycleDetectionDirected {
                 return true;
             }
         }
+
         path[node] = false;
         return false;
     }
@@ -65,7 +67,6 @@ public class CycleDetectionDirected {
         graph.get(8).add(7);
 
         System.out.println(isCyclic(graph, vertices));
-
     }
 
 }
