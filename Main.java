@@ -2,22 +2,55 @@ import java.util.*;
 
 public class Main {
 
-    static int[][] updateMatrix(int[][] mat) {
+
+    static ArrayList<Integer> bfs(ArrayList<ArrayList<Integer>> graph, int vertices) {
 
     }
 
 
-    public static void main(String[] args) {
-        int[][] mat = {
-                {0, 0, 0},
-                {1, 1, 0},
-                {1, 1, 1}
-        };
+//    static ArrayList<Integer> dfs(ArrayList<ArrayList<Integer>> graph, int vertices) {
+//
+//    }
 
-        int[][] ans = updateMatrix(mat);
-        for (int[] i : ans) {
-            System.out.println(Arrays.toString(i));
+
+    public static void main(String[] args) {
+
+//        0 -- 1 --- 4
+//        |    |    |  \
+//        2 -- 3    5 - 61
+
+        int vertices = 7;
+        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+
+        for (int i = 0; i < vertices; i++) {
+            graph.add(new ArrayList<>());
         }
+
+        graph.get(0).add(1);
+        graph.get(0).add(2);
+
+        graph.get(1).add(0);
+        graph.get(1).add(3);
+        graph.get(1).add(4);
+
+        graph.get(2).add(0);
+        graph.get(2).add(3);
+
+        graph.get(3).add(1);
+        graph.get(3).add(2);
+
+        graph.get(4).add(1);
+        graph.get(4).add(5);
+        graph.get(4).add(6);
+
+        graph.get(5).add(4);
+        graph.get(5).add(6);
+
+        graph.get(6).add(4);
+        graph.get(6).add(5);
+
+        System.out.println(bfs(graph, vertices));
+//        System.out.println(dfs(graph, vertices));
     }
 
 
