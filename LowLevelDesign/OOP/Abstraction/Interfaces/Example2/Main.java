@@ -1,4 +1,4 @@
-package LowLevelDesign.OOP.Interfaces.car;
+package LowLevelDesign.OOP.Abstraction.Interfaces.Example2;
 
 public class Main {
     public static void main(String[] args) {
@@ -7,15 +7,15 @@ public class Main {
 //        car.acc();
 //        car.start();
 //        car.stop();
+
 //        Media carMedia = new Car();
 //        carMedia.stop();
 
-
         NiceCar car = new NiceCar();
-
         car.start();
         car.startMusic();
+        car.stopMusic();
+        car.stop();
         car.upgradeEngine();
-        car.start();
     }
 }

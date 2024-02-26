@@ -1,4 +1,4 @@
-package LowLevelDesign.OOP.Interfaces.car;
+package LowLevelDesign.OOP.Abstraction.Interfaces.Example2;
 
 public class NiceCar {
     private Engine engine;

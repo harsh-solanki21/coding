@@ -1,4 +1,4 @@
-package OOP.Abstraction;
+package LowLevelDesign.OOP.Abstraction.AbstractClasses.Example2;
 
 public abstract class Parent2 {
 
@@ -11,11 +11,11 @@ public abstract class Parent2 {
     }
 
     static void hello(){
-        System.out.println("hey");
+        System.out.println("Hello from 2nd Parent");
     }
 
     void normal() {
-        System.out.println("this is a normal method");
+        System.out.println("This is a normal method form 2nd Parent");
     }
 
     abstract void career();

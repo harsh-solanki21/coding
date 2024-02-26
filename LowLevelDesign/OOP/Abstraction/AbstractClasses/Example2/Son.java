@@ -1,6 +1,6 @@
-package OOP.Abstraction;
+package LowLevelDesign.OOP.Abstraction.AbstractClasses.Example2;
 
-public class Son extends Parent {
+public class Son extends Parent1 {
 
     public Son(int age) {
         super(age);
@@ -13,7 +13,7 @@ public class Son extends Parent {
 
     @Override
     void career() {
-        System.out.println("I am going to be a doctor");
+        System.out.println("I am going to be a Doctor");
     }
 
     @Override

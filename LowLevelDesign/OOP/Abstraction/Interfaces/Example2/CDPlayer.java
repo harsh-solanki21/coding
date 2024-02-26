@@ -1,6 +1,6 @@
-package LowLevelDesign.OOP.Interfaces.car;
+package LowLevelDesign.OOP.Abstraction.Interfaces.Example2;
 
-public class CDPlayer implements Media{
+public class CDPlayer implements Media {
 
     @Override
     public void start() {

@@ -1,6 +1,6 @@
-package LowLevelDesign.OOP.Interfaces.car;
+package LowLevelDesign.OOP.Abstraction.Interfaces.Example2;
 
-public class PowerEngine implements Engine{
+public class PowerEngine implements Engine {
 
     @Override
     public void start() {
