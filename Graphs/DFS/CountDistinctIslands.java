@@ -19,11 +19,10 @@ public class CountDistinctIslands {
 
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
-                if (!visited[i][j] && grid[i][j] == 1) {
+                if (grid[i][j] == 1 && !visited[i][j]) {
                     ArrayList<String> res = new ArrayList<>();
-                    dfs(i, j, grid, visited, res, i, j);
+                    dfs(grid, visited, res, i, j, i, j);
                     hs.add(res);
-                    System.out.println(hs);
                 }
             }
         }
@@ -31,19 +30,17 @@ public class CountDistinctIslands {
         return hs.size();
     }
 
-    private static void dfs(int i, int j, int[][] grid, boolean[][] visited, ArrayList<String> res, int row0, int col0) {
-        visited[i][j] = true;
-        res.add("(" + (i - row0) + ", " + (j - col0) + ")");
-
-        int[] row = {-1, 0, 1, 0};
-        int[] col = {0, 1, 0, -1};
-        for (int a = 0; a < 4; a++) {
-            int first = i + row[a];
-            int second = j + col[a];
-            if (first >= 0 && second >= 0 && first < grid.length && second < grid[0].length && !visited[first][second] && grid[first][second] == 1) {
-                dfs(first, second, grid, visited, res, row0, col0);
-            }
+    private static void dfs(int[][] grid, boolean[][] visited, ArrayList<String> res, int i, int j, int baseI, int baseJ) {
+        if (i < 0 || j < 0 || i >= grid.length || j >= grid[0].length || grid[i][j] == 0 || visited[i][j]) {
+            return;
         }
+
+        visited[i][j] = true;
+        res.add("(" + (i - baseI) + ", " + (j - baseJ) + ")");
+        dfs(grid, visited, res, i - 1, j, baseI, baseJ);
+        dfs(grid, visited, res, i + 1, j, baseI, baseJ);
+        dfs(grid, visited, res, i, j + 1, baseI, baseJ);
+        dfs(grid, visited, res, i, j - 1, baseI, baseJ);
     }
 
 
