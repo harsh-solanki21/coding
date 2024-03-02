@@ -7,6 +7,12 @@ import java.util.Queue;
 
 public class BipartiteGraph {
 
+    // Graphs with no cycle are always Bipartite.
+    // Graphs with even cycle length are Bipartite.
+    // Graphs with odd cycle length are Not Bipartite.
+
+
+    // 1. When Graph is given as ArrayList<ArrayList<Integer>>
     // BFS
     static boolean isBipartiteBFS(ArrayList<ArrayList<Integer>> graph, int vertices) {
         int[] color = new int[vertices];
@@ -14,7 +20,7 @@ public class BipartiteGraph {
 
         for (int i = 0; i < vertices; i++) {
             if (color[i] == -1) {
-                if (!check(graph, color, i)) {
+                if (!bfs(graph, color, i)) {
                     return false;
                 }
             }
@@ -23,7 +29,7 @@ public class BipartiteGraph {
         return true;
     }
 
-    private static boolean check(ArrayList<ArrayList<Integer>> graph, int[] color, int start) {
+    private static boolean bfs(ArrayList<ArrayList<Integer>> graph, int[] color, int start) {
         Queue<Integer> q = new LinkedList<>();
         q.offer(start);
         color[start] = 1;
@@ -79,7 +85,79 @@ public class BipartiteGraph {
     }
 
 
+    // 2. When Graph is given as int[][]
+    // BFS
+    static boolean isBipartite1(int[][] graph) {
+        int[] colors = new int[graph.length];
+        Arrays.fill(colors, -1);
+
+        for (int i = 0; i < graph.length; i++) {
+            if (colors[i] == -1) {
+                if (!bfsCheck(graph, colors, i)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private static boolean bfsCheck(int[][] graph, int[] colors, int src) {
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(src);
+        colors[src] = 0;
+
+        while (!q.isEmpty()) {
+            int node = q.poll();
+            int currentColor = colors[node];
+
+            for (int i : graph[node]) {
+                if (colors[i] == -1) {
+                    colors[i] = (currentColor == 1) ? 0 : 1;
+                    q.offer(i);
+                } else {
+                    if (colors[i] == currentColor) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+
+    // DFS
+    static boolean isBipartite2(int[][] graph) {
+        int[] colors = new int[graph.length];
+        for (int i = 0; i < graph.length; i++) {
+            if (colors[i] == 0 && !dfsCheck(graph, colors, i, true)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean dfsCheck(int[][] graph, int[] colors, int src, boolean red) {
+        if (red) {
+            colors[src] = 1;
+        } else {
+            colors[src] = 2;
+        }
+
+        for (int i : graph[src]) {
+            if (colors[i] == (red ? 1 : 2) || colors[i] == 0 && !dfsCheck(graph, colors, i, !red)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
     public static void main(String[] args) {
+
+        // 1. When Graph is given as ArrayList<ArrayList<Integer>>
 
 //  True Case     2               False Case     2
 //              /   \                         /     \
@@ -116,7 +194,20 @@ public class BipartiteGraph {
         graph.get(6).add(5);
 
 //        System.out.println(isBipartiteBFS(graph, vertices));
-        System.out.println(isBipartiteDFS(graph, vertices));
+//        System.out.println(isBipartiteDFS(graph, vertices));
+
+
+        // 2. When Graph is given as int[][]
+
+//        False Case            True Case
+//        0 --- 1               0 -- 1
+//        |  \  |               |    |
+//        3 --- 2               3 -- 2
+
+        int[][] graph2 = {{1, 3}, {0, 2}, {1, 3}, {0, 2}};
+        System.out.println(isBipartite1(graph2));
+        System.out.println(isBipartite2(graph2));
+
     }
 
 }
