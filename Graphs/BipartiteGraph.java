@@ -127,7 +127,7 @@ public class BipartiteGraph {
     }
 
 
-    // DFS
+    // DFS 1
     static boolean isBipartite2(int[][] graph) {
         int[] colors = new int[graph.length];
         for (int i = 0; i < graph.length; i++) {
@@ -153,6 +153,39 @@ public class BipartiteGraph {
 
         return true;
     }
+
+
+    // DFS 2
+    static boolean isBipartiteDFS(int[][] graph) {
+        int[] color = new int[graph.length];
+        Arrays.fill(color, -1);
+
+        for (int i = 0; i < graph.length; i++) {
+            if (color[i] == -1) {
+                if (!dfs2(graph, color, i)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private static boolean dfs2(int[][] graph, int[] color, int src) {
+        for (int i : graph[src]) {
+            if (color[i] == -1) {
+                color[i] = 1 - color[src];
+                if (!dfs2(graph, color, i)) {
+                    return false;
+                }
+            } else if (color[i] == color[src]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 
 
     public static void main(String[] args) {
