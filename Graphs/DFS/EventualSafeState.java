@@ -7,21 +7,21 @@ public class EventualSafeState {
 
     // Every node who is a part of a cycle, cannot be a safe node.
 
-    // 1. with given ArrayList<ArrayList<Integer>>
+    // 1. with given ArrayList<ArrayList<Integer>> (GFG)
     static ArrayList<Integer> eventualSafeNode(ArrayList<ArrayList<Integer>> graph, int vertices) {
-        int[] visited = new int[vertices];
-        int[] pathVisited = new int[vertices];
-        int[] check = new int[vertices];
+        boolean[] visited = new boolean[vertices];
+        boolean[] pathVisited = new boolean[vertices];
+        boolean[] check = new boolean[vertices];
 
         for (int i = 0; i < vertices; i++) {
-            if (visited[i] == 0) {
+            if (!visited[i]) {
                 dfs(graph, visited, pathVisited, check, i);
             }
         }
 
         ArrayList<Integer> safeNodes = new ArrayList<>();
         for (int i = 0; i < vertices; i++) {
-            if (check[i] == 1) {
+            if (check[i]) {
                 safeNodes.add(i);
             }
         }
@@ -29,28 +29,28 @@ public class EventualSafeState {
         return safeNodes;
     }
 
-    private static boolean dfs(ArrayList<ArrayList<Integer>> graph, int[] visited, int[] pathVisited, int[] check, int node) {
-        visited[node] = 1;
-        pathVisited[node] = 1;
-        check[node] = 0;
+    private static boolean dfs(ArrayList<ArrayList<Integer>> graph, boolean[] visited, boolean[] pathVisited, boolean[] check, int node) {
+        visited[node] = true;
+        pathVisited[node] = true;
+        check[node] = false;
 
         for (int i : graph.get(node)) {
-            if (visited[i] == 0) {
+            if (!visited[i]) {
                 if (dfs(graph, visited, pathVisited, check, i)) {
                     return true;
                 }
-            } else if (pathVisited[i] == 1) {
+            } else if (pathVisited[i]) {
                 return true;
             }
         }
 
-        check[node] = 1;
-        pathVisited[node] = 0;
+        pathVisited[node] = false;
+        check[node] = true;
         return false;
     }
 
 
-    // 2. with given int[][]
+    // 2. with given int[][] (Leetcode)
     static List<Integer> eventualSafeNodes(int[][] graph) {
         boolean[] visited = new boolean[graph.length];
         int[] unsafe = new int[graph.length];
