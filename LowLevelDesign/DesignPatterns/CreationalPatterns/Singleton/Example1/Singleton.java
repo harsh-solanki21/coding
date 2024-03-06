@@ -1,14 +1,13 @@
-package OOP.SingletonClass;
+package LowLevelDesign.DesignPatterns.CreationalPatterns.Singleton.Example1;
 
-public class  Singleton {
+public class Singleton {
 
-    // a singleton class is a class that can have only one object at a time.
+    // A singleton class is a class that can have only one object at a time.
 
     private static Singleton single_instance = null;
-
     public String s;
 
-    // Here private constructor is used to restricted to this class itself
+    // Here, private constructor is used to restricted to this class itself
     private Singleton() {
         s = "Hello I am a string part of Singleton class";
     }
@@ -22,16 +21,15 @@ public class  Singleton {
         return single_instance;
     }
 
-    public static void main(String args[]) {
 
+    public static void main(String[] args) {
         Singleton x = Singleton.getInstance();
         Singleton y = Singleton.getInstance();
         Singleton z = Singleton.getInstance();
 
         if (x == y && y == z) {
             System.out.println("Three objects point to the same memory location on the heap i.e, to the same object");
-        }
-        else {
+        } else {
             System.out.println("Three objects DO NOT point to the same memory location on the heap");
         }
     }
