@@ -5,6 +5,8 @@ import java.util.List;
 
 public class EventualSafeState {
 
+    // Every node who is a part of a cycle, cannot be a safe node.
+
     // 1. with given ArrayList<ArrayList<Integer>>
     static ArrayList<Integer> eventualSafeNode(ArrayList<ArrayList<Integer>> graph, int vertices) {
         int[] visited = new int[vertices];
