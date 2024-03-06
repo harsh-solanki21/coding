@@ -3,58 +3,15 @@ import java.util.*;
 public class Main {
 
 
-//    static void nextPermutation(int[] nums) {
-//        int index1 = -1;
-//        int index2 = -1;
+//    static List<Integer> eventualSafeNodes(int[][] graph) {
 //
-//        // step 1 find breaking point
-//        for (int i = nums.length - 2; i >= 0; i--) {
-//            if (nums[i] < nums[i + 1]) {
-//                index1 = i;
-//                break;
-//            }
-//        }
-//
-//        // if there is no breaking point
-//        if (index1 == -1) {
-//            reverse(nums, 0);
-//            return;
-//        }
-//
-//        // step 2 find next greater element and swap with index2
-//        for (int i = nums.length - 1; i >= 0; i--) {
-//            if (nums[i] > nums[index1]) {
-//                index2 = i;
-//                break;
-//            }
-//        }
-//
-//        swap(nums, index1, index2);
-//        // step 3 reverse the rest right half
-//        reverse(nums, index1 + 1);
-//    }
-//
-//    private static void swap(int[] nums, int i, int j) {
-//        int temp = nums[i];
-//        nums[i] = nums[j];
-//        nums[j] = temp;
-//    }
-//
-//    private static void reverse(int[] nums, int start) {
-//        int i = start;
-//        int j = nums.length - 1;
-//        while (i < j) {
-//            swap(nums, i, j);
-//            i++;
-//            j--;
-//        }
 //    }
 //
 //
 //    public static void main(String[] args) {
-//        int[] prices = {1, 1, 5};
-//        nextPermutation(prices);
-//        System.out.println(Arrays.toString(prices));
+//        //                 0       1      2    3    4   5   6
+//        int[][] graph = {{1, 2}, {2, 3}, {5}, {0}, {5}, {}, {}};
+//        System.out.println(eventualSafeNodes(graph));
 //    }
 
 
