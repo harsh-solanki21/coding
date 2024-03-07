@@ -3,16 +3,7 @@ import java.util.*;
 public class Main {
 
 
-//    static List<Integer> eventualSafeNodes(int[][] graph) {
-//
-//    }
-//
-//
-//    public static void main(String[] args) {
-//        //                 0       1      2    3    4   5   6
-//        int[][] graph = {{1, 2}, {2, 3}, {5}, {0}, {5}, {}, {}};
-//        System.out.println(eventualSafeNodes(graph));
-//    }
+
 
 
 //    public static void main(String[] args) {
