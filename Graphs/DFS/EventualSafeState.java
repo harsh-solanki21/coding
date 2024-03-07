@@ -6,6 +6,7 @@ import java.util.List;
 public class EventualSafeState {
 
     // Every node who is a part of a cycle, cannot be a safe node.
+    // So, every node who is not part of a cycle, is the answer.
 
     // 1. with given ArrayList<ArrayList<Integer>> (GFG)
     static ArrayList<Integer> eventualSafeNode(ArrayList<ArrayList<Integer>> graph, int vertices) {
@@ -52,49 +53,42 @@ public class EventualSafeState {
 
     // 2. with given int[][] (Leetcode)
     static List<Integer> eventualSafeNodes(int[][] graph) {
-        boolean[] visited = new boolean[graph.length];
-        int[] unsafe = new int[graph.length];
+        List<Integer> ans = new ArrayList<>();
+        int[] visited = new int[graph.length];
+        // 0 = not visited
+        // 1 = visited and safe
+        //-1 = visited and not safe
+        // 2 = currently visiting
 
         for (int i = 0; i < graph.length; i++) {
-            if (unsafe[i] == 0) {
-                visited[i] = true;
-                dfs(i, visited, graph, unsafe);
-                visited[i] = false;
+            boolean check = dfs(graph, visited, i);
+            if (check) {
+                ans.add(i);
             }
         }
 
-        ArrayList<Integer> result = new ArrayList<>();
-        for (int i = 0; i < unsafe.length; i++) {
-            if (unsafe[i] == 1) {
-                result.add(i);
-            }
-        }
-
-        return result;
+        return ans;
     }
 
-    private static boolean dfs(int node, boolean[] visited, int[][] graph, int[] unsafe) {
-        boolean isSafe = true;
-
-        for (int neighbor : graph[node]) {
-            if (visited[neighbor] || unsafe[neighbor] == 2) {
-                isSafe = false;
-                break;
-            }
-
-            if (unsafe[neighbor] == 1) {
-                continue;
-            }
-
-            visited[neighbor] = true;
-            if (!dfs(neighbor, visited, graph, unsafe)) {
-                isSafe = false;
-            }
-            visited[neighbor] = false;
+    private static boolean dfs(int[][] graph, int[] visited, int node) {
+        if (visited[node] == 2 || visited[node] == -1) {
+            return false;
+        }
+        if (visited[node] == 1) {
+            return true;
         }
 
-        unsafe[node] = isSafe ? 1 : 2;
-        return isSafe;
+        visited[node] = 2;
+        for (int i : graph[node]) {
+            boolean check = dfs(graph, visited, i);
+            if (!check) {
+                visited[node] = -1;
+                return false;
+            }
+        }
+        visited[node] = 1;
+
+        return true;
     }
 
 
