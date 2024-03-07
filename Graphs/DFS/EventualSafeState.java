@@ -101,11 +101,11 @@ public class EventualSafeState {
     public static void main(String[] args) {
         // 1. ArrayList<ArrayList<Integer>>
 
-//      0 -> 1 -> 2 -> 3 -> 5
-//           ↑         ↓    ↓
-//           8         4 -> 6 -> 7
-//         ↓   ↑
-//  11 -> 9 -> 10
+//            0 -> 1 -> 2 -> 3 -> 5
+//                 ↑         ↓    ↓
+//                 8         4 -> 6 -> 7
+//               ↓   ↑
+//        11 -> 9 -> 10
 
         int vertices = 12;
         ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
