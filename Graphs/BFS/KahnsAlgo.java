@@ -20,7 +20,7 @@ public class KahnsAlgo {
         Queue<Integer> q = new LinkedList<>();
         for (int i = 0; i < vertices; i++) {
             if (indegree[i] == 0) {
-                q.add(i);
+                q.offer(i);
             }
         }
 
@@ -33,7 +33,7 @@ public class KahnsAlgo {
             for (int j : graph.get(node)) {
                 indegree[j]--;
                 if (indegree[j] == 0) {
-                    q.add(j);
+                    q.offer(j);
                 }
             }
         }
