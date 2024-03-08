@@ -15,6 +15,7 @@ public class CourseSchedule1 {
         for (int i = 0; i < numCourses; i++) {
             graph.add(new ArrayList<>());
         }
+
         for (int i = 0; i < prerequisites.length; i++) {
             graph.get(prerequisites[i][0]).add(prerequisites[i][1]);
         }
@@ -33,10 +34,10 @@ public class CourseSchedule1 {
             }
         }
 
-        ArrayList<Integer> topo = new ArrayList<>();
+        int count = 0;
         while (!q.isEmpty()) {
             int node = q.poll();
-            topo.add(node);
+            count++;
             for (int j : graph.get(node)) {
                 indegree[j]--;
                 if (indegree[j] == 0) {
@@ -45,7 +46,7 @@ public class CourseSchedule1 {
             }
         }
 
-        return topo.size() == numCourses;
+        return count == numCourses;
     }
 
 
