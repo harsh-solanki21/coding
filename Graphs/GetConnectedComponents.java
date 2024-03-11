@@ -1,10 +1,9 @@
-package Graphs.DFS;
+package Graphs;
 
 import java.util.ArrayList;
 
-public class FindAllPathsDFS {
+public class GetConnectedComponents {
 
-    // Find all the paths from 0 to 6 in lexicographical order
     static class Edge {
         int source;
         int dest;
@@ -18,27 +17,19 @@ public class FindAllPathsDFS {
     }
 
 
-    // print all paths
-    // Find Path
-    static void printAllPaths(ArrayList<ArrayList<Edge>> graph, int source, int dest, boolean[] visited, String ans) {
-        if (source == dest) {
-            System.out.println(ans);
-            return;
-        }
-
+    static void connectedComponents(ArrayList<ArrayList<Edge>> graph, int source, ArrayList<Integer> result, boolean[] visited) {
         visited[source] = true;
+        result.add(source);
         for (Edge edge : graph.get(source)) {
             if (!visited[edge.dest]) {
-                printAllPaths(graph, edge.dest, dest, visited, ans + edge.dest);
+                connectedComponents(graph, edge.dest, result, visited);
             }
         }
-        visited[source] = false;
-
     }
 
 
     public static void main(String[] args) {
-        int vertices = 7, edges = 8;
+        int vertices = 7;
         ArrayList<ArrayList<Edge>> graph = new ArrayList<>();
 
         // vertices
@@ -48,26 +39,35 @@ public class FindAllPathsDFS {
 
         // Edges
         graph.get(0).add(new Edge(0, 1, 10));
-        graph.get(1).add(new Edge(1, 2, 10));
         graph.get(2).add(new Edge(2, 3, 10));
-        graph.get(0).add(new Edge(0, 3, 10));
-        graph.get(3).add(new Edge(3, 4, 10));
         graph.get(4).add(new Edge(4, 5, 10));
-        graph.get(5).add(new Edge(5, 6, 10));
         graph.get(4).add(new Edge(4, 6, 10));
+        graph.get(5).add(new Edge(5, 6, 2));
 
         // also need to add this because of undirected graph
         graph.get(1).add(new Edge(1, 0, 10));
-        graph.get(2).add(new Edge(2, 1, 10));
         graph.get(3).add(new Edge(3, 2, 10));
-        graph.get(3).add(new Edge(3, 0, 10));
-        graph.get(4).add(new Edge(4, 3, 10));
         graph.get(5).add(new Edge(5, 4, 10));
-        graph.get(6).add(new Edge(6, 5, 10));
         graph.get(6).add(new Edge(6, 4, 10));
+        graph.get(6).add(new Edge(6, 5, 2));
 
-        int source = 0, dest = 6;
-        printAllPaths(graph, source, dest, new boolean[vertices], source + "");
+
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        boolean[] visited = new boolean[vertices];
+        for (int i = 0; i < vertices; i++) {
+            if (!visited[i]) {
+                ArrayList<Integer> component = new ArrayList<>();
+                connectedComponents(graph, i, component, visited);
+                ans.add(component);
+            }
+        }
+
+        System.out.println(ans);
+
+        // Solution of Is Graph connected or not solution
+        System.out.println(ans.size() == 1);
+        // if size is 1 then all the vertices are connected, so the graph is connected
+
     }
 
 }

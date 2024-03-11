@@ -1,4 +1,4 @@
-package Graphs.BFS;
+package Graphs;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;

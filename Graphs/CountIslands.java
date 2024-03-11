@@ -1,4 +1,4 @@
-package Graphs.DFS;
+package Graphs;
 
 public class CountIslands {
 
