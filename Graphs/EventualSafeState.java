@@ -106,7 +106,8 @@ public class EventualSafeState {
         int[] indegree = new int[graph.length];
         for (int i = 0; i < n; i++) {
             for (int j : graph[i]) {
-                adj.get(j).add(i);
+                // can't traverse the graph with terminal nodes, So invert all the indegress
+                adj.get(j).add(i);  // Inverting the indegrees
                 indegree[i]++;
             }
         }
