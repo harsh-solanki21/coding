@@ -7,14 +7,14 @@ public class AlienDictionary {
     // Given a sorted dictionary of an alien language having N words and k starting alphabets of a standard dictionary.
     // Find the order of characters in the alien language.
 
-    // 1. DFS
+    // 1. DFS (Preferred)
     static String alienOrder(String[] words) {
         Map<Character, Set<Character>> adj = new HashMap<>();
-        Map<Character, Boolean> visit = new HashMap<>(); // False-visited, True=current path
+        Map<Character, Boolean> visit = new HashMap<>();  // false = visited, true = current path
         StringBuilder res = new StringBuilder();
 
-        for (String w : words) {
-            for (char c : w.toCharArray()) {
+        for (String s : words) {
+            for (char c : s.toCharArray()) {
                 adj.put(c, new HashSet<>());
             }
         }
