@@ -1,10 +1,8 @@
 package Graphs.DFS;
 
-import Graphs.BFS.BFSListDisconnected;
-
 import java.util.ArrayList;
 
-public class DFSListDisconnected {
+public class DFSListPreferred {
 
     static class Edge {
         int source, destination;
