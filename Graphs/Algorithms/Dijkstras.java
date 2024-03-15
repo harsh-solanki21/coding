@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
-public class DijkstraAlgo {
+public class Dijkstras {
 
     // Purpose: find the shortest path between nodes in a graph
 

@@ -1,11 +1,11 @@
-package Graphs;
+package Graphs.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class KahnsAlgo {
+public class Kahns {
 
     // Kahn’s algorithm for Topological Sorting
 
