@@ -21,10 +21,13 @@ public class Dijkstras {
 
     // It is same as BFS, just use PriorityQueue instead of Queue
 
-    // TC - O(E Log V) where, E is the number of edges and V is the number of vertices
+    // TC - O(E * Log V) where, E is the number of edges and V is the number of vertices
     // SC - O(V)
 
-
+    // The only difference between a queue and a priority queue is that we have to traverse all connected nodes of a current node
+    // and find the minimum among them when we use a normal queue which takes time of O(V).
+    // But using the priority queue we can optimize it to O(log V).
+    // The Time Complexity of Dijkstra’s Algorithm using a normal queue is O(V^2).
 
 
 
