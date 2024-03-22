@@ -8,10 +8,13 @@ public class BellmanFord {
     // Shortest distance from the source to all vertices
     // Bellman ford Algorithm works on both +ve and -ve edge weights
     // We can calculate the shortest distance even though cycle exists
+    // It works on both Directed and Undirected Graph.
     // TC - O(V * E)
 
-    // BFA fails when there's a negative weight cycle.
-    // Which means, if the total weight of cycle comes out negative then BFA will fail.
+
+    // The shortest path between two vertices can have at most N-1 edges, where N is the number of vertices.
+
+
 
     static class Edge {
         int src, dest, weight;
@@ -28,31 +31,26 @@ public class BellmanFord {
         Arrays.fill(dist, Integer.MAX_VALUE);
         dist[source] = 0;
 
+        // Relax all edges |vertices| - 1 times
         for (int i = 0; i < graph.length - 1; i++) {
-            for (int j = 0; j < graph.length; j++) {
-                for (int k = 0; k < graph[j].size(); k++) {
-                    Edge e = graph[j].get(k);
-                    int src = e.src;
-                    int dest = e.dest;
-                    int weight = e.weight;
-
-                    if (dist[src] != Integer.MAX_VALUE && dist[src] + weight < dist[dest]) {
-                        dist[dest] = dist[src] + weight;
-                    }
+            for (Edge e : graph[i]) {
+                int src = e.src;
+                int dest = e.dest;
+                int weight = e.weight;
+                if (dist[src] != Integer.MAX_VALUE && dist[src] + weight < dist[dest]) {
+                    dist[dest] = dist[src] + weight;
                 }
             }
         }
 
-        // Detect -ve weight cycle
-        for (int j = 0; j < graph.length; j++) {
-            for (int k = 0; k < graph[j].size(); k++) {
-                Edge e = graph[j].get(k);
+        // Check for negative-weight cycles
+        for (int i = 0; i < graph.length; i++) {
+            for (Edge e : graph[i]) {
                 int src = e.src;
                 int dest = e.dest;
                 int weight = e.weight;
-
                 if (dist[src] != Integer.MAX_VALUE && dist[src] + weight < dist[dest]) {
-                    System.out.println("Negative weight cycle exists!");
+                    System.out.println("Graph contains negative weight cycle");
                     return new int[]{-1};
                 }
             }
