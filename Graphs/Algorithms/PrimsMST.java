@@ -5,27 +5,30 @@ import java.util.PriorityQueue;
 
 public class PrimsMST {
 
-    // Prim's Algorithm - Minimum Spanning Tree
-    static class Edge {
-        int source;
-        int neighbour;
-        int weight;
+    // Prim's Algorithm is a MST algorithm that takes a graph as input and finds the subset of the edges of that graph which:
+    // form a tree that includes every vertex
+    // has the minimum sum of weights among all the trees that can be formed from the graph
 
-        Edge(int source, int neighbour, int weight) {
-            this.source = source;
-            this.neighbour = neighbour;
+    // It falls under a class of algorithms called greedy algorithms that find the local optimum in the hopes of finding a global optimum.
+
+    // TC - O(E * log E)
+
+
+    static class Edge {
+        int src, dest, weight;
+
+        Edge(int src, int dest, int weight) {
+            this.src = src;
+            this.dest = dest;
             this.weight = weight;
         }
     }
 
     static class Pair implements Comparable<Pair> {
-        int vertex;
-        int parent;
-        int weight;
+        int node, weight;
 
-        Pair(int vertex, int parent, int weight) {
-            this.vertex = vertex;
-            this.parent = parent;
+        Pair(int node, int weight) {
+            this.node = node;
             this.weight = weight;
         }
 
@@ -36,62 +39,56 @@ public class PrimsMST {
     }
 
 
-    public static void main(String[] args) {
-        int vertices = 7;
-        ArrayList<ArrayList<Edge>> graph = new ArrayList<>();
-
-        // vertices
-        for (int i = 0; i < vertices; i++) {
-            graph.add(new ArrayList<>());
-        }
-
-        // Edges
-        graph.get(0).add(new Edge(0, 1, 10));
-        graph.get(1).add(new Edge(1, 2, 10));
-        graph.get(2).add(new Edge(2, 3, 10));
-        graph.get(0).add(new Edge(0, 3, 40));
-        graph.get(3).add(new Edge(3, 4, 2));
-        graph.get(4).add(new Edge(4, 5, 3));
-        graph.get(5).add(new Edge(5, 6, 3));
-        graph.get(4).add(new Edge(4, 6, 8));
-
-        // also need to add this because of undirected graph
-        graph.get(1).add(new Edge(1, 0, 10));
-        graph.get(2).add(new Edge(2, 1, 10));
-        graph.get(3).add(new Edge(3, 2, 10));
-        graph.get(3).add(new Edge(3, 0, 40));
-        graph.get(4).add(new Edge(4, 3, 2));
-        graph.get(5).add(new Edge(5, 4, 3));
-        graph.get(6).add(new Edge(6, 5, 3));
-        graph.get(6).add(new Edge(6, 4, 8));
-
-
-        // Prim's Algo
+    static int primsAlgo(ArrayList<Edge>[] graph, int vertices) {
         PriorityQueue<Pair> pq = new PriorityQueue<>();
-        pq.add(new Pair(0, -1, 0));
         boolean[] visited = new boolean[vertices];
+        pq.add(new Pair(0, 0));
+        int mstCost = 0;
 
-        while (pq.size() > 0) {
-            Pair remove = pq.remove();
+        while (!pq.isEmpty()) {
+            Pair curr = pq.remove();
+            int vertex = curr.node;
+            int weight = curr.weight;
 
-            if (visited[remove.vertex]) {
-                continue;
-            }
-            visited[remove.vertex] = true;
+            if (!visited[vertex]) {
+                visited[vertex] = true;
+                mstCost += weight;
 
-            if (remove.parent != -1) {
-                System.out.println(remove.vertex + " - " + remove.parent + " @ " + remove.weight);
-            }
-
-            for (Edge e : graph.get(remove.vertex)) {
-                if (!visited[e.neighbour]) {
-                    pq.add(new Pair(e.neighbour, remove.vertex, e.weight));
+                for (Edge e : graph[vertex]) {
+                    if (!visited[e.dest]) {
+                        pq.add(new Pair(e.dest, e.weight));
+                    }
                 }
             }
-
-
         }
 
+        return mstCost;
+    }
+
+
+    public static void main(String[] args) {
+        int vertices = 4;
+        ArrayList<Edge>[] graph = new ArrayList[vertices];
+
+        for (int i = 0; i < vertices; i++) {
+            graph[i] = new ArrayList<>();
+        }
+
+        graph[0].add(new Edge(0, 1, 10));
+        graph[0].add(new Edge(0, 2, 15));
+        graph[0].add(new Edge(0, 3, 30));
+
+        graph[1].add(new Edge(1, 0, 10));
+        graph[1].add(new Edge(1, 3, 40));
+
+        graph[2].add(new Edge(2, 0, 15));
+        graph[2].add(new Edge(2, 3, 50));
+
+        graph[3].add(new Edge(3, 1, 40));
+        graph[3].add(new Edge(3, 2, 50));
+
+
+        System.out.println(primsAlgo(graph, vertices));
     }
 
 }
