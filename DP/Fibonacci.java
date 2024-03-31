@@ -2,36 +2,56 @@ package DP;
 
 public class Fibonacci {
 
-    // DP - Memoization
-    static int fiboRecursive(int n, int[] cache) {
+    // Memoization
+    static int fiboMemoize(int n, int[] dp) {
         if (n <= 1) {
             return n;
         }
-        if (cache[n] != 0) {
-            return cache[n];
+        if (dp[n] != 0) {
+            return dp[n];
         }
 
-        cache[n] = fiboRecursive(n - 1, cache) + fiboRecursive(n - 2, cache);
-        return cache[n];
+        dp[n] = fiboMemoize(n - 1, dp) + fiboMemoize(n - 2, dp);
+        return dp[n];
     }
 
 
-    static int fiboIterative(int n) {
-        int[] fibo = new int[n + 1];
-        fibo[0] = 0;
-        fibo[1] = 1;
+    // Tabulation
+    static int fiboTabulation(int n) {
+        int[] dp = new int[n + 1];
+        dp[0] = 0;
+        dp[1] = 1;
 
         for (int i = 2; i <= n; i++) {
-            fibo[i] = fibo[i - 1] + fibo[i - 2];
+            dp[i] = dp[i - 1] + dp[i - 2];
         }
 
-        return fibo[n];
+        return dp[n];
     }
+
+
+    // Space Optimization
+    static int fiboSpaceOptimize(int n) {
+        int prev2 = 0, prev = 1;
+        if (n == 0) {
+            return prev2;
+        }
+
+        for (int i = 2; i <= n; i++) {
+            int temp = prev2 + prev;
+            prev2 = prev;
+            prev = temp;
+        }
+
+        return prev;
+    }
+
 
     public static void main(String[] args) {
         int n = 10;
-        System.out.println(fiboRecursive(n, new int[n + 1]));
-        System.out.println(fiboIterative(n));
+        System.out.println(fiboMemoize(n, new int[n + 1]));
+        System.out.println(fiboTabulation(n));
+        System.out.println(fiboSpaceOptimize(n));
     }
 
 }
