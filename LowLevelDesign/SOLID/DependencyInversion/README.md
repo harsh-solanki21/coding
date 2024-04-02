@@ -4,7 +4,7 @@
 
 - **Abstractions should not depend on details. Details should depend on abstractions.**
 
-<br />
+
 
 - High-level Module(or Class): Class that executes an action with a tool.
 - Low-level Module (or Class): The tool that is needed to execute the action
