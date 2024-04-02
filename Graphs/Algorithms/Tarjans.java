@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Tarjans {
 
-    // Bridge is an edge whose deletion increases the graph's number of connected components
+    // Bridge is an edge whose deletion increases the graph's number of connected components.
 
     static class Edge {
         int src, dest;
