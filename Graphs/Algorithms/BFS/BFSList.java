@@ -1,4 +1,4 @@
-package Graphs.BFS;
+package Graphs.Algorithms.BFS;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

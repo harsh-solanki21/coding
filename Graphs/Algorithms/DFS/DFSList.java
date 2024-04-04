@@ -1,4 +1,4 @@
-package Graphs.DFS;
+package Graphs.Algorithms.DFS;
 
 import java.util.ArrayList;
 import java.util.Stack;

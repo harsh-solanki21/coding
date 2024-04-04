@@ -1,2 +1,7 @@
-package Graphs.Algorithms;public class KruskalsMST {
+package Graphs.Algorithms;
+
+public class KruskalsMST {
+
+    //
+
 }

@@ -3,7 +3,7 @@ package Graphs.DFS;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-public class DFSProblems {
+public class MultiSolver {
 
     // Smallest, Longest, Ceil, Floor, Kth largest path
     static class Edge {

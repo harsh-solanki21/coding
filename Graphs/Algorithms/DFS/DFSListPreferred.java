@@ -1,10 +1,8 @@
-package Graphs.BFS;
+package Graphs.Algorithms.DFS;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 
-public class BFSListPreferred {
+public class DFSListPreferred {
 
     static class Edge {
         int source, destination;
@@ -17,20 +15,14 @@ public class BFSListPreferred {
 
 
     // TC - O(V + E)
-    static void bfs(ArrayList<Edge>[] graph, boolean[] visited, int start) {
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(start);
+    static void dfs(ArrayList<Edge>[] graph, boolean[] visited, int current) {
+        System.out.print(current + " ");
+        visited[current] = true;
 
-        while (!queue.isEmpty()) {
-            int vertex = queue.remove();
-            if (!visited[vertex]) {
-                System.out.print(vertex + " ");
-                visited[vertex] = true;
-
-                for (int i = 0; i < graph[vertex].size(); i++) {
-                    Edge e = graph[vertex].get(i);
-                    queue.add(e.destination);
-                }
+        for (int i = 0; i < graph[current].size(); i++) {
+            Edge e = graph[current].get(i);
+            if (!visited[e.destination]) {
+                dfs(graph, visited, e.destination);
             }
         }
     }
@@ -73,9 +65,9 @@ public class BFSListPreferred {
         boolean[] visited = new boolean[vertices];
         for (int i = 0; i < vertices; i++) {
             if (!visited[i]) {
-                bfs(graph, visited, i);
+                dfs(graph, visited, i);
             }
         }
     }
-    
+
 }
