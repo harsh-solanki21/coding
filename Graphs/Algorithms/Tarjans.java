@@ -54,6 +54,11 @@ public class Tarjans {
     }
 
 
+    static void addEdge(ArrayList<Edge>[] graph, int u, int v) {
+        graph[u].add(new Edge(u, v));
+        graph[v].add(new Edge(v, u));
+    }
+
     public static void main(String[] args) {
 
 //        1 -- 4 -- 5    7            11
@@ -68,45 +73,20 @@ public class Tarjans {
             graph[i] = new ArrayList<>();
         }
 
-        graph[1].add(new Edge(1, 2));
-        graph[1].add(new Edge(1, 4));
-
-        graph[2].add(new Edge(2, 1));
-        graph[2].add(new Edge(2, 3));
-
-        graph[3].add(new Edge(3, 2));
-        graph[3].add(new Edge(3, 4));
-
-        graph[4].add(new Edge(4, 1));
-        graph[4].add(new Edge(4, 2));
-        graph[4].add(new Edge(4, 5));
-
-        graph[5].add(new Edge(5, 4));
-        graph[5].add(new Edge(5, 6));
-
-        graph[6].add(new Edge(6, 5));
-        graph[6].add(new Edge(6, 7));
-
-        graph[7].add(new Edge(7, 6));
-        graph[7].add(new Edge(7, 8));
-
-        graph[8].add(new Edge(8, 7));
-        graph[8].add(new Edge(8, 9));
-        graph[8].add(new Edge(8, 10));
-
-        graph[9].add(new Edge(9, 6));
-        graph[9].add(new Edge(9, 8));
-
-        graph[10].add(new Edge(10, 8));
-        graph[10].add(new Edge(10, 11));
-        graph[10].add(new Edge(10, 12));
-
-        graph[11].add(new Edge(11, 10));
-        graph[11].add(new Edge(11, 12));
-
-        graph[12].add(new Edge(12, 10));
-        graph[12].add(new Edge(12, 11));
-
+        addEdge(graph, 1, 2);
+        addEdge(graph, 1, 4);
+        addEdge(graph, 2, 3);
+        addEdge(graph, 3, 4);
+        addEdge(graph, 4, 5);
+        addEdge(graph, 5, 6);
+        addEdge(graph, 6, 7);
+        addEdge(graph, 6, 9);
+        addEdge(graph, 7, 8);
+        addEdge(graph, 8, 9);
+        addEdge(graph, 8, 10);
+        addEdge(graph, 10, 11);
+        addEdge(graph, 10, 12);
+        addEdge(graph, 11, 12);
 
         System.out.println(getBridge(graph, vertices));
 
