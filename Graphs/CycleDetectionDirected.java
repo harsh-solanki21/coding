@@ -70,7 +70,7 @@ public class CycleDetectionDirected {
             }
         }
 
-        return count != vertices;
+        return count != vertices;  // means there's a cycle
     }
 
 
