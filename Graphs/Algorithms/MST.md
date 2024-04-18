@@ -1,22 +1,26 @@
-A spanning tree is defined as a tree-like subgraph of a connected, undirected graph that includes all the vertices of the graph.
+# Minimum Spanning Tree (MST)
+
+- A spanning tree is defined as a tree-like subgraph of a connected, undirected graph that includes all the vertices of the graph.
 It is a subset of the edges of the graph that forms a tree (acyclic) where every node of the graph is a part of the tree.
 
-The minimum spanning tree has all the properties of a spanning tree with an added constraint of
+- The minimum spanning tree has all the properties of a spanning tree with an added constraint of
 having the minimum possible weights among all possible spanning trees.
 Like a spanning tree, there can also be many possible MSTs for a graph.
 
-A minimum spanning tree (MST) is defined as a spanning tree that has the minimum weight among all the possible spanning trees.
+- A minimum spanning tree (MST) is defined as a spanning tree that has the minimum weight among all the possible spanning trees.
 
+<br />
 
-Properties of Spanning Tree:
-The number of vertices (V) in the graph and the spanning tree is the same.
+### Properties of Spanning Tree:
+- The number of vertices (V) in the graph and the spanning tree is the same.
 There is a fixed number of edges in the spanning tree which is equal to one less than the total number of vertices ( E = V-1 ).
 The spanning tree should not be disconnected, as in there should only be a single source of component, not more than that.
 The spanning tree should be acyclic, which means there would not be any cycle in the tree.
 The total cost (or weight) of the spanning tree is defined as the sum of the edge weights of all the edges of the spanning tree.
 There can be many possible spanning trees for a graph.
 
+<br />
 
-Algorithms to find Minimum Spanning Tree:
-1. Prim’s Minimum Spanning Tree Algorithm
-2. Kruskal’s Minimum Spanning Tree Algorithm
+### Algorithms to find Minimum Spanning Tree:
+1. Prim’s MST
+2. Kruskal’s MST
