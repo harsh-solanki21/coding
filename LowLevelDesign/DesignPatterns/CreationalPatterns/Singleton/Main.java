@@ -2,6 +2,14 @@ package LowLevelDesign.DesignPatterns.CreationalPatterns.Singleton;
 
 public class Main {
 
+    // Singleton class never accepts parameters.
+    // If it accepts parameter, then it becomes factory. So avoid it.
+
+    // Ways to break Singleton pattern:
+    // 1. Reflection API
+    // 2. Deserialization
+    // 3. Cloning
+
     public static void main(String[] args) {
         EagerInitialization eager = EagerInitialization.getInstance();
 

@@ -10,7 +10,8 @@ package LowLevelDesign.DesignPatterns.CreationalPatterns.Singleton;
 
 public class LazyInitialization {
 
-    private static LazyInitialization instance;
+    // volatile keyword here makes sure that the changes made in one thread are immediately reflect in other threads.
+    private static LazyInitialization instance = null;
 
     private LazyInitialization() {
     }

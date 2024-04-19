@@ -9,7 +9,7 @@ package LowLevelDesign.DesignPatterns.CreationalPatterns.Singleton;
 
 public class ThreadSafe {
 
-    private static ThreadSafe instance;
+    private static ThreadSafe instance = null;  // volatile keyword
 
     private ThreadSafe() {
     }
