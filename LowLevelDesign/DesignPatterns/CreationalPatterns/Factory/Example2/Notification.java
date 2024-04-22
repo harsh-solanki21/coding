@@ -2,11 +2,11 @@ package LowLevelDesign.DesignPatterns.CreationalPatterns.Factory.Example2;
 
 public class Notification {
 
-    private String message;
-    private String header;
-    private String footer;
-    private String recipient;
-    private String sender;
+    private final String message;
+    private final String header;
+    private final String footer;
+    private final String recipient;
+    private final String sender;
 
     public Notification(String message, String header, String footer, String recipient, String sender) {
         this.message = message;

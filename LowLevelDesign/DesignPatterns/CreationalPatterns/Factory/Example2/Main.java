@@ -8,7 +8,7 @@ public class Main {
         Notification emailNotification
                 = new Notification("This is the message body of the resignation Email.",
                 "Resignation Letter", "signature",
-                "nisarg@gmail.com",
+                "hr@gmail.com",
                 "harsh@gmail.com");
         Client emailClient = NotificationFactory.getNotificationclient(ClientType.MAIL);
         emailClient.notify(emailNotification);
@@ -17,8 +17,8 @@ public class Main {
         Notification smsNotificaiton
                 = new Notification("This is the message body of the leave request SMS.",
                 "Leave Request", "signature",
-                "sunil@gmail.com",
-                "bapu@gmail.com");
+                "allhr@gmail.com",
+                "harsh@gmail.com");
         Client smsClient = NotificationFactory.getNotificationclient(ClientType.MESSAGE);
         smsClient.notify(smsNotificaiton);
 
