@@ -1,5 +1,6 @@
 package LowLevelDesign.DesignPatterns.CreationalPatterns.Singleton;
 
+// Lazy Initialization + Thread Safety
 // In this approach, the synchronized block is used inside if condition with an additional check to ensure that only one instance of singleton class is created.
 
 // We can break singleton pattern using Reflection API
@@ -16,9 +17,9 @@ public class DoubleCheckedLocking {
     }
 
     public static DoubleCheckedLocking getInstance() {
-        if (instance == null) {
-            synchronized (DoubleCheckedLocking.class) {
-                if (instance == null) {
+        if (instance == null) {  // This check is an optimization to avoid the overhead of synchronization once the instance is initialized.
+            synchronized (DoubleCheckedLocking.class) {  // This ensures that only one thread can execute this block at a time
+                if (instance == null) {  // This is necessary because multiple threads might have passed the first check, and only one should create the instance.
                     instance = new DoubleCheckedLocking();
                 }
             }
