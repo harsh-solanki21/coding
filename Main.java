@@ -3,6 +3,9 @@ import java.util.*;
 public class Main {
 
 
+
+}
+
 //    static List<Integer> eventualSafeNode(ArrayList<ArrayList<Integer>> graph, int vertices) {
 //
 //    }
@@ -50,6 +53,3 @@ public class Main {
 //
 //        System.out.println(eventualSafeNode(graph, vertices));
 //    }
-
-
-}
