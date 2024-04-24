@@ -2,39 +2,29 @@ package DP;
 
 public class ClimbStairs {
 
-    // 2 Approaches in DP:
-    // 1. top-Down  -> Recursion + Memoization  (Map / Array)
-    // 2. Bottom-Up -> Tabulation
-    // then Space optimization
-
-    // MEMOIZATION
-    static int countPaths(int n, int[] cp) {
+    // Memoization
+    static int climbStairsMemoize(int n, int[] dp) {
         if (n < 0) {
             return 0;
         } else if (n == 0) {
             return 1;
         }
 
-        if (cp[n] > 0) {
-            return cp[n];
+        if (dp[n] > 0) {
+            return dp[n];
         }
 
-        int path1 = countPaths(n - 1, cp);
-        int path2 = countPaths(n - 2, cp);
-        int path3 = countPaths(n - 3, cp);
-        int paths = path1 + path2 + path3;
+        int path1 = climbStairsMemoize(n - 1, dp);
+        int path2 = climbStairsMemoize(n - 2, dp);
+        int path3 = climbStairsMemoize(n - 3, dp);
+        dp[n] = path1 + path2 + path3;
 
-        cp[n] = paths;
-        return paths;
+        return dp[n];
     }
 
 
-    // TABULATION:
-    // Tabulation thinking steps:
-    // 1. Storage and meaning (make storage and assign meaning)
-    // 2. Identify direction
-    // 3. Travel and solve
-    static int countPathsTab(int n) {
+    // Tabulation
+    static int climbStairsTab(int n) {
         int[] dp = new int[n + 1];
         dp[0] = 1;
 
@@ -52,10 +42,31 @@ public class ClimbStairs {
     }
 
 
+    // Space Optimization
+    static int climbStairsSpace(int n) {
+        if (n == 0 || n == 1) {
+            return 1;
+        } else if (n == 2) {
+            return 2;
+        }
+
+        int prev0 = 1, prev1 = 1, prev2 = 2;
+        for (int i = 3; i <= n; i++) {
+            int curr = prev0 + prev1 + prev2;
+            prev0 = prev1;
+            prev1 = prev2;
+            prev2 = curr;
+        }
+
+        return prev2;
+    }
+
+
     public static void main(String[] args) {
-        int n = 4;
-//        System.out.println(countPaths(n, new int[n + 1]));
-        System.out.println(countPathsTab(n));
+        int n = 5;
+        System.out.println(climbStairsMemoize(n, new int[n + 1]));
+        System.out.println(climbStairsTab(n));
+        System.out.println(climbStairsSpace(n));
     }
 
 }
