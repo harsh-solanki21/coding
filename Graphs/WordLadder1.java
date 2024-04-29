@@ -6,7 +6,7 @@ public class WordLadder1 {
 
 
     static int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        if (!wordList.contains(endWord)){
+        if (!wordList.contains(endWord)) {
             return 0;
         }
 
@@ -18,9 +18,9 @@ public class WordLadder1 {
         while (!q.isEmpty()) {
             count++;
             int size = q.size();
-            for (int k = 0; k < size; k++) {
+            for (int k = 0; k < size; k++) {  // will have to crete separate class to maintain count if you want to remove this loop
                 String word = q.poll();
-                if (word.equals(endWord)){
+                if (word.equals(endWord)) {
                     return count;
                 }
                 for (int i = 0; i < word.length(); i++) {
