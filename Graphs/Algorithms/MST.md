@@ -1,6 +1,6 @@
 # Minimum Spanning Tree (MST)
 
-- A spanning tree is defined as a tree-like subgraph of a connected, undirected graph that includes all the vertices of the graph.
+- A spanning tree is defined as a tree-like subgraph of a `undirected, connected, weighted Graph` that includes all the vertices of the graph.
 It is a subset of the edges of the graph that forms a tree (acyclic) where every node of the graph is a part of the tree.
 
 - The minimum spanning tree has all the properties of a spanning tree with an added constraint of
