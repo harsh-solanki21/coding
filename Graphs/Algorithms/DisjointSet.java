@@ -19,7 +19,7 @@ public class DisjointSet {
     // With a disjoint set data structure, we can do it more efficiently and quickly in constant time.
 
     // TC using BDF/DFS - O(V + E)
-    // TC using Disjoint Set - O(4α) (4 Alpha) = O(1)
+    // TC using Disjoint Set - O(4α) (4 Alpha) = O(1), where Alpha is Inverse Ackermann Function
 
 
     // Disjoint set data structure generally provides two types of functionalities:
