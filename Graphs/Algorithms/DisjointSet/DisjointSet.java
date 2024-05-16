@@ -5,6 +5,7 @@ import java.util.List;
 
 public class DisjointSet {
 
+    // TC - O(α(n))
     List<Integer> parent = new ArrayList<>();
     List<Integer> rank = new ArrayList<>();
     List<Integer> size = new ArrayList<>();
