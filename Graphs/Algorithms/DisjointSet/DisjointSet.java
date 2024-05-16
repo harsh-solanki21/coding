@@ -1,41 +1,9 @@
-package Graphs.Algorithms;
+package Graphs.Algorithms.DisjointSet;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DisjointSet {
-
-    // Disjoint Set (Union-Find Algorithm)
-    // Two sets are called disjoint sets if they don’t have any element in common, the intersection of sets is a null set.
-
-    // The disjoint Set data structure is generally used for dynamic graphs.
-
-    // In the disjoint-set data structure, every element is part of just one set.
-    // This structure lets us combine (union) two sets into one and figure out (find) which set a specific element belongs to.
-
-
-    // Why we require Disjoint set?
-    // If we want to check whether a specific node is in a component, we usually use BFS or DFS, which works but can be a bit brute-force.
-    // With a disjoint set data structure, we can do it more efficiently and quickly in constant time.
-
-
-    // Time Complexity
-    // Naive Approach: TC - O(n), SC - O(n)
-    // Path Compression: TC - O(log n), SC - O(n)
-    // Combination of both optimizations (path compression with union by size / rank): TC - O(4α) = O(1)
-    // the final amortized time complexity is O(α), where α(alpha) is Inverse Ackermann Function, which grows very slowly.
-
-    // Amortized complexity is the total time per operation, evaluated over a sequence of multiple operations.
-    // The idea is to guarantee the total time of the entire sequence, while allowing single operations to be much slower than the amortized time.
-    // E.g. in our case a single call might take O(log n) in the worst case, but if we do m such calls back to back we will end up with an average time of O(α).
-
-
-    // Disjoint set data structure generally provides two types of functionalities:
-    // 1. Find (Finding the parent for a particular node)
-    // 2. Union (adding an edge between two nodes)
-    //    i.  Union by rank
-    //    ii. Union by size
-
 
     List<Integer> parent = new ArrayList<>();
     List<Integer> rank = new ArrayList<>();
@@ -49,44 +17,44 @@ public class DisjointSet {
         }
     }
 
-    int findUltimateParent(int node) {
+    public int find(int node) {
         if (node == parent.get(node)) {
             return node;
         }
-        int ulp = findUltimateParent(parent.get(node));
-        parent.set(node, ulp);
+        int leader = find(parent.get(node));
+        parent.set(node, leader);
         return parent.get(node);
     }
 
-    void unionByRank(int u, int v) {
-        int ulp_u = findUltimateParent(u);
-        int ulp_v = findUltimateParent(v);
-        if (ulp_u == ulp_v) {
+    public void unionByRank(int i, int j) {
+        int iLeader = find(i);
+        int jLeader = find(j);
+        if (iLeader == jLeader) {
             return;
         }
-        if (rank.get(ulp_u) < rank.get(ulp_v)) {
-            parent.set(ulp_u, ulp_v);
-        } else if (rank.get(ulp_u) > rank.get(ulp_v)) {
-            parent.set(ulp_v, ulp_u);
+        if (rank.get(iLeader) < rank.get(jLeader)) {
+            parent.set(iLeader, jLeader);
+        } else if (rank.get(iLeader) > rank.get(jLeader)) {
+            parent.set(jLeader, iLeader);
         } else {
-            parent.set(ulp_v, ulp_u);
-            int rankU = rank.get(ulp_u);
-            rank.set(ulp_u, rankU + 1);
+            parent.set(jLeader, iLeader);
+            int rankU = rank.get(iLeader);
+            rank.set(iLeader, rankU + 1);
         }
     }
 
-    void unionBySize(int u, int v) {
-        int ulp_u = findUltimateParent(u);
-        int ulp_v = findUltimateParent(v);
-        if (ulp_u == ulp_v) {
+    public void unionBySize(int i, int j) {
+        int iLeader = find(i);
+        int jLeader = find(j);
+        if (iLeader == jLeader) {
             return;
         }
-        if (size.get(ulp_u) < size.get(ulp_v)) {
-            parent.set(ulp_u, ulp_v);
-            size.set(ulp_v, size.get(ulp_v) + size.get(ulp_u));
+        if (size.get(iLeader) < size.get(jLeader)) {
+            parent.set(iLeader, jLeader);
+            size.set(jLeader, size.get(jLeader) + size.get(iLeader));
         } else {
-            parent.set(ulp_v, ulp_u);
-            size.set(ulp_u, size.get(ulp_u) + size.get(ulp_v));
+            parent.set(jLeader, iLeader);
+            size.set(iLeader, size.get(iLeader) + size.get(jLeader));
         }
     }
 
@@ -104,14 +72,14 @@ class Main {
         ds.unionByRank(6, 7);
         ds.unionByRank(5, 6);
 
-        if (ds.findUltimateParent(3) == ds.findUltimateParent(7)) {
+        if (ds.find(3) == ds.find(7)) {
             System.out.println("Same");
         } else {
             System.out.println("Not Same");
         }
 
         ds.unionByRank(3, 7);
-        if (ds.findUltimateParent(3) == ds.findUltimateParent(7)) {
+        if (ds.find(3) == ds.find(7)) {
             System.out.println("Same");
         } else {
             System.out.println("Not Same");
@@ -125,14 +93,14 @@ class Main {
 //        ds.unionBySize(6, 7);
 //        ds.unionBySize(5, 6);
 //
-//        if (ds.findUltimateParent(3) == ds.findUltimateParent(7)) {
+//        if (ds.find(3) == ds.find(7)) {
 //            System.out.println("Same");
 //        } else {
 //            System.out.println("Not Same");
 //        }
 //
 //        ds.unionBySize(3, 7);
-//        if (ds.findUltimateParent(3) == ds.findUltimateParent(7)) {
+//        if (ds.find(3) == ds.find(7)) {
 //            System.out.println("Same");
 //        } else {
 //            System.out.println("Not Same");
