@@ -28,9 +28,10 @@
 
 **Path Compression:** TC - O(log n), SC - O(n)
 
-**Combination of both optimizations (path compression with union by size / rank):** TC - O(4α) = O(1)
+**Combination of both optimizations (path compression with union by size / rank):** TC - O(α(n)) / O(4α) = O(1)
 
-- The final `amortized` time complexity is O(α), where α(alpha) is `Inverse Ackermann Function`, which grows very slowly.
+- The final `amortized` time complexity is O(α(n)), where α(alpha) is `Inverse Ackermann Function`, which grows very slowly.
 
 - `Amortized complexity` is the total time per operation, evaluated over a sequence of multiple operations.
-- The idea is to guarantee the total time of the entire sequence, while allowing single operations to be much slower than the amortized time. E.g. in our case a single call might take O(log n) in the worst case, but if we do m such calls back to back we will end up with an `average time of O(α)`.
+
+- The idea is to guarantee the total time of the entire sequence, while allowing single operations to be much slower than the amortized time. E.g. in our case a single call might take O(log n) in the worst case, but if we do m such calls back to back we will end up with an `average time of O(α(n))`.
