@@ -18,8 +18,16 @@ public class DisjointSet {
     // If we want to check whether a specific node is in a component, we usually use BFS or DFS, which works but can be a bit brute-force.
     // With a disjoint set data structure, we can do it more efficiently and quickly in constant time.
 
-    // TC using BDF/DFS - O(V + E)
-    // TC using Disjoint Set - O(4α) (4 Alpha) = O(1), where Alpha is Inverse Ackermann Function
+
+    // Time Complexity
+    // Naive Approach: TC - O(n), SC - O(n)
+    // Path Compression: TC - O(log n), SC - O(n)
+    // Combination of both optimizations (path compression with union by size / rank): TC - O(4α) = O(1)
+    // the final amortized time complexity is O(α), where α(alpha) is Inverse Ackermann Function, which grows very slowly.
+
+    // Amortized complexity is the total time per operation, evaluated over a sequence of multiple operations.
+    // The idea is to guarantee the total time of the entire sequence, while allowing single operations to be much slower than the amortized time.
+    // E.g. in our case a single call might take O(log n) in the worst case, but if we do m such calls back to back we will end up with an average time of O(α).
 
 
     // Disjoint set data structure generally provides two types of functionalities:
@@ -58,7 +66,7 @@ public class DisjointSet {
         }
         if (rank.get(ulp_u) < rank.get(ulp_v)) {
             parent.set(ulp_u, ulp_v);
-        } else if (rank.get(ulp_v) < rank.get(ulp_u)) {
+        } else if (rank.get(ulp_u) > rank.get(ulp_v)) {
             parent.set(ulp_v, ulp_u);
         } else {
             parent.set(ulp_v, ulp_u);
