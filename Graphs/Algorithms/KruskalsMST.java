@@ -1,8 +1,7 @@
 package Graphs.Algorithms;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 public class KruskalsMST {
 
@@ -14,8 +13,9 @@ public class KruskalsMST {
     // Edges that would create a cycle are not added to the MST.
 
     // Steps for implementing Kruskal's algorithm:
-    // 1. Sort all the edges from low weight to high
-    // 2. Take the edge with the lowest weight and add it to the spanning tree. If adding the edge created a cycle, then reject this edge.
+    // 1. Sort all the edges by weight.
+    // 2. Take the edge with the lowest weight and add it to the spanning tree,
+    //    if adding the edge created a cycle (same ultimate parent), then reject this edge.
     // 3. Keep adding edges until we reach all vertices.
 
     // TC - O(E * logE), SC - O(E), Sorting of edges takes O(E * logE) time
@@ -37,54 +37,64 @@ public class KruskalsMST {
     }
 
 
-    static int kruskalsMST(ArrayList<Edge>[] graph, int vertices) {
-        List<Edge> edges = new ArrayList<>();
+    static int kruskalsMST(int[][] graph, int vertices) {
+        int[] parent = new int[vertices];
+        int[] size = new int[vertices];
+        Edge[] edges = new Edge[graph.length];
 
-        // O(V + E)
-        for (int i = 0; i <= vertices; i++) {
-            for (Edge e : graph[i]) {
-                edges.add(new Edge(e.src, e.dest, e.weight));
-            }
+        for (int i = 0; i < vertices; i++) {
+            parent[i] = i;
+            size[i] = 1;
         }
 
-        DisjointSet ds = new DisjointSet(vertices);
+        for (int i = 0; i < graph.length; i++) {
+            edges[i] = new Edge(graph[i][0], graph[i][1], graph[i][2]);
+        }
+        Arrays.sort(edges);
 
-        // O(E * logE)
-        Collections.sort(edges);
         int mstWt = 0;
-        // E * 4 * alpha * 2
         for (Edge e : edges) {
-            int a = ds.findUltimateParent(e.src);
-            int b = ds.findUltimateParent(e.dest);
-            if (a != b) {
+            int srcLeader = findRoot(parent, e.src);
+            int destLeader = findRoot(parent, e.dest);
+            if (srcLeader != destLeader) {
                 mstWt += e.weight;
-                ds.unionBySize(e.src, e.dest);
+                unionBySize(parent, size, e.src, e.dest);
             }
         }
 
         return mstWt;
     }
 
+    private static int findRoot(int[] parent, int node) {
+        if (parent[node] == node) {
+            return node;
+        }
+        parent[node] = findRoot(parent, parent[node]);  // Path compression
+        return parent[node];
+    }
 
-    static void addEdge(ArrayList<Edge>[] graph, int u, int v, int w) {
-        graph[u].add(new Edge(u, v, w));
-        graph[v].add(new Edge(v, u, w));
+    private static void unionBySize(int[] parent, int[] size, int i, int j) {
+        int iLeader = findRoot(parent, i);
+        int jLeader = findRoot(parent, j);
+        if (iLeader == jLeader) {
+            return;
+        }
+        if (size[iLeader] < size[jLeader]) {
+            parent[iLeader] = jLeader;
+            size[jLeader] += size[iLeader];
+        } else {
+            parent[jLeader] = iLeader;
+            size[iLeader] += size[jLeader];
+        }
     }
 
 
     public static void main(String[] args) {
-        int vertices = 6;
-//        int[][] edges = {{1, 2, 2}, {1, 4, 1}, {1, 5, 4}, {2, 3, 3}, {2, 4, 3}, {2, 6, 7}, {3, 4, 5}, {3, 6, 8}, {4, 5, 9}};
-        int[][] edges = {{0, 1, 10}, {0, 2, 6}, {0, 3, 5}, {1, 3, 15}, {2, 3, 4}};
+//        int vertices = 6;
+//        int[][] graph = {{0, 1, 2}, {0, 3, 1}, {0, 4, 4}, {1, 2, 3}, {1, 3, 3}, {1, 5, 7}, {2, 3, 5}, {2, 5, 8}, {3, 4, 9}};
 
-        ArrayList<Edge>[] graph = new ArrayList[vertices + 1];
-        for (int i = 0; i <= vertices; i++) {
-            graph[i] = new ArrayList<>();
-        }
-
-        for (int i = 0; i < edges.length; i++) {
-            addEdge(graph, edges[i][0], edges[i][1], edges[i][2]);
-        }
+        int vertices = 4;
+        int[][] graph = {{0, 1, 10}, {0, 2, 6}, {0, 3, 5}, {1, 3, 15}, {2, 3, 4}};
 
         System.out.println(kruskalsMST(graph, vertices));
     }
