@@ -13,7 +13,6 @@
 - If we want to check whether a specific node is in a component, we usually use BFS or DFS, which works but can be a bit brute-force.
 - With a disjoint set data structure, we can do it more efficiently and quickly in constant time.
 
-<br />
 
 ### Disjoint set data structure generally provides two functionalities:
 1. Find (Finding the parent for a particular node)
@@ -23,7 +22,22 @@
 
 <br />
 
-### Time Complexity
+### Path Compression Optimization:
+```
+int find(int n) {
+   if (parent[n] == n) {
+      return n;
+   }
+   parent[n] = find(parent[n]);  // Path Compression
+   return parent[n];
+}
+```
+- The result of `find(parent[n])` is assigned back to `parent[n]`. This step is called `path compression`. Path compression is an optimization that `flattens` the structure of the tree whenever `find` is called. By making every node on the path point directly to the root, it speeds up future operations by reducing the tree's height.
+
+
+<br />
+
+### Time and Space Complexity
 **Naive Approach:** TC - O(n), SC - O(n)
 
 **Path Compression:** TC - O(log n), SC - O(n)
