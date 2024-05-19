@@ -30,27 +30,50 @@ public class MostOptimized {
     void unionBySize(int i, int j) {
         int iLeader = find(i);
         int jLeader = find(j);
-        if (iLeader != jLeader) {
-            if (size[iLeader] < size[jLeader]) {
-                swap(size, iLeader, jLeader);
-            }
+        if (iLeader == jLeader) {
+            return;
+        }
+        if (size[iLeader] < size[jLeader]) {
+            parent[iLeader] = jLeader;
+            size[jLeader] += size[iLeader];
+        } else {
             parent[jLeader] = iLeader;
             size[iLeader] += size[jLeader];
         }
+
+//        if (iLeader != jLeader) {
+//            if (size[iLeader] < size[jLeader]) {
+//                swap(size, iLeader, jLeader);
+//            }
+//            parent[jLeader] = iLeader;
+//            size[iLeader] += size[jLeader];
+//        }
     }
 
     void unionByRank(int i, int j) {
         int iLeader = find(i);
         int jLeader = find(j);
-        if (iLeader != jLeader) {
-            if (rank[iLeader] < rank[jLeader]) {
-                swap(rank, iLeader, jLeader);
-            }
-            parent[jLeader] = iLeader;
-            if (rank[i] == rank[j]) {
-                rank[i]++;
-            }
+        if (iLeader == jLeader) {
+            return;
         }
+        if (rank[iLeader] < rank[jLeader]) {
+            parent[iLeader] = jLeader;
+        } else if (rank[iLeader] > rank[jLeader]) {
+            parent[jLeader] = iLeader;
+        } else {
+            parent[jLeader] = iLeader;
+            rank[iLeader]++;
+        }
+
+//        if (iLeader != jLeader) {
+//            if (rank[iLeader] < rank[jLeader]) {
+//                swap(rank, iLeader, jLeader);
+//            }
+//            parent[jLeader] = iLeader;
+//            if (rank[i] == rank[j]) {
+//                rank[i]++;
+//            }
+//        }
     }
 
     private void swap(int[] nums, int i, int j) {
