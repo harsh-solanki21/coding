@@ -57,9 +57,9 @@ public class MostOptimized {
             return;
         }
         if (rank[iLeader] < rank[jLeader]) {
-            parent[iLeader] = jLeader;
-        } else if (rank[iLeader] > rank[jLeader]) {
             parent[jLeader] = iLeader;
+        } else if (rank[iLeader] > rank[jLeader]) {
+            parent[iLeader] = jLeader;
         } else {
             parent[jLeader] = iLeader;
             rank[iLeader]++;
