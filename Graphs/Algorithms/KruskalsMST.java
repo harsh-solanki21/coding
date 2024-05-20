@@ -53,11 +53,17 @@ public class KruskalsMST {
 
         int mstWt = 0;
         for (Edge e : edges) {
-            int srcLeader = findRoot(parent, e.src);
-            int destLeader = findRoot(parent, e.dest);
-            if (srcLeader != destLeader) {
+            int src = findRoot(parent, e.src);
+            int dest = findRoot(parent, e.dest);
+            if (src != dest) {
                 mstWt += e.weight;
-                unionBySize(parent, size, e.src, e.dest);
+                if (size[src] < size[dest]) {
+                    parent[src] = dest;
+                    size[dest] += size[src];
+                } else {
+                    parent[dest] = src;
+                    size[src] += size[dest];
+                }
             }
         }
 
@@ -70,21 +76,6 @@ public class KruskalsMST {
         }
         parent[node] = findRoot(parent, parent[node]);  // Path compression
         return parent[node];
-    }
-
-    private static void unionBySize(int[] parent, int[] size, int i, int j) {
-        int iLeader = findRoot(parent, i);
-        int jLeader = findRoot(parent, j);
-        if (iLeader == jLeader) {
-            return;
-        }
-        if (size[iLeader] < size[jLeader]) {
-            parent[iLeader] = jLeader;
-            size[jLeader] += size[iLeader];
-        } else {
-            parent[jLeader] = iLeader;
-            size[iLeader] += size[jLeader];
-        }
     }
 
 
