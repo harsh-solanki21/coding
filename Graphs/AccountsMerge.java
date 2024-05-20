@@ -1,0 +1,88 @@
+package Graphs;
+
+import java.util.*;
+
+public class AccountsMerge {
+
+    // https://leetcode.com/problems/accounts-merge/description/
+
+    static int[] parent, size;
+
+    private static int find(int node) {
+        if (parent[node] == node) {
+            return node;
+        }
+        parent[node] = find(parent[node]);
+        return parent[node];
+    }
+
+    private static void unionBySize(int i, int j) {
+        int iLeader = find(i);
+        int jLeader = find(j);
+        if (iLeader == jLeader) {
+            return;
+        }
+        if (size[iLeader] < size[jLeader]) {
+            parent[iLeader] = jLeader;
+            size[jLeader] += size[iLeader];
+        } else {
+            parent[jLeader] = iLeader;
+            size[iLeader] += size[jLeader];
+        }
+    }
+
+    static List<List<String>> accountsMerge(List<List<String>> accounts) {
+        int n = accounts.size();
+        parent = new int[n];
+        size = new int[n];
+        for (int i = 0; i < n; i++) {
+            parent[i] = i;
+        }
+
+        HashMap<String, Integer> mailMap = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            for (int j = 1; j < accounts.get(i).size(); j++) {
+                String mail = accounts.get(i).get(j);
+                if (!mailMap.containsKey(mail)) {
+                    mailMap.put(mail, i);
+                } else {
+                    unionBySize(i, mailMap.get(mail));  // union ith index with the index where we encountered the same mail earlier.
+                }
+            }
+        }
+
+        HashMap<Integer, Set<String>> distinctGroupMap = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            parent[i] = find(i);  // further updating the parent in case anything left earlier
+
+            int accountSize = accounts.get(i).size();
+            distinctGroupMap.putIfAbsent(parent[i], new HashSet<>());
+            distinctGroupMap.get(parent[i]).addAll(accounts.get(i).subList(1, accountSize));  // removing 0th element i.e. name
+        }
+
+        List<List<String>> ans = new ArrayList<>();
+        for (int group : distinctGroupMap.keySet()) {
+            List<String> emailList = new ArrayList<>(distinctGroupMap.get(group));
+            Collections.sort(emailList);
+
+            emailList.addFirst(accounts.get(group).getFirst());  // adding the name to the first element of the merged account
+            ans.add(emailList);
+        }
+
+        return ans;
+    }
+
+
+    public static void main(String[] args) {
+        List<List<String>> accounts = new ArrayList<>();
+        accounts.add(Arrays.asList("John", "j1@mail.com", "j2@mail.com", "j3@mail.com"));
+        accounts.add(Arrays.asList("John", "j4@mail.com"));
+        accounts.add(Arrays.asList("Fern", "f5@m.co", "f1@m.co", "f0@m.co"));
+        accounts.add(Arrays.asList("Mary", "m1@mail.com"));
+        accounts.add(Arrays.asList("John", "j1@mail.com", "j5@mail.com"));
+        accounts.add(Arrays.asList("Fern", "f4@m.co", "f1@m.co"));
+
+        System.out.println(accountsMerge(accounts));
+    }
+
+}
