@@ -2,6 +2,7 @@ package Graphs;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Queue;
 
 public class CycleDetectionUndirected {
@@ -80,14 +81,41 @@ public class CycleDetectionUndirected {
     }
 
 
-    // DSU (Disjoint Set Union) (Union-Find Algorithm)
-    static class Edge {
-        int source, destination;
+    // DSU
+    static boolean isCycleDSU(ArrayList<ArrayList<Integer>> graph, int vertices) {
+        int[] parent = new int[vertices + 1];
 
-        Edge(int source, int destination) {
-            this.source = source;
-            this.destination = destination;
+        for (int i = 0; i <= vertices; i++) {
+            parent[i] = i;
         }
+
+        for (int i = 0; i < vertices; i++) {
+            for (int j : graph.get(i)) {
+                if (i < j) {
+                    int x = findRoot(parent, i);
+                    int y = findRoot(parent, j);
+                    if (x == y) {
+                        return true;
+                    }
+                    parent[y] = x;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private static int findRoot(int[] parent, int node) {
+        if (parent[node] == node) {
+            return node;
+        }
+        parent[node] = findRoot(parent, parent[node]);
+        return parent[node];
+    }
+
+    static void addEdge(ArrayList<ArrayList<Integer>> graph, int u, int v) {
+        graph.get(u).add(v);
+        graph.get(v).add(u);
     }
 
 
@@ -98,35 +126,22 @@ public class CycleDetectionUndirected {
             graph.add(new ArrayList<>());
         }
 
-        graph.get(1).add(2);
-        graph.get(1).add(3);
-
-        graph.get(2).add(1);
-        graph.get(2).add(5);
-
-        graph.get(3).add(1);
-        graph.get(3).add(4);
-//        graph.get(3).add(6);
-
-        graph.get(4).add(3);
-
-        graph.get(5).add(2);
-        graph.get(5).add(7);
-
-//        graph.get(6).add(3);
-        graph.get(6).add(7);
-
-        graph.get(7).add(5);
-        graph.get(7).add(6);
+        addEdge(graph, 1, 2);
+        addEdge(graph, 1, 3);
+        addEdge(graph, 2, 5);
+        addEdge(graph, 3, 4);
+        addEdge(graph, 3, 6);  // cycle edge
+        addEdge(graph, 5, 7);
+        addEdge(graph, 6, 7);
 
         // BFS
-//        System.out.println(isCycle(graph, vertices));
+        System.out.println(isCycle(graph, vertices));
 
         // DFS
         System.out.println(detectCycle(graph, vertices));
 
         // DSU
-        System.out.println(isCycle(graph, vertices));
+        System.out.println(isCycleDSU(graph, vertices));
 
     }
 
