@@ -34,9 +34,48 @@ public class NumberOfProvinces {
     }
 
 
+    // DSU
+    static int findCircleNumDSU(int[][] isConnected) {
+        int[] parent = new int[isConnected.length];
+        for (int i = 0; i < parent.length; i++) {
+            parent[i] = i;
+        }
+
+        for (int i = 0; i < isConnected.length; i++) {
+            for (int j = 0; j < isConnected[i].length; j++) {
+                if (isConnected[i][j] == 1) {
+                    int src = findRoot(parent, i);
+                    int dest = findRoot(parent, j);
+                    if (src != dest) {
+                        parent[dest] = src;
+                    }
+                }
+            }
+        }
+
+        int provinces = 0;
+        for (int i = 0; i < parent.length; i++) {
+            if (parent[i] == i) {
+                provinces++;
+            }
+        }
+
+        return provinces;
+    }
+
+    private static int findRoot(int[] parent, int node) {
+        if (parent[node] == node) {
+            return node;
+        }
+        parent[node] = findRoot(parent, parent[node]);
+        return parent[node];
+    }
+
+
     public static void main(String[] args) {
         int[][] isConnected = {{1, 1, 0}, {1, 1, 0}, {0, 0, 1}};
         System.out.println(findCircleNum(isConnected));
+        System.out.println(findCircleNumDSU(isConnected));
     }
 
 }
