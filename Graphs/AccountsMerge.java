@@ -37,6 +37,7 @@ public class AccountsMerge {
         size = new int[n];
         for (int i = 0; i < n; i++) {
             parent[i] = i;
+            size[i] = 1;
         }
 
         HashMap<String, Integer> mailMap = new HashMap<>();
@@ -46,15 +47,14 @@ public class AccountsMerge {
                 if (!mailMap.containsKey(mail)) {
                     mailMap.put(mail, i);
                 } else {
-                    unionBySize(i, mailMap.get(mail));  // union ith index with the index where we encountered the same mail earlier.
+                    unionBySize(i, mailMap.get(mail));
                 }
             }
         }
 
         HashMap<Integer, Set<String>> distinctGroupMap = new HashMap<>();
         for (int i = 0; i < n; i++) {
-            parent[i] = find(i);  // further updating the parent in case anything left earlier
-
+            parent[i] = find(i);
             int accountSize = accounts.get(i).size();
             distinctGroupMap.putIfAbsent(parent[i], new HashSet<>());
             distinctGroupMap.get(parent[i]).addAll(accounts.get(i).subList(1, accountSize));  // removing 0th element i.e. name
@@ -64,7 +64,6 @@ public class AccountsMerge {
         for (int group : distinctGroupMap.keySet()) {
             List<String> emailList = new ArrayList<>(distinctGroupMap.get(group));
             Collections.sort(emailList);
-
             emailList.addFirst(accounts.get(group).getFirst());  // adding the name to the first element of the merged account
             ans.add(emailList);
         }
