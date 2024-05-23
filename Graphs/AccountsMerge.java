@@ -73,13 +73,19 @@ public class AccountsMerge {
 
 
     public static void main(String[] args) {
+        String[][] accountsArr = {
+                {"John", "j1@mail.com", "j2@mail.com", "j3@mail.com"},
+                {"John", "j4@mail.com"},
+                {"Fern", "f5@m.co", "f1@m.co", "f0@m.co"},
+                {"Mary", "m1@mail.com"},
+                {"John", "j1@mail.com", "j5@mail.com"},
+                {"Fern", "f4@m.co", "f1@m.co"},
+        };
+
         List<List<String>> accounts = new ArrayList<>();
-        accounts.add(Arrays.asList("John", "j1@mail.com", "j2@mail.com", "j3@mail.com"));
-        accounts.add(Arrays.asList("John", "j4@mail.com"));
-        accounts.add(Arrays.asList("Fern", "f5@m.co", "f1@m.co", "f0@m.co"));
-        accounts.add(Arrays.asList("Mary", "m1@mail.com"));
-        accounts.add(Arrays.asList("John", "j1@mail.com", "j5@mail.com"));
-        accounts.add(Arrays.asList("Fern", "f4@m.co", "f1@m.co"));
+        for (String[] i : accountsArr) {
+            accounts.add(Arrays.asList(i));
+        }
 
         System.out.println(accountsMerge(accounts));
     }
