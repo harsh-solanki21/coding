@@ -1,11 +1,11 @@
 package Graphs;
 
-public class DisjointSetGeneral {
+public class DisjointSet {
 
     public int[] parent;
     public int[] size;
 
-    public DisjointSetGeneral(int n) {
+    public DisjointSet(int n) {
         parent = new int[n];
         size = new int[n];
         for (int i = 0; i < n; i++) {
