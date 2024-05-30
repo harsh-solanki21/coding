@@ -14,7 +14,7 @@ public class DisjointSet {
         }
     }
 
-    int find(int node) {
+    public int find(int node) {
         if (parent[node] == node) {
             return node;
         }
@@ -22,7 +22,7 @@ public class DisjointSet {
         return parent[node];
     }
 
-    void unionBySize(int i, int j) {
+    public void unionBySize(int i, int j) {
         int iLeader = find(i);
         int jLeader = find(j);
         if (iLeader == jLeader) {
