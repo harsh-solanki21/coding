@@ -7,75 +7,72 @@ import java.util.Queue;
 public class BFSListPreferred {
 
     static class Edge {
-        int source, destination;
+        int src, dest;
 
-        Edge(int source, int destination) {
-            this.source = source;
-            this.destination = destination;
+        Edge(int src, int dest) {
+            this.src = src;
+            this.dest = dest;
         }
     }
 
 
     // TC - O(V + E)
-    static void bfs(ArrayList<Edge>[] graph, boolean[] visited, int start) {
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(start);
+    static ArrayList<Integer> bfs(ArrayList<Edge>[] graph, int vertices) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        boolean[] visited = new boolean[vertices];
+        for (int i = 0; i < vertices; i++) {
+            if (!visited[i]) {
+                bfsTraversal(graph, visited, ans, i);
+            }
+        }
+        return ans;
+    }
 
-        while (!queue.isEmpty()) {
-            int vertex = queue.remove();
-            if (!visited[vertex]) {
-                System.out.print(vertex + " ");
-                visited[vertex] = true;
+    private static void bfsTraversal(ArrayList<Edge>[] graph, boolean[] visited, ArrayList<Integer> ans, int source) {
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(source);
+        visited[source] = true;
 
-                for (int i = 0; i < graph[vertex].size(); i++) {
-                    Edge e = graph[vertex].get(i);
-                    queue.add(e.destination);
+        while (!q.isEmpty()) {
+            int vertex = q.poll();
+            ans.add(vertex);
+
+            for (Edge e : graph[vertex]) {
+                if (!visited[e.dest]) {
+                    q.offer(e.dest);
+                    visited[e.dest] = true;
                 }
             }
         }
     }
 
 
-    static void createGraph(ArrayList<Edge>[] graph) {
-        for (int i = 0; i < graph.length; i++) {
-            graph[i] = new ArrayList<>();
-        }
-
-        graph[0].add(new Edge(0, 1));
-        graph[0].add(new Edge(0, 3));
-
-        graph[1].add(new Edge(1, 0));
-        graph[1].add(new Edge(1, 2));
-        graph[1].add(new Edge(1, 3));
-
-        graph[2].add(new Edge(2, 1));
-        graph[2].add(new Edge(2, 3));
-
-        graph[3].add(new Edge(3, 0));
-        graph[3].add(new Edge(3, 1));
-        graph[3].add(new Edge(3, 2));
-
-        graph[4].add(new Edge(4, 5));
-
-        graph[5].add(new Edge(5, 4));
+    private static void addEdge(ArrayList<Edge>[] graph, int u, int v) {
+        graph[u].add(new Edge(u, v));
+        graph[v].add(new Edge(v, u));
     }
 
 
     public static void main(String[] args) {
-        int vertices = 7;
-        ArrayList<Edge>[] graph = new ArrayList[vertices];
-        createGraph(graph);
         /*
               0 --- 1
               |  /  |     4 --- 5    6
               3 --- 2
          */
-        boolean[] visited = new boolean[vertices];
-        for (int i = 0; i < vertices; i++) {
-            if (!visited[i]) {
-                bfs(graph, visited, i);
-            }
+        int vertices = 7;
+        ArrayList<Edge>[] graph = new ArrayList[vertices];
+        for (int i = 0; i < graph.length; i++) {
+            graph[i] = new ArrayList<>();
         }
+
+        addEdge(graph, 0, 1);
+        addEdge(graph, 0, 3);
+        addEdge(graph, 1, 2);
+        addEdge(graph, 1, 3);
+        addEdge(graph, 2, 3);
+        addEdge(graph, 4, 5);
+
+        System.out.println(bfs(graph, vertices));
     }
-    
+
 }
